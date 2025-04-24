@@ -118,10 +118,12 @@ const Navbar = () => {
           </nav>
           <div className="flex items-center space-x-4">
             <ModeToggle />
+            <Link href={"/contact"}>
             <Button className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white relative overflow-hidden group">
               <span className="relative z-10">Get Started</span>
               <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Button>
+            </Link>
           </div>
         </div>
 

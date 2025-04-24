@@ -260,7 +260,7 @@ const Footer = () => {
               <li className="flex items-start group">
                 <Mail className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-300" />
                 <span className="text-foreground/70 group-hover:text-foreground transition-colors duration-300">
-                  info@webifyit.com
+                  abhishek.singh.dev147@gmail.com
                 </span>
               </li>
               <li className="flex items-start group">

@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { FileText, Mail, MessageSquare, Download } from "lucide-react"
+import Link from "next/link"
 
 const leadGenItems = [
   {
@@ -11,7 +12,8 @@ const leadGenItems = [
     description:
       "High-value downloadable resources that capture leads while providing immediate value to your audience.",
     icon: <FileText className="h-10 w-10 text-purple-600 dark:text-purple-400" />,
-    cta: "Download the '10-Point Digital Audit' Checklist",
+    cta: "Download '10-Point Digital Audit' Checklist",
+    href:"/"
   },
   {
     title: "Drip Campaigns, Big Results",
@@ -25,6 +27,7 @@ const leadGenItems = [
     description: "Strategic, non-intrusive popups that capture leads at the perfect moment in the user journey.",
     icon: <MessageSquare className="h-10 w-10 text-pink-600 dark:text-pink-400" />,
     cta: "Get Your Free Website Audit",
+    href:"/contact"
   },
   {
     title: "Offer, Capture, Nurture, Convert",
@@ -32,6 +35,7 @@ const leadGenItems = [
       "Complete lead generation systems that take prospects from awareness to conversion with minimal friction.",
     icon: <Download className="h-10 w-10 text-green-600 dark:text-green-400" />,
     cta: "Start Your 7-Day Trial",
+    href:"/contact"
   },
 ]
 
@@ -68,7 +72,9 @@ const LeadGenSection = () => {
                     <div className="space-y-4">
                       <h3 className="text-xl font-semibold">{item.title}</h3>
                       <p className="text-foreground/70">{item.description}</p>
-                      {item?.cta && <Button variant="outline" className="group">
+                      {item?.cta && 
+                      <Link href={item?.href}>
+                      <Button variant="outline" className="group">
                         {item.cta}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -82,9 +88,10 @@ const LeadGenSection = () => {
                             strokeLinejoin="round"
                             strokeWidth={2}
                             d="M14 5l7 7m0 0l-7 7m7-7H3"
-                          />
+                            />
                         </svg>
                       </Button>
+                            </Link>
                       }
                     </div>
                   </div>

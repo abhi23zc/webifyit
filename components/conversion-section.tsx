@@ -94,6 +94,7 @@ const ConversionSection = () => {
             <p className="text-foreground/70 mb-6">
               Schedule a 15-minute call with our experts to discuss your project and goals.
             </p>
+            <Link href="/contact">
             <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white group relative overflow-hidden">
               <span className="relative z-10 flex items-center">
                 Book Your Call
@@ -101,6 +102,7 @@ const ConversionSection = () => {
               </span>
               <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Button>
+            </Link>
           </motion.div>
 
           <motion.div
@@ -115,6 +117,7 @@ const ConversionSection = () => {
             <p className="text-foreground/70 mb-6">
               Receive a comprehensive audit of your current website with actionable insights.
             </p>
+            <Link href="/contact">
             <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-500 hover:from-blue-700 hover:to-purple-600 text-white group relative overflow-hidden">
               <span className="relative z-10 flex items-center">
                 Request Audit
@@ -122,6 +125,7 @@ const ConversionSection = () => {
               </span>
               <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Button>
+            </Link>
           </motion.div>
 
           <motion.div

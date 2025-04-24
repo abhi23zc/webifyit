@@ -3,8 +3,9 @@
 import { Button } from "@/components/ui/button"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowRight, CheckCircle } from "lucide-react"
-import HeroAnimation  from "@/components/hero-animation"
+import HeroAnimation from "@/components/hero-animation"
 import { useRef, useState, useEffect } from "react"
+import Link from "next/link"
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -44,16 +45,16 @@ const HeroSection = () => {
   }, [])
 
   // Generate random particles only after component is mounted
-  const particles = isMounted 
+  const particles = isMounted
     ? Array.from({ length: 10 }).map((_, i) => ({
-        id: i,
-        width: Math.random() * 10 + 5,
-        height: Math.random() * 10 + 5,
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        duration: Math.random() * 5 + 5,
-        delay: Math.random() * 5,
-      }))
+      id: i,
+      width: Math.random() * 10 + 5,
+      height: Math.random() * 10 + 5,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: Math.random() * 5 + 5,
+      delay: Math.random() * 5,
+    }))
     : [];
 
   return (
@@ -160,20 +161,26 @@ const HeroSection = () => {
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white group relative overflow-hidden shadow-md"
-              >
-                <span className="relative z-10 flex items-center">
-                  Get Your Free Website Audit
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              </Button>
-              <Button size="lg" variant="outline" className="border-2 relative overflow-hidden group">
-                <span className="relative z-10">Book a 30-Minute Strategy Call</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              </Button>
+              <Link href={"/contact"}>
+                <Button
+
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white group relative overflow-hidden shadow-md"
+                >
+                  <span className="relative z-10 flex items-center">
+                    Get Your Free Website Audit
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                </Button>
+              </Link>
+              <Link href={"https://wa.me/+916394575814"}>
+
+                <Button size="lg" variant="outline" className="border-2 relative overflow-hidden group">
+                  <span className="relative z-10">Book a 30-Minute Strategy Call</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                </Button>
+              </Link >
             </motion.div>
 
             <motion.div variants={itemVariants} className="pt-6">
