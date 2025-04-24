@@ -7,6 +7,7 @@ import Navbar from "@/components/navbar"
 import { Toaster } from 'react-hot-toast';
 
 import Footer from "@/components/footer"
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -30,6 +31,7 @@ export default function RootLayout({
           <main className="min-h-screen">{children}</main>
           <Footer />
           <Toaster />
+          <Analytics/>
         </ThemeProvider>
       </body>
     </html>
