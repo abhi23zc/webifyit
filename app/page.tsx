@@ -19,7 +19,8 @@ export default function Home() {
       <ServicesSection />
       <StatsSection />
       <TrustSection />
-
+      {/* <PackagesSection /> */}
+      {/* <SeoSection /> */}
       <AnalyticsSection />
       <LeadGenSection />
       <ConversionSection />
