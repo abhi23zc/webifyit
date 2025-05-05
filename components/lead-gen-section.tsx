@@ -12,7 +12,7 @@ const leadGenItems = [
     description:
       "High-value downloadable resources that capture leads while providing immediate value to your audience.",
     icon: <FileText className="h-10 w-10 text-purple-600 dark:text-purple-400" />,
-    cta: "Download '10-Point Digital Audit' Checklist",
+    cta: "10-Point Digital Audit' Checklist",
     href:"/"
   },
   {
@@ -74,11 +74,11 @@ const LeadGenSection = () => {
                       <p className="text-foreground/70">{item.description}</p>
                       {item?.cta && 
                       <Link href={item?.href}>
-                      <Button variant="outline" className="group">
+                      <Button variant="outline" className="group mt-2">
                         {item.cta}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 ml-2 transition-transform duration-200 group-hover:translate-x-1"
+                          className="h-4 w-4 ml-2 transition-transform duration-200 group-hover:translate-x-1 "
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"

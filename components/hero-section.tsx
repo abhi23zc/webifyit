@@ -106,7 +106,7 @@ const HeroSection = () => {
       </div>
 
       {/* Floating particles - only rendered after client-side hydration */}
-      {isMounted && (
+      {/* {isMounted && (
         <div className="absolute inset-0 -z-5">
           {particles.map((particle) => (
             <motion.div
@@ -131,7 +131,7 @@ const HeroSection = () => {
             />
           ))}
         </div>
-      )}
+      )} */}
 
       <motion.div style={{ y, opacity }} className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
