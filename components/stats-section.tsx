@@ -7,31 +7,31 @@ import { Award, Users, Briefcase } from "lucide-react"
 // Stats data
 const stats = [
   {
-    value: 30,
+    value: 12,
     label: "Projects Completed",
     icon: <Briefcase className="h-8 w-8 text-purple-600 dark:text-purple-400" />,
     suffix: "+",
   },
   {
-    value: 100,
+    value: 15,
     label: "Happy Clients",
     icon: <Users className="h-8 w-8 text-blue-600 dark:text-blue-400" />,
     suffix: "+",
   },
   {
-    value: 10,
+    value: 4,
     label: "Years Experience",
     icon: <Award className="h-8 w-8 text-pink-600 dark:text-pink-400" />,
     suffix: "+",
   },
   {
-    value: 15,
+    value: 10,
     label: "Employees",
     icon: <Award className="h-8 w-8 text-pink-600 dark:text-pink-400" />,
     suffix: "+",
   },
   {
-    value: 5000,
+    value: 1000,
     label: "Leads Generated",
     icon: <Award className="h-8 w-8 text-pink-600 dark:text-pink-400" />,
     suffix: "+",
