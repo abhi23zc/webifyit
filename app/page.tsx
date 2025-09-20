@@ -8,6 +8,7 @@ import AnalyticsSection from "@/components/analytics-section"
 import LeadGenSection from "@/components/lead-gen-section"
 import StatsSection from "@/components/stats-section"
 import ContactPage from "@/components/contact-form"
+import ProjectsSection from "@/components/projects-section"
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       </div>
       <ServicesSection />
       <StatsSection />
+      <ProjectsSection />
       <TrustSection />
       {/* <PackagesSection /> */}
       {/* <SeoSection /> */}

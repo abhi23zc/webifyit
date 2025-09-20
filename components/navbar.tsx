@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Menu, X } from "lucide-react"
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion"
+import { usePathname } from "next/navigation"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
   const { scrollY } = useScroll()
+  const pathname = usePathname()
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() || 0
@@ -50,8 +52,20 @@ const Navbar = () => {
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    // Only attach scroll-based active detection on the homepage
+    if (pathname === "/") {
+      window.addEventListener("scroll", handleScroll)
+      return () => window.removeEventListener("scroll", handleScroll)
+    }
+  }, [pathname])
+
+  useEffect(() => {
+    // Route-based active state for non-anchor pages
+    if (pathname && pathname.startsWith("/projects")) {
+      setActiveSection("projects")
+    } else if (pathname === "/") {
+      setActiveSection("home")
+    }
   }, [])
 
   const toggleMenu = () => setIsOpen(!isOpen)
@@ -59,7 +73,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
-  
+    { name: "Projects", href: "/projects" },
     { name: "About", href: "#trust" },
     { name: "Contact", href: "#contact" },
   ]

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "Next.js",
     "React"
   ],
-  authors: [{ name: "WebifyIt Team", url: "https://webifyit.com" }],
+  authors: [{ name: "WebifyIt Team", url: "https://webifyit.in" }],
   creator: "WebifyIt",
   publisher: "WebifyIt",
   openGraph: {
