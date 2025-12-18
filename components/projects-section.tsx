@@ -30,16 +30,27 @@ const projects: Project[] = [
     description:
       "A robust tool for sending personalized bulk WhatsApp messages, supporting attachments, scheduling, and delivery analytics.",
     imageSrc: "/images/msgzone.png",
-    tags: ["Next.js", "TypeScript", "Node.js", "Redis", "Socket.io", "Docker" , "Razorpay", "Tailwind CSS"],
+    tags: ["Next.js", "TypeScript", "Node.js", "Redis", "Socket.io", "Docker", "Razorpay", "Tailwind CSS"],
     href: "https://www.msgzone.live",
   },
   {
-    title: "OyeStore",
+    title: "Dineezy",
     description:
-      "A modern travel agency platform offering destination discovery, package booking, and itinerary management.",
-    imageSrc: "/images/oyestore.png",
-    tags: ["Next.js", "TypeScript", "Travel", "Booking", "UX"],
+      "A comprehensive QR-based food ordering and restaurant management system designed to streamline dining experiences and operations.",
+    imageSrc: "/images/dineezy.png",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Socket.io", "Tailwind CSS"],
+    href: "https://dineezy.in",
   },
+
+  {
+    title: "Interview AI",
+    description:
+      "An AI-powered mock interview platform that provides real-time feedback, sentiment analysis, and personalized improvement suggestions.",
+    imageSrc: "/images/interview.png",
+    tags: ["Next.js", "TypeScript", "OpenAI", "WebRTC", "AI Tools", "Firebase", "Tailwind CSS"],
+
+  },
+
 ]
 
 const container = {

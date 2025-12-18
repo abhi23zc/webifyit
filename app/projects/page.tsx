@@ -56,24 +56,42 @@ const detailedProjects: DetailedProject[] = [
     href: "https://www.msgzone.live",
   },
   {
-    title: "OyeStore",
+    title: "Dineezy",
     summary:
-      "A modern travel agency platform offering destination discovery, package booking, and itinerary management.",
-    imageSrc: "/images/oyestore.png",
-    tags: [
-      "Next.js",
-      "TypeScript",
-      "PostgreSQL",
-      "Tailwind CSS",
-      "Responsive Design",
-      "UX/UI",
-    ],
+      "A comprehensive QR-based food ordering and restaurant management system designed to streamline dining experiences and operations.",
+    imageSrc: "/images/dineezy.png",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Socket.io", "Tailwind CSS"],
     highlights: [
-      "Destination discovery and package booking",
-      "Itinerary management tools",
-      "Modern, user-friendly interface",
+      "Contactless QR code menu and instant ordering system",
+      "Real-time kitchen display system for order management",
+      "Integrated payment processing and digital receipts",
+      "Advanced analytics for sales and inventory tracking",
     ],
+    results: [
+      "Reduced order processing time by 25%",
+      "Increased table turnover rate by 15%",
+    ],
+    href: "https://dineezy.in",
   },
+  {
+    title: "Interview AI",
+    summary:
+      "An AI-powered mock interview platform that provides real-time feedback, sentiment analysis, and personalized improvement suggestions.",
+    imageSrc: "/images/interview.png",
+    tags: ["Next.js", "TypeScript", "OpenAI", "WebRTC", "AI Tools", "Firebase", "Tailwind CSS"],
+    highlights: [
+      "Real-time AI-powered mock interviews",
+      "Sentiment analysis and feedback",
+      "Personalized improvement suggestions",
+      "WebRTC-based video/audio interaction",
+    ],
+    results: [
+      "Improved user confidence in interviews",
+      "Provided actionable feedback for candidates",
+    ],
+
+  },
+
 ]
 
 const container = {
