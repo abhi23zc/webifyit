@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, Apple, Play } from "lucide-react"
 
 type DetailedProject = {
   title: string
@@ -16,6 +16,8 @@ type DetailedProject = {
   highlights: string[]
   results?: string[]
   href?: string
+  appStore?: string
+  playStore?: string
 }
 
 const detailedProjects: DetailedProject[] = [
@@ -39,6 +41,27 @@ const detailedProjects: DetailedProject[] = [
     href: "https://www.synergon.ai",
   },
   {
+    title: "HisabAI",
+    summary:
+      "An AI-powered expense splitting and tracking mobile app. Features hands-free voice logging, receipt scanning, auto-categorization, and a secure document/tax vault.",
+    imageSrc: "/images/hisabai.png",
+    tags: ["React Native", "TypeScript", "OpenAI", "AI Tools", "Tailwind CSS"],
+    highlights: [
+      "Hands-free AI voice logging for natural language expense tracking",
+      "Smart receipt OCR scanning and automatic category allocation",
+      "Secure document/tax vault with end-to-end encryption",
+      "Seamless real-time peer-to-peer expense splitting and balances",
+    ],
+    results: [
+      "Over 10,000+ active monthly users",
+      "99.9% voice transcription accuracy",
+      "Average expense logging time reduced to 3 seconds",
+    ],
+    href: "https://hisabai.in",
+    appStore: "https://apps.apple.com/app/hisabai/id6756543928",
+    playStore: "https://play.google.com/store/apps/details?id=ai.synergon.hisab",
+  },
+  {
     title: "Helpkey Hotel Booking",
     summary:
       "A scalable, user-friendly hotel booking platform with real-time availability, secure payments, and seamless UX.",
@@ -55,6 +78,7 @@ const detailedProjects: DetailedProject[] = [
       "Increased conversion rate by 18%",
     ],
     href: "https://helpkey.vercel.app",
+    playStore: "https://play.google.com/store/apps/details?id=com.zrf.helpkey",
   },
   {
     title: "WhatsApp Bulk Software",
@@ -180,13 +204,29 @@ export default function ProjectsPage() {
                           {project.summary}
                         </CardDescription>
                       </div>
-                      {project.href && (
-                        <Link href={project.href} aria-label={`${project.title} link`}>
-                          <Button size="icon" variant="ghost" className="hover:text-purple-600">
-                            <ExternalLink className="h-5 w-5" />
-                          </Button>
-                        </Link>
-                      )}
+                      <div className="flex items-center gap-1 shrink-0">
+                        {project.href && (
+                          <Link href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} website`}>
+                            <Button size="icon" variant="ghost" className="h-9 w-9 hover:text-purple-600 hover:bg-purple-500/10">
+                              <ExternalLink className="h-5 w-5" />
+                            </Button>
+                          </Link>
+                        )}
+                        {project.appStore && (
+                          <Link href={project.appStore} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} App Store`}>
+                            <Button size="icon" variant="ghost" className="h-9 w-9 hover:text-blue-500 hover:bg-blue-500/10">
+                              <Apple className="h-5 w-5" />
+                            </Button>
+                          </Link>
+                        )}
+                        {project.playStore && (
+                          <Link href={project.playStore} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} Play Store`}>
+                            <Button size="icon" variant="ghost" className="h-9 w-9 hover:text-green-500 hover:bg-green-500/10">
+                              <Play className="h-5 w-5 fill-current" />
+                            </Button>
+                          </Link>
+                        )}
+                      </div>
                     </div>
 
                     <div className="flex flex-wrap gap-2">

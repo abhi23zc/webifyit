@@ -85,7 +85,7 @@ export default function RootLayout({
       <head>
         {/* SEO meta tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#09090b" />
         <meta name="author" content="WebifyIt Team" />
         <meta name="copyright" content="WebifyIt" />
         <meta name="robots" content="index, follow" />
@@ -133,7 +133,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

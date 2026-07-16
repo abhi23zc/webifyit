@@ -63,6 +63,7 @@ const projects: Project[] = [
     imageSrc: "/images/helpkey.png",
     tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Razorpay", "AWS", "Tailwind CSS"],
     href: "https://helpkey.vercel.app",
+    playStore: "https://play.google.com/store/apps/details?id=com.zrf.helpkey",
   },
   {
     title: "Interview AI",
