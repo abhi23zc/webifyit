@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
@@ -9,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { CalendarIcon, FileTextIcon, MessageSquareIcon, Sparkles } from "lucide-react";
+import { Mail, Phone, MapPin, Check, Copy, MessageSquare, ShieldAlert } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -27,20 +26,9 @@ interface FormData {
   services: ServiceType[];
 }
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, type: "spring", stiffness: 80 }
-  })
-};
-
-const gradientBorder =
-  "bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 p-[2px] rounded-3xl";
-
 export default function ContactPage() {
   const [isLoading, setisLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -66,6 +54,13 @@ export default function ContactPage() {
         : [...prev.services, service];
       return { ...prev, services };
     });
+  };
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("webifyit.in@gmail.com");
+    setCopied(true);
+    toast.success("Email copied to clipboard!");
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const sendMail = async () => {
@@ -101,337 +96,290 @@ export default function ContactPage() {
         services: []
       });
     } catch (e) {
-      toast.error("Something error occurred");
+      toast.error("Something went wrong. Please try again.");
     }
     setisLoading(false);
   };
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white pt-10"
-    >
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, type: "spring" }}
-          className="mb-12 text-center"
-        >
-          <motion.h1
-            className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-purple-400 via-blue-500 to-pink-400 bg-clip-text text-transparent mb-4 flex items-center justify-center gap-2"
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
-          >
-            <Sparkles className="w-8 h-8 text-pink-400 animate-pulse" />
-            Ready to Transform Your Digital Presence?
-          </motion.h1>
-          <motion.p
-            className="text-lg text-gray-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            Take the first step towards digital success. Fill out the form below and let's build something amazing together.
-          </motion.p>
-        </motion.div>
+  const availableServices = [
+    "Web Development",
+    "Mobile Development",
+    "UX / UI Design",
+    "AI Integration",
+    "Marketing",
+    "SEO",
+    "Other"
+  ];
 
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, type: "spring" }}
-        >
-          <div className={gradientBorder}>
-            <Card className="bg-[#181824] border-0 rounded-3xl shadow-2xl">
-              <CardContent className="p-8">
-                <AnimatePresence>
+  return (
+    <div className="min-h-screen bg-[#09090b] text-zinc-100 pt-32 pb-24 relative overflow-hidden">
+      {/* Background gradients */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          
+          {/* Left Column: Context & Contact Details */}
+          <div className="lg:col-span-5 space-y-10 flex flex-col justify-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium">
+                <MessageSquare className="w-4 h-4" /> Let's Connect
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+                Let's build something <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">great</span> together.
+              </h1>
+              <p className="text-lg text-zinc-400 leading-relaxed">
+                Have a project in mind? Looking to partner or just want to chat? Reach out to us and we'll get back to you within 24 hours.
+              </p>
+            </div>
+
+            <div className="space-y-6 pt-4 border-t border-zinc-800/80">
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-purple-400 group-hover:border-purple-500/30 transition-all duration-300">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-sm text-zinc-500 font-medium">Email Us</p>
+                  <div className="flex items-center gap-2">
+                    <a href="mailto:webifyit.in@gmail.com" className="text-zinc-200 hover:text-white font-medium transition-colors">
+                      webifyit.in@gmail.com
+                    </a>
+                    <button 
+                      onClick={copyEmail}
+                      className="p-1 text-zinc-500 hover:text-zinc-300 transition-colors"
+                      title="Copy email"
+                    >
+                      {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-blue-400 group-hover:border-blue-500/30 transition-all duration-300">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-sm text-zinc-500 font-medium">Call Us</p>
+                  <a href="tel:+916394575814" className="text-zinc-200 hover:text-white font-medium transition-colors">
+                    +91 63945 75814
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-pink-400 group-hover:border-pink-500/30 transition-all duration-300">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-sm text-zinc-500 font-medium">Location</p>
+                  <p className="text-zinc-200 font-medium">Kanpur, Uttar Pradesh &middot; India</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Clean Form Card */}
+          <div className="lg:col-span-7">
+            <Card className="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl shadow-xl backdrop-blur-md">
+              <CardContent className="p-8 sm:p-10 space-y-6">
+                
+                <AnimatePresence mode="wait">
                   {success && (
                     <motion.div
-                      initial={{ opacity: 0, y: -20 }}
+                      initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      className="mb-6 flex items-center justify-center gap-2 bg-gradient-to-r from-green-400/20 to-blue-400/20 rounded-xl py-3 px-4"
+                      exit={{ opacity: 0, y: -10 }}
+                      className="flex items-center gap-3 bg-green-500/10 border border-green-500/20 text-green-400 rounded-xl py-4 px-5 text-sm"
                     >
-                      <Sparkles className="w-6 h-6 text-green-400 animate-bounce" />
-                      <span className="text-green-300 font-semibold">Thank you! We'll be in touch soon.</span>
+                      <Check className="w-5 h-5 shrink-0" />
+                      <span>Thank you! We've received your inquiry and will respond shortly.</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  <motion.h2
-                    className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-purple-400 via-blue-500 to-pink-400 bg-clip-text text-transparent"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    Request a Free Estimate
-                  </motion.h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {[
-                      {
-                        label: "First Name*",
-                        id: "firstName",
-                        name: "firstName",
-                        value: formData.firstName,
-                        required: true,
-                        type: "text"
-                      },
-                      {
-                        label: "Last Name*",
-                        id: "lastName",
-                        name: "lastName",
-                        value: formData.lastName,
-                        required: true,
-                        type: "text"
-                      }
-                    ].map((field, i) => (
-                      <motion.div
-                        key={field.id}
-                        className="space-y-2"
-                        custom={i}
-                        variants={fadeInUp}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        <Label htmlFor={field.id}>{field.label}</Label>
-                        <Input
-                          id={field.id}
-                          name={field.name}
-                          value={field.value}
-                          onChange={handleChange}
-                          className="bg-[#23233a] border-0 focus:ring-2 focus:ring-blue-500/60 text-white transition-all duration-200"
-                          required={field.required}
-                          type={field.type}
-                          autoComplete="off"
-                        />
-                      </motion.div>
-                    ))}
+                <div>
+                  <h2 className="text-2xl font-semibold text-white">Request a Free Estimate</h2>
+                  <p className="text-sm text-zinc-400 mt-1">Fill out the fields below and let's get started on your estimate.</p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  
+                  {/* First & Last Name */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName" className="text-zinc-300 text-sm">First Name*</Label>
+                      <Input
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        className="bg-zinc-950 border-zinc-800 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white rounded-lg h-11"
+                        required
+                        autoComplete="off"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName" className="text-zinc-300 text-sm">Last Name*</Label>
+                      <Input
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className="bg-zinc-950 border-zinc-800 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white rounded-lg h-11"
+                        required
+                        autoComplete="off"
+                      />
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <motion.div
-                      className="space-y-2"
-                      custom={2}
-                      variants={fadeInUp}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <Label htmlFor="email">Email*</Label>
+                  {/* Email & Phone */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-zinc-300 text-sm">Email*</Label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="bg-[#23233a] border-0 focus:ring-2 focus:ring-pink-500/60 text-white transition-all duration-200"
+                        className="bg-zinc-950 border-zinc-800 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white rounded-lg h-11"
                         required
                         autoComplete="off"
                       />
-                    </motion.div>
-                    <motion.div
-                      className="space-y-2"
-                      custom={3}
-                      variants={fadeInUp}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <Label htmlFor="phone">Phone Number</Label>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-zinc-300 text-sm">Phone Number</Label>
                       <Input
                         id="phone"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="bg-[#23233a] border-0 focus:ring-2 focus:ring-purple-500/60 text-white transition-all duration-200"
+                        className="bg-zinc-950 border-zinc-800 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white rounded-lg h-11"
                         autoComplete="off"
                       />
-                    </motion.div>
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <motion.div
-                      className="space-y-2"
-                      custom={4}
-                      variants={fadeInUp}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <Label htmlFor="company">Company name</Label>
+                  {/* Company & Referral */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="company" className="text-zinc-300 text-sm">Company Name</Label>
                       <Input
                         id="company"
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="bg-[#23233a] border-0 focus:ring-2 focus:ring-blue-500/60 text-white transition-all duration-200"
+                        className="bg-zinc-950 border-zinc-800 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white rounded-lg h-11"
                         autoComplete="off"
                       />
-                    </motion.div>
-                    <motion.div
-                      className="space-y-2"
-                      custom={5}
-                      variants={fadeInUp}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <Label htmlFor="referralSource">How did you hear about us?*</Label>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="referralSource" className="text-zinc-300 text-sm">How did you hear about us?*</Label>
                       <Input
                         id="referralSource"
                         name="referralSource"
                         value={formData.referralSource}
                         onChange={handleChange}
-                        className="bg-[#23233a] border-0 focus:ring-2 focus:ring-pink-500/60 text-white transition-all duration-200"
+                        className="bg-zinc-950 border-zinc-800 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white rounded-lg h-11"
                         required
                         autoComplete="off"
                       />
-                    </motion.div>
+                    </div>
                   </div>
 
-                  <motion.div
-                    className="space-y-2"
-                    custom={6}
-                    variants={fadeInUp}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    <Label htmlFor="projectDetails">Tell us more about your project*</Label>
+                  {/* Project Details */}
+                  <div className="space-y-2">
+                    <Label htmlFor="projectDetails" className="text-zinc-300 text-sm">Tell us more about your project*</Label>
                     <Textarea
                       id="projectDetails"
                       name="projectDetails"
                       value={formData.projectDetails}
                       onChange={handleChange}
-                      className="min-h-32 bg-[#23233a] border-0 focus:ring-2 focus:ring-blue-500/60 text-white transition-all duration-200"
+                      placeholder="Describe what you want to build, timeline, or scope..."
+                      className="min-h-[120px] bg-zinc-950 border-zinc-800 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white rounded-lg p-3 resize-y"
                       required
                     />
-                  </motion.div>
+                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <motion.div
-                      className="md:col-span-1 space-y-2"
-                      custom={7}
-                      variants={fadeInUp}
-                      initial="hidden"
-                      animate="visible"
+                  {/* NDA Request */}
+                  <div className="space-y-3">
+                    <Label className="text-zinc-300 text-sm flex items-center gap-1.5">
+                      <ShieldAlert className="w-4 h-4 text-purple-400" /> Do you need an NDA first?
+                    </Label>
+                    <RadioGroup
+                      defaultValue={formData.needNDA ? "yes" : "no"}
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, needNDA: value === "yes" }))}
+                      className="flex gap-6"
                     >
-                      <Label>Do you need an NDA first?</Label>
-                      <RadioGroup
-                        defaultValue={formData.needNDA ? "yes" : "no"}
-                        onValueChange={(value) => setFormData(prev => ({ ...prev, needNDA: value === "yes" }))}
-                        className="flex gap-4"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem id="yes" value="yes" />
-                          <Label htmlFor="yes">Yes</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem id="no" value="no" />
-                          <Label htmlFor="no">No</Label>
-                        </div>
-                      </RadioGroup>
-                    </motion.div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem id="yes" value="yes" className="border-zinc-800 text-purple-600 focus:ring-purple-500" />
+                        <Label htmlFor="yes" className="text-zinc-300 cursor-pointer">Yes, please provide one</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem id="no" value="no" className="border-zinc-800 text-purple-600 focus:ring-purple-500" />
+                        <Label htmlFor="no" className="text-zinc-300 cursor-pointer">No, not required</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
 
-                    <motion.div
-                      className="md:col-span-2"
-                      custom={8}
-                      variants={fadeInUp}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <Label className="mb-2 block">What can we help you with?</Label>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        {[
-                          "Web Development",
-                          "Mobile Development",
-                          "UX / UI Design",
-                          "AI Integration",
-                          "Marketing",
-                          "SEO",
-                          "Other"
-                        ].map((service, i) => (
-                          <motion.div
+                  {/* Services Checkbox Grid */}
+                  <div className="space-y-3">
+                    <Label className="text-zinc-300 text-sm block">What can we help you with?</Label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                      {availableServices.map((service) => {
+                        const isChecked = formData.services.includes(service);
+                        return (
+                          <div 
                             key={service}
-                            className="flex items-center space-x-2"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.97 }}
+                            onClick={() => handleCheckboxChange(service)}
+                            className={`flex items-center space-x-3 px-3 py-2.5 rounded-lg border cursor-pointer select-none transition-all duration-200 ${
+                              isChecked 
+                                ? "bg-purple-600/10 border-purple-500/40 text-purple-400" 
+                                : "bg-zinc-950 border-zinc-800/80 text-zinc-400 hover:border-zinc-700"
+                            }`}
                           >
                             <Checkbox
                               id={service}
-                              checked={formData.services.includes(service)}
-                              onCheckedChange={() => handleCheckboxChange(service)}
-                              className="accent-pink-500"
+                              checked={isChecked}
+                              onCheckedChange={() => {}} // handled by wrapper click
+                              className="border-zinc-800 data-[state=checked]:bg-purple-600 data-[state=checked]:border-purple-600"
                             />
-                            <Label htmlFor={service}>{service}</Label>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
+                            <span className="text-sm font-medium">{service}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
 
-                  <motion.div
-                    className="pt-2"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                  >
+                  {/* Submit Button */}
+                  <div className="pt-2">
                     <Button
                       type="submit"
-                      className={`w-full py-6 font-bold text-lg rounded-2xl bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 shadow-lg transition-all duration-200 ${
-                        isLoading ? "opacity-70 cursor-not-allowed" : ""
-                      }`}
+                      className="w-full h-12 font-medium text-base rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white shadow-lg transition-all duration-300"
                       disabled={isLoading}
                     >
-                      <AnimatePresence mode="wait" initial={false}>
-                        {!isLoading ? (
-                          <motion.span
-                            key="submit"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
-                            className="flex items-center justify-center gap-2"
-                          >
-                            <Sparkles className="w-5 h-5 animate-pulse" />
-                            Request Free Estimate
-                          </motion.span>
-                        ) : (
-                          <motion.span
-                            key="loading"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
-                            className="flex items-center justify-center gap-2"
-                          >
-                            <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                              <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                                fill="none"
-                              />
-                              <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8v8z"
-                              />
-                            </svg>
-                            Processing...
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
+                      {isLoading ? (
+                        <div className="flex items-center gap-2">
+                          <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                          </svg>
+                          <span>Processing...</span>
+                        </div>
+                      ) : (
+                        <span>Request Free Estimate</span>
+                      )}
                     </Button>
-                  </motion.div>
+                  </div>
                 </form>
               </CardContent>
             </Card>
           </div>
-        </motion.div>
+
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

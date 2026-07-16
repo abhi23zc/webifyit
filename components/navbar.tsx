@@ -63,20 +63,32 @@ const Navbar = () => {
     // Route-based active state for non-anchor pages
     if (pathname && pathname.startsWith("/projects")) {
       setActiveSection("projects")
+    } else if (pathname === "/contact") {
+      setActiveSection("contact")
     } else if (pathname === "/") {
       setActiveSection("home")
     }
-  }, [])
+  }, [pathname])
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
+    { name: "Home", href: "/#home" },
+    { name: "Services", href: "/#services" },
     { name: "Projects", href: "/projects" },
-    { name: "About", href: "#trust" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/#trust" },
+    { name: "Contact", href: "/contact" },
   ]
+
+  const isLinkActive = (href: string) => {
+    if (href.startsWith("/#")) {
+      return activeSection === href.substring(2)
+    }
+    if (href === "/") {
+      return activeSection === "home"
+    }
+    return pathname === href
+  }
 
   return (
     <motion.header
@@ -111,32 +123,35 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <nav className="flex items-center space-x-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`text-foreground/80 hover:text-foreground transition-colors duration-200 relative ${
-                  activeSection === link.href.substring(1) ? "text-foreground font-medium" : ""
-                }`}
-              >
-                {link.name}
-                {activeSection === link.href.substring(1) && (
-                  <motion.span
-                    layoutId="activeSection"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-500"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const active = isLinkActive(link.href)
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-foreground/80 hover:text-foreground transition-colors duration-200 relative ${
+                    active ? "text-foreground font-medium" : ""
+                  }`}
+                >
+                  {link.name}
+                  {active && (
+                    <motion.span
+                      layoutId="activeSection"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-500"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              )
+            })}
           </nav>
           <div className="flex items-center space-x-4">
             <ModeToggle />
             <Link href={"/contact"}>
-            <Button className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white relative overflow-hidden group">
-              <span className="relative z-10">Get Started</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            </Button>
+              <Button className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white relative overflow-hidden group">
+                <span className="relative z-10">Get Started</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Button>
             </Link>
           </div>
         </div>
@@ -185,9 +200,11 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.3 }}
               >
-                <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white">
-                  Get Started
-                </Button>
+                <Link href="/contact" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white">
+                    Get Started
+                  </Button>
+                </Link>
               </motion.div>
             </div>
           </motion.div>
