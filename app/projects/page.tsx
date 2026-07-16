@@ -20,6 +20,25 @@ type DetailedProject = {
 
 const detailedProjects: DetailedProject[] = [
   {
+    title: "Synergon AI",
+    summary:
+      "A unified, enterprise-grade AI suite replacing fragmented tools with an all-in-one platform for sales, CRM, voice agents, and campaigns.",
+    imageSrc: "/images/synergon.png",
+    tags: ["Next.js", "TypeScript", "AI Voice Agents", "WhatsApp API", "LLMs", "Node.js", "Tailwind CSS"],
+    highlights: [
+      "Inbound & outbound multilingual AI voice agents with real-time intent-aware CRM updates",
+      "Unified omnichannel inbox across WhatsApp Business, web chat, Instagram, and Email",
+      "No-code flow designer for multi-step drip journeys and custom AI knowledge base integration",
+      "Fully automated pipeline forecasting and lead pre-qualification in under 30 seconds",
+    ],
+    results: [
+      "2.4x increase in demo bookings in 28 days",
+      "40% reduction in unqualified demo requests",
+      "60% reduction in manual follow-up workloads",
+    ],
+    href: "https://www.synergon.ai",
+  },
+  {
     title: "Helpkey Hotel Booking",
     summary:
       "A scalable, user-friendly hotel booking platform with real-time availability, secure payments, and seamless UX.",

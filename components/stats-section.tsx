@@ -4,8 +4,16 @@ import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Award, Users, Briefcase } from "lucide-react"
 
+interface Stat {
+  value: number
+  label: string
+  icon: React.ReactNode
+  suffix: string
+  decimals?: number
+}
+
 // Stats data
-const stats = [
+const stats: Stat[] = [
   {
     value: 12,
     label: "Projects Completed",

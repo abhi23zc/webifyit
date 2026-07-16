@@ -10,7 +10,7 @@ const testimonials = [
     company: "Helpkey",
     content:
       "The team at WebifyIt delivered our mobile app ahead of schedule and under budget. Their attention to detail and user experience expertise is unmatched.",
-    
+
     rating: 5,
   },
   {
@@ -23,7 +23,7 @@ const testimonials = [
 
 ]
 
-const logos = ["Helpkey", "Renascence Hosiers", "Goodgut", "OyeStore", "GrowPlus" ]
+const logos = ["Helpkey", "Renascence Hosiers", "Goodgut", "OyeStore", "GrowPlus", "Synergon"]
 
 const TrustSection = () => {
   return (
@@ -80,9 +80,8 @@ const TrustSection = () => {
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`h-5 w-5 ${
-                          i < testimonial.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                        }`}
+                        className={`h-5 w-5 ${i < testimonial.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+                          }`}
                       />
                     ))}
                   </div>

@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, Apple, Play } from "lucide-react"
 
 type Project = {
   title: string
@@ -14,16 +14,19 @@ type Project = {
   imageSrc: string
   tags: string[]
   href?: string
+  appStore?: string
+  playStore?: string
 }
 
 const projects: Project[] = [
+
   {
-    title: "Helpkey Hotel Booking",
+    title: "Dineezy",
     description:
-      "A scalable, user-friendly hotel booking platform with real-time availability, secure payments, and seamless UX.",
-    imageSrc: "/images/helpkey.png",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Razorpay", "AWS", "Tailwind CSS"],
-    href: "https://helpkey.vercel.app",
+      "A comprehensive QR-based food ordering and restaurant management system designed to streamline dining experiences and operations.",
+    imageSrc: "/images/dineezy.png",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Socket.io", "Tailwind CSS"],
+    href: "https://dineezy.in",
   },
   {
     title: "WhatsApp Bulk Software",
@@ -34,23 +37,40 @@ const projects: Project[] = [
     href: "https://www.msgzone.live",
   },
   {
-    title: "Dineezy",
+    title: "HisabAI",
     description:
-      "A comprehensive QR-based food ordering and restaurant management system designed to streamline dining experiences and operations.",
-    imageSrc: "/images/dineezy.png",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Socket.io", "Tailwind CSS"],
-    href: "https://dineezy.in",
+      "An AI-powered expense splitting and tracking mobile app. Features hands-free voice logging, receipt scanning, auto-categorization, and a secure document/tax vault.",
+    imageSrc: "/images/hisabai.png",
+    tags: ["React Native", "TypeScript", "OpenAI", "AI Tools", "Tailwind CSS"],
+    href: "https://hisabai.in",
+    appStore: "https://apps.apple.com/app/hisabai/id6756543928",
+    playStore: "https://play.google.com/store/apps/details?id=ai.synergon.hisab",
+  },
+  {
+    title: "Synergon AI",
+    description:
+      "One AI platform that replaces 5+ disconnected marketing & sales tools. Automates chat, voice agents, drip campaigns, and CRM workflows for high-volume lead pipelines.",
+    imageSrc: "/images/synergon.png",
+    tags: ["Next.js", "TypeScript", "AI Voice Agents", "WhatsApp API", "LLMs", "Node.js", "Tailwind CSS"],
+    href: "https://www.synergon.ai",
   },
 
+
+  {
+    title: "Helpkey Hotel Booking",
+    description:
+      "A scalable, user-friendly hotel booking platform with real-time availability, secure payments, and seamless UX.",
+    imageSrc: "/images/helpkey.png",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Razorpay", "AWS", "Tailwind CSS"],
+    href: "https://helpkey.vercel.app",
+  },
   {
     title: "Interview AI",
     description:
       "An AI-powered mock interview platform that provides real-time feedback, sentiment analysis, and personalized improvement suggestions.",
     imageSrc: "/images/interview.png",
     tags: ["Next.js", "TypeScript", "OpenAI", "WebRTC", "AI Tools", "Firebase", "Tailwind CSS"],
-
   },
-
 ]
 
 const container = {
@@ -120,19 +140,35 @@ export default function ProjectsSection() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-start justify-between gap-4">
-                    <div>
+                    <div className="flex-1">
                       <CardTitle className="text-xl">{project.title}</CardTitle>
                       <CardDescription className="mt-2 text-foreground/70">
                         {project.description}
                       </CardDescription>
                     </div>
-                    {project.href && (
-                      <Link href={project.href} aria-label={`${project.title} link`}>
-                        <Button size="icon" variant="ghost" className="hover:text-purple-600">
-                          <ExternalLink className="h-5 w-5" />
-                        </Button>
-                      </Link>
-                    )}
+                    <div className="flex items-center gap-1 shrink-0">
+                      {project.href && (
+                        <Link href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} website`}>
+                          <Button size="icon" variant="ghost" className="h-9 w-9 hover:text-purple-600 hover:bg-purple-500/10">
+                            <ExternalLink className="h-5 w-5" />
+                          </Button>
+                        </Link>
+                      )}
+                      {project.appStore && (
+                        <Link href={project.appStore} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} App Store`}>
+                          <Button size="icon" variant="ghost" className="h-9 w-9 hover:text-blue-500 hover:bg-blue-500/10">
+                            <Apple className="h-5 w-5" />
+                          </Button>
+                        </Link>
+                      )}
+                      {project.playStore && (
+                        <Link href={project.playStore} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} Play Store`}>
+                          <Button size="icon" variant="ghost" className="h-9 w-9 hover:text-green-500 hover:bg-green-500/10">
+                            <Play className="h-5 w-5 fill-current" />
+                          </Button>
+                        </Link>
+                      )}
+                    </div>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
