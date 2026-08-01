@@ -1,0 +1,163 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Menu, X, Sparkles, SquareArrowOutUpLeft } from "lucide-react";
+
+interface NavbarProps {
+  onOpenAuditModal: () => void;
+}
+
+export default function Navbar({ onOpenAuditModal }: NavbarProps) {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      // Section intersection detection
+      const sections = ["hero", "services", "impact", "projects", "testimonials", "insights", "faq", "contact"];
+      const current = sections.find((sec) => {
+        const el = document.getElementById(sec);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return rect.top <= 120 && rect.bottom >= 120;
+        }
+        return false;
+      });
+      if (current) setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { label: "Home", href: "#hero", id: "hero" },
+    { label: "Services", href: "#services", id: "services" },
+    { label: "Projects", href: "#projects", id: "projects" },
+    { label: "Insights", href: "#insights", id: "insights" },
+    { label: "FAQ", href: "#faq", id: "faq" },
+    { label: "Contact", href: "#contact", id: "contact" },
+  ];
+
+  return (
+    <motion.header
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+        ? "bg-[#F5F6F1]/90 backdrop-blur-md border-b border-[#DCDDD6] py-3 shadow-xs"
+        : "bg-[#F5F6F1]/70 backdrop-blur-xs py-5 border-b border-transparent"
+        }`}
+    >
+      <div className="max-w-[1180px] mx-auto px-5 sm:px-8 flex items-center justify-between">
+        {/* Brand Logo */}
+        <a href="#hero" className="flex items-center gap-2.5 group">
+          <motion.div
+            whileHover={{ scale: 1.08, rotate: 2 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-8 h-8 bg-[#12151B] text-white flex items-center justify-center font-mono font-bold text-xs tracking-tighter rounded-xs group-hover:bg-[#FF4B23] transition-colors shadow-xs"
+          >
+            W//I
+          </motion.div>
+          <div className="flex flex-col">
+            <span className="font-display text-xl font-bold tracking-tight text-[#12151B]">
+              Webify<span className="text-[#FF4B23]">It</span>
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A8E96] -mt-1 flex items-center gap-1">
+              KANPUR · INDIA
+              <span className="w-1 h-1 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+            </span>
+          </div>
+        </a>
+
+        {/* Desktop Nav Links */}
+        <nav className="hidden md:flex items-center gap-7">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                className={`font-body text-sm font-medium transition-colors relative py-1 ${isActive ? "text-[#12151B] font-semibold" : "text-[#585D67] hover:text-[#12151B]"
+                  }`}
+              >
+                {link.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavIndicator"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FF4B23]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* CTA & Mobile Menu Trigger */}
+        <div className="flex items-center gap-3">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={onOpenAuditModal}
+            className="hidden sm:inline-flex btn-primary text-xs tracking-wide py-2.5 px-4 items-center gap-1.5 shadow-xs"
+          >
+            <SquareArrowOutUpLeft className="w-3.5 h-3.5" />
+            <span>Get Started</span>
+          </motion.button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+            className="md:hidden p-2 text-[#12151B] border border-[#C7C9C0] bg-white rounded-xs"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden bg-[#FFFFFF] border-b border-[#DCDDD6] px-5 py-6 space-y-4 overflow-hidden shadow-lg"
+          >
+            <div className="flex flex-col space-y-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="font-body text-base font-medium text-[#12151B] py-2.5 border-b border-[#F5F6F1] flex items-center justify-between group"
+                >
+                  <span>{link.label}</span>
+                  <ArrowUpRight className="w-4 h-4 text-[#8A8E96] group-hover:text-[#FF4B23] transition-colors" />
+                </a>
+              ))}
+            </div>
+            <div className="pt-2">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenAuditModal();
+                }}
+                className="w-full btn-primary justify-center text-sm py-3"
+              >
+                Get Started — Free Audit
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}
