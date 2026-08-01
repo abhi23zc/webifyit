@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import { X, CheckCircle2, ArrowRight, Sparkles, SquareArrowOutUpLeft } from "lucide-react";
 
 interface AuditModalProps {
   isOpen: boolean;
@@ -222,7 +222,7 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
                         type="submit"
                         className="flex-1 btn-primary py-3 justify-center text-sm font-semibold"
                       >
-                        <square-arrow-out-up-right className="w-4 h-4" />
+                        <SquareArrowOutUpLeft className="w-4 h-4" />
                         <span>Submit Audit Request</span>
                       </button>
                     </div>

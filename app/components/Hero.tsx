@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, Zap, BarChart2, ShieldCheck, Layers, Eye, Sparkles, SquareArrowOutUpLeft } from "lucide-react";
+import { ArrowRight, CheckCircle2, Zap, BarChart2, ShieldCheck, Layers, Sparkles, SquareArrowOutUpLeft } from "lucide-react";
 import Card3D from "./Card3D";
 
 interface HeroProps {
@@ -11,7 +11,6 @@ interface HeroProps {
 
 export default function Hero({ onOpenAuditModal }: HeroProps) {
   const [activeMetricView, setActiveMetricView] = useState<"traffic" | "conversions">("traffic");
-  const [perspectiveMode, setPerspectiveMode] = useState<"3d" | "flat" | "wireframe">("3d");
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 24 },
@@ -118,58 +117,16 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
 
           </motion.div>
 
-          {/* Right Column: Interactive 3D Perspective Browser Engine */}
+          {/* Right Column: Interactive Browser Engine */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="lg:col-span-6 relative"
           >
-            {/* Mode Switcher Control Toolbar */}
-            <div className="flex items-center justify-between mb-3 px-2">
-              <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#585D67]">
-                <Layers className="w-3.5 h-3.5 text-[#1F3D8C]" />
-                <span>3D PERSPECTIVE ENGINE</span>
-              </div>
-              <div className="flex bg-white border border-[#C7C9C0] rounded-xs p-0.5 shadow-2xs">
-                <button
-                  onClick={() => setPerspectiveMode("3d")}
-                  className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs flex items-center gap-1 transition-all ${perspectiveMode === "3d"
-                    ? "bg-[#1F3D8C] text-white shadow-xs font-bold"
-                    : "text-[#585D67] hover:text-[#12151B]"
-                    }`}
-                >
-                  <Layers className="w-3 h-3" />
-                  3D Depth
-                </button>
-                <button
-                  onClick={() => setPerspectiveMode("wireframe")}
-                  className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs flex items-center gap-1 transition-all ${perspectiveMode === "wireframe"
-                    ? "bg-[#FF4B23] text-white shadow-xs font-bold"
-                    : "text-[#585D67] hover:text-[#12151B]"
-                    }`}
-                >
-                  <Eye className="w-3 h-3" />
-                  Blueprint
-                </button>
-                <button
-                  onClick={() => setPerspectiveMode("flat")}
-                  className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs transition-all ${perspectiveMode === "flat"
-                    ? "bg-[#12151B] text-white shadow-xs font-bold"
-                    : "text-[#585D67] hover:text-[#12151B]"
-                    }`}
-                >
-                  2D Render
-                </button>
-              </div>
-            </div>
-
             {/* Wrapped in Card3D component for Subtle Mouse Tilt */}
-            <Card3D intensity={perspectiveMode === "3d" ? 6 : 0} className="shadow-3d">
-              <div
-                className={`xmark bg-white border border-[#C7C9C0] p-4 sm:p-6 rounded-xs relative transition-all duration-500 ${perspectiveMode === "wireframe" ? "bg-grid-pattern border-[#1F3D8C]" : ""
-                  }`}
-              >
+            <Card3D intensity={3} className="shadow-3d">
+              <div className="xmark bg-white border border-[#C7C9C0] p-4 sm:p-6 rounded-xs relative transition-all duration-500">
 
                 {/* Browser Header Bar (Z-Layer 1) */}
                 <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#DCDDD6] translate-z-10">
