@@ -11,19 +11,14 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
   return (
     <footer className="bg-[#12151B] text-white pt-16 pb-12 border-t border-white/10">
       <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
-        
+
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
-          
+
           {/* Brand Blurb */}
           <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 bg-[#FF4B23] text-white flex items-center justify-center font-mono font-bold text-xs rounded-xs">
-                W//I
-              </div>
-              <span className="font-display text-2xl font-bold tracking-tight text-white">
-                Webify<span className="text-[#FF4B23]">It</span>
-              </span>
+            <div className="flex items-center">
+              <img src="/images/logo.png" alt="WebifyIt" className="h-10 sm:h-12 w-auto object-contain brightness-0 invert" />
             </div>
 
             <p className="font-body text-sm text-[#8A8E96] leading-relaxed max-w-md">
@@ -57,7 +52,7 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
               LIVING PROOF & BLOG
             </div>
             <ul className="space-y-2 font-body text-sm text-[#8A8E96]">
-              <li><a href="#projects" className="hover:text-white transition-colors">Dine-Easy POS Engine</a></li>
+              <li><a href="#projects" className="hover:text-white transition-colors">Dineezy POS Engine</a></li>
               <li><a href="#projects" className="hover:text-white transition-colors">MsgZone WhatsApp SaaS</a></li>
               <li><a href="#projects" className="hover:text-white transition-colors">HelpKey Engine</a></li>
               <li><Link href="/blog" className="hover:text-white transition-colors font-semibold text-white">Engineering Blog</Link></li>

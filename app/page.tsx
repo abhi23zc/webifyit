@@ -59,7 +59,7 @@ export default function Home() {
         {/* 6. Achievements / Stats */}
         <ImpactStats />
 
-        {/* 7. Featured Work (Living Proof: Dine-Easy, MsgZone, HelpKey, HisabAI) */}
+        {/* 7. Featured Work (Living Proof: Dineezy, MsgZone, HelpKey, HisabAI) */}
         <Projects onOpenAuditModal={handleOpenAuditModal} />
 
         {/* 8. Client Reviews & Engineering Testimonials */}

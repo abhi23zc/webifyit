@@ -25,6 +25,10 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       domain: "dineezy.in",
       highlight: "Real-Time Order Dispatch",
       stats: "4.8x Order Speedup",
+      media: {
+        type: "image",
+        url: "/images/dineezy/1.png"
+      },
     },
     {
       id: "PRJ-02",
@@ -37,6 +41,10 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       domain: "msgzone.live",
       highlight: "High-Volume Dispatch Engine",
       stats: "50k+ Msgs / Day",
+      media: {
+        type: "image",
+        url: "/images/msgzone/1.png"
+      },
     },
     {
       id: "PRJ-03",
@@ -50,6 +58,11 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       badge: "App Store & Play Store",
       highlight: "Voice & Vision AI",
       stats: "99.4% Scan Accuracy",
+      media: {
+        type: "image",
+        url: "/images/hisab/1.png"
+      },
+
     },
     {
       id: "PRJ-04",
@@ -62,6 +75,10 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       domain: "synergon.ai",
       highlight: "Autonomous Sales Pipeline",
       stats: "3.2x Lead Conv.",
+      media: {
+        type: "image",
+        url: "/images/synergon/1.png"
+      },
     },
     {
       id: "PRJ-05",
@@ -147,85 +164,126 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
           </div>
         </div>
 
-        {/* 3D Project Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.94 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="h-full"
-              >
-                <Card3D intensity={12} className="h-full">
-                  <div className="xmark bg-white border border-[#C7C9C0] p-6 rounded-xs flex flex-col justify-between hover:shadow-3d hover:border-[#1F3D8C] transition-all duration-300 group h-full">
-                    <div>
-                      {/* Header */}
-                      <div className="flex items-center justify-between pb-4 border-b border-[#DCDDD6] mb-4 translate-z-10">
-                        <span className="font-mono text-xs font-bold text-[#1F3D8C]">
-                          {project.id}
-                        </span>
-                        {project.badge ? (
-                          <span className="tag-pill tag-pill-accent text-[10px] font-bold">
-                            {project.badge}
-                          </span>
-                        ) : (
-                          <span className="font-mono text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-2xs border border-emerald-200">
-                            {project.stats}
-                          </span>
-                        )}
-                      </div>
+        {/* Infinite Horizontal Marquee */}
+        <div className="relative w-full overflow-hidden py-8 group">
+          <style>{`
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+              animation: marquee 40s linear infinite;
+            }
+            .group:hover .animate-marquee {
+              animation-play-state: paused;
+            }
+            .mask-edges {
+              mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+              -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            }
+          `}</style>
 
-                      {/* Title & Domain */}
-                      <div className="mb-3 translate-z-20">
-                        <h3 className="font-display text-xl font-bold text-[#12151B] group-hover:text-[#1F3D8C] transition-colors flex items-center justify-between">
-                          <span>{project.name}</span>
-                          {project.link !== "#" && (
-                            <a
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="p-1.5 bg-[#F5F6F1] border border-[#DCDDD6] rounded-xs text-[#585D67] hover:bg-[#1F3D8C] hover:text-white transition-colors"
-                              title="Visit live project"
-                            >
-                              <ExternalLink className="w-4 h-4" />
-                            </a>
-                          )}
-                        </h3>
-                        <div className="font-mono text-xs text-[#8A8E96] mt-1 flex items-center gap-1.5">
-                          <Globe className="w-3 h-3 text-[#1F3D8C]" />
-                          {project.domain}
+          <div className="mask-edges">
+            <div className="flex gap-6 animate-marquee w-max px-3">
+              {[...filteredProjects, ...filteredProjects].map((project, idx) => (
+                <div
+                  key={`${project.id}-${idx}`}
+                  className="w-[320px] sm:w-[360px] md:w-[400px] shrink-0 h-full"
+                >
+                  <Card3D intensity={12} className="h-full">
+                    <div className="group/card relative w-full h-full perspective-1000 min-h-[380px]">
+                      <div className="w-full h-full relative preserve-3d duration-700 group-hover/card:rotate-y-180">
+
+                        {/* --- FRONT FACE --- */}
+                        <div className="relative backface-hidden xmark bg-white border border-[#C7C9C0] p-6 rounded-xs flex flex-col justify-between h-full shadow-sm">
+                          <div>
+                            {/* Header */}
+                            <div className="flex items-center justify-between pb-4 border-b border-[#DCDDD6] mb-4">
+                              <span className="font-mono text-xs font-bold text-[#1F3D8C]">
+                                {project.id}
+                              </span>
+                              {project.badge ? (
+                                <span className="tag-pill tag-pill-accent text-[10px] font-bold">
+                                  {project.badge}
+                                </span>
+                              ) : (
+                                <span className="font-mono text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-2xs border border-emerald-200">
+                                  {project.stats}
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Title & Domain */}
+                            <div className="mb-3">
+                              <h3 className="font-display text-xl font-bold text-[#12151B] flex items-center justify-between">
+                                <span>{project.name}</span>
+                              </h3>
+                              <div className="font-mono text-xs text-[#8A8E96] mt-1 flex items-center gap-1.5">
+                                <Globe className="w-3 h-3 text-[#1F3D8C]" />
+                                {project.domain}
+                              </div>
+                            </div>
+
+                            <p className="font-body text-sm text-[#585D67] leading-relaxed mb-6 line-clamp-3">
+                              {project.description}
+                            </p>
+                          </div>
+
+                          {/* Tech Stack Chips */}
+                          <div className="pt-4 border-t border-[#DCDDD6]">
+                            <div className="font-mono text-[10px] text-[#8A8E96] uppercase tracking-wider mb-2 flex items-center gap-1 font-bold">
+                              <Layers className="w-3 h-3 text-[#1F3D8C]" />
+                              BUILT WITH
+                            </div>
+                            <div className="flex flex-wrap gap-1.5">
+                              {project.stack.slice(0, 3).map((tech) => (
+                                <span key={tech} className="tag-pill text-[10px] bg-[#F5F6F1]">
+                                  {tech}
+                                </span>
+                              ))}
+                              {project.stack.length > 3 && (
+                                <span className="tag-pill text-[10px] bg-[#F5F6F1]">
+                                  +{project.stack.length - 3}
+                                </span>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                      </div>
 
-                      <p className="font-body text-sm text-[#585D67] leading-relaxed mb-6 translate-z-10">
-                        {project.description}
-                      </p>
-                    </div>
-
-                    {/* Tech Stack Chips */}
-                    <div className="translate-z-20 pt-4 border-t border-[#DCDDD6]">
-                      <div className="font-mono text-[10px] text-[#8A8E96] uppercase tracking-wider mb-2 flex items-center gap-1 font-bold">
-                        <Layers className="w-3 h-3 text-[#1F3D8C]" />
-                        BUILT WITH
+                        {/* --- BACK FACE (Media Only Clickable) --- */}
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="absolute inset-0 backface-hidden rotate-y-180 bg-[#12151B] border border-[#1F3D8C]/30 rounded-xs flex flex-col justify-between h-full shadow-xl overflow-hidden cursor-pointer"
+                          title={`Visit ${project.name}`}
+                        >
+                          {/* @ts-ignore - dynamic media property support */}
+                          {project.media ? (
+                            <div className="absolute inset-0 w-full h-full p-2 flex items-center justify-center">
+                              {/* @ts-ignore */}
+                              {project.media.type === 'video' ? (
+                                /* @ts-ignore */
+                                <video src={project.media.url} autoPlay loop muted playsInline className="w-full h-full object-contain" />
+                              ) : (
+                                /* @ts-ignore */
+                                <img src={project.media.url} alt={project.name} className="w-full h-full object-contain" />
+                              )}
+                            </div>
+                          ) : (
+                            <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-[#12151B] to-[#1F3D8C]/40 text-[#585D67] font-mono text-sm">
+                              Media Preview Unavailable
+                            </div>
+                          )}
+                        </a>
                       </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.stack.map((tech) => (
-                          <span key={tech} className="tag-pill text-[10px] bg-[#F5F6F1]">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
                     </div>
-                  </div>
-                </Card3D>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                  </Card3D>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
         {/* Bottom CTAs */}
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">

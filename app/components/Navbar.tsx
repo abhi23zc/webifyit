@@ -57,22 +57,7 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
       <div className="max-w-[1180px] mx-auto px-5 sm:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <motion.div
-            whileHover={{ scale: 1.08, rotate: 2 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-8 h-8 bg-[#12151B] text-white flex items-center justify-center font-mono font-bold text-xs tracking-tighter rounded-xs group-hover:bg-[#FF4B23] transition-colors shadow-xs"
-          >
-            W//I
-          </motion.div>
-          <div className="flex flex-col">
-            <span className="font-display text-xl font-bold tracking-tight text-[#12151B]">
-              Webify<span className="text-[#FF4B23]">It</span>
-            </span>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A8E96] -mt-1 flex items-center gap-1">
-              WEB & AI STUDIO
-              <span className="w-1 h-1 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
-            </span>
-          </div>
+          <img src="/images/logo.png" alt="WebifyIt" className="h-10 sm:h-12 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav Links */}

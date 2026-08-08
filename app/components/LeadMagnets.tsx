@@ -77,8 +77,8 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
         });
       } else if (textLower.includes("restaurant") || textLower.includes("khana") || textLower.includes("dine") || textLower.includes("hotel")) {
         setAiResult({
-          proposal: "Deploy Dine-Easy QR digital menu dispatch with automated kitchen order management and instant WhatsApp bill delivery.",
-          stack: ["Dine-Easy Engine", "Real-Time WebSocket Kitchen Display", "Razorpay Payment Gateway"],
+          proposal: "Deploy Dineezy QR digital menu dispatch with automated kitchen order management and instant WhatsApp bill delivery.",
+          stack: ["Dineezy Engine", "Real-Time WebSocket Kitchen Display", "Razorpay Payment Gateway"],
           savings: "Accelerates table turnaround by 4.8x and boosts average order value by 24%.",
         });
       } else {
@@ -260,11 +260,10 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
         <div className="flex items-center gap-3 border-b border-[#DCDDD6] pb-4 mb-8 overflow-x-auto">
           <button
             onClick={() => setActiveTab("architect")}
-            className={`font-mono text-xs px-4 py-2.5 rounded-xs border font-semibold flex items-center gap-2 transition-all shrink-0 ${
-              activeTab === "architect"
+            className={`font-mono text-xs px-4 py-2.5 rounded-xs border font-semibold flex items-center gap-2 transition-all shrink-0 ${activeTab === "architect"
                 ? "bg-[#1F3D8C] text-white border-[#1F3D8C] shadow-2xs"
                 : "bg-white text-[#585D67] border-[#C7C9C0] hover:border-[#12151B]"
-            }`}
+              }`}
           >
             <Bot className="w-4 h-4 text-[#FF4B23]" />
             1. AI Business Architect (Chat/Voice)
@@ -272,11 +271,10 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
 
           <button
             onClick={() => setActiveTab("quiz")}
-            className={`font-mono text-xs px-4 py-2.5 rounded-xs border font-semibold flex items-center gap-2 transition-all shrink-0 ${
-              activeTab === "quiz"
+            className={`font-mono text-xs px-4 py-2.5 rounded-xs border font-semibold flex items-center gap-2 transition-all shrink-0 ${activeTab === "quiz"
                 ? "bg-[#1F3D8C] text-white border-[#1F3D8C] shadow-2xs"
                 : "bg-white text-[#585D67] border-[#C7C9C0] hover:border-[#12151B]"
-            }`}
+              }`}
           >
             <HelpCircle className="w-4 h-4 text-[#FF4B23]" />
             2. Business Bottleneck Diagnostic
@@ -284,11 +282,10 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
 
           <button
             onClick={() => setActiveTab("calculator")}
-            className={`font-mono text-xs px-4 py-2.5 rounded-xs border font-semibold flex items-center gap-2 transition-all shrink-0 ${
-              activeTab === "calculator"
+            className={`font-mono text-xs px-4 py-2.5 rounded-xs border font-semibold flex items-center gap-2 transition-all shrink-0 ${activeTab === "calculator"
                 ? "bg-[#1F3D8C] text-white border-[#1F3D8C] shadow-2xs"
                 : "bg-white text-[#585D67] border-[#C7C9C0] hover:border-[#12151B]"
-            }`}
+              }`}
           >
             <Calculator className="w-4 h-4 text-[#FF4B23]" />
             3. Operational Savings Calculator
@@ -302,7 +299,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
               <div className="flex items-center justify-between pb-4 border-b border-[#DCDDD6] mb-6">
                 <div className="flex items-center gap-2 font-mono text-xs">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FF4B23] animate-ping" />
-                   <span className="font-bold text-[#12151B] uppercase tracking-wider">
+                  <span className="font-bold text-[#12151B] uppercase tracking-wider">
                     WEBIFYIT AI BUSINESS ADVISOR (Chat/Voice)
                   </span>
                 </div>
@@ -327,11 +324,10 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
                   <button
                     type="button"
                     onClick={toggleListening}
-                    className={`absolute right-3 top-3 p-3 rounded-xs transition-colors ${
-                      isListening
+                    className={`absolute right-3 top-3 p-3 rounded-xs transition-colors ${isListening
                         ? "bg-red-500 text-white animate-pulse"
                         : "bg-[#1F3D8C] text-white hover:bg-[#FF4B23]"
-                    }`}
+                      }`}
                     title={isListening ? "Listening..." : "Click to speak in Hindi/English"}
                   >
                     {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
@@ -354,7 +350,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
                     disabled={isAnalyzing || !userInput.trim()}
                     className="btn-primary text-xs py-3 px-6 shadow-3d-accent disabled:opacity-50 flex items-center gap-2"
                   >
-                     {isAnalyzing ? (
+                    {isAnalyzing ? (
                       <>
                         <RefreshCw className="w-4 h-4 animate-spin" />
                         <span>Thinking...</span>
@@ -498,7 +494,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
                         </div>
 
                         <div className="bg-[#F5F6F1] p-5 rounded-xs border border-[#DCDDD6] space-y-3">
-                           <div className="font-mono text-xs font-bold text-[#12151B] uppercase">OUR RECOMMENDED SOLUTION:</div>
+                          <div className="font-mono text-xs font-bold text-[#12151B] uppercase">OUR RECOMMENDED SOLUTION:</div>
                           <p className="font-body text-sm text-[#585D67] leading-relaxed">
                             {analysis.recommendation}
                           </p>
@@ -506,7 +502,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
 
                         {!quizCaptured ? (
                           <form onSubmit={handleCaptureQuizLead} className="bg-[#12151B] text-white p-5 rounded-xs space-y-3">
-                             <div className="font-mono text-xs text-[#25D366] font-bold uppercase tracking-wider">
+                            <div className="font-mono text-xs text-[#25D366] font-bold uppercase tracking-wider">
                               GET YOUR FREE BUSINESS REPORT ON WHATSAPP
                             </div>
                             <div className="flex flex-col sm:flex-row gap-3">
@@ -546,7 +542,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
           <Card3D intensity={5}>
             <div className="xmark bg-white border border-[#C7C9C0] p-6 sm:p-8 rounded-xs shadow-3d">
               <div className="flex items-center justify-between pb-4 border-b border-[#DCDDD6] mb-6">
-                 <div className="font-mono text-xs font-bold text-[#1F3D8C] uppercase tracking-wider flex items-center gap-2">
+                <div className="font-mono text-xs font-bold text-[#1F3D8C] uppercase tracking-wider flex items-center gap-2">
                   <Calculator className="w-4 h-4 text-[#FF4B23]" />
                   SEE HOW MUCH YOU CAN SAVE WITH AI
                 </div>

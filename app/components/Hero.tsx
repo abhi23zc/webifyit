@@ -130,7 +130,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   </div>
                   <div className="font-display font-bold text-xs text-[#12151B] group-hover:text-[#1F3D8C] transition-colors leading-tight">
-                    Dine-Easy POS
+                    Dineezy POS
                   </div>
                   <div className="font-mono text-[10px] text-[#FF4B23] font-semibold">
                     4.8x Orders ↑

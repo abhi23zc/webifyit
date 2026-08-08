@@ -77,7 +77,7 @@ const DEFAULT_BLOG_ANALYTICS: BlogAnalytics[] = [
   {
     id: "BLOG-02",
     slug: "why-off-the-shelf-crms-fail-restaurants",
-    title: "Why Off-the-Shelf CRMs Fail High-Volume Restaurants (and How We Solved It with Dine-Easy)",
+    title: "Why Off-the-Shelf CRMs Fail High-Volume Restaurants (and How We Solved It with Dineezy)",
     category: "Proprietary Architecture",
     readTime: "8 min read",
     views30Days: 2190,
