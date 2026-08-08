@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 interface FooterProps {
   onOpenAuditModal: () => void;
@@ -26,7 +27,7 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
             </div>
 
             <p className="font-body text-sm text-[#8A8E96] leading-relaxed max-w-md">
-              Transform your business with cutting-edge web & app solutions. We build high-performance digital experiences that engage, convert, and retain customers.
+              Custom Websites, Mobile Apps & AI Tools. We design and build fast websites, smart AI chatbots, and cloud software that helps your business grow.
             </p>
 
             <div className="font-mono text-xs text-[#8A8E96] flex items-center gap-2 pt-2">
@@ -35,39 +36,40 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
             </div>
           </div>
 
-          {/* Services Links */}
+          {/* Core Engineering Services */}
           <div className="md:col-span-3 space-y-3">
             <div className="font-mono text-xs font-bold text-[#FF4B23] uppercase tracking-wider">
-              SERVICES
+              OUR SERVICES
             </div>
             <ul className="space-y-2 font-body text-sm text-[#8A8E96]">
-              <li><a href="#services" className="hover:text-white transition-colors">Web Development</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">App Development</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">AI Integration</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">SEO Optimization</a></li>
-              <li><a href="#growth" className="hover:text-white transition-colors">Lead Generation</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Custom SaaS Platforms</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Custom Websites</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">AI Chatbots & Voice Assistants</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Cloud SaaS Platforms</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Mobile Apps</a></li>
+              <li><a href="#lead-magnets" className="hover:text-white transition-colors">Free AI Business Planner</a></li>
+              <li><a href="#positioning" className="hover:text-white transition-colors">Why Choose Us</a></li>
             </ul>
           </div>
 
-          {/* Resources Links */}
+          {/* Living Proof & Resources */}
           <div className="md:col-span-2 space-y-3">
             <div className="font-mono text-xs font-bold text-[#FF4B23] uppercase tracking-wider">
-              RESOURCES
+              LIVING PROOF & BLOG
             </div>
             <ul className="space-y-2 font-body text-sm text-[#8A8E96]">
-              <li><a href="#projects" className="hover:text-white transition-colors">Case Studies</a></li>
-              <li><button onClick={onOpenAuditModal} className="hover:text-white transition-colors text-left">Free Website Audit</button></li>
-              <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
-              <li><a href="#insights" className="hover:text-white transition-colors">Analytics Guide</a></li>
-              <li><a href="#growth" className="hover:text-white transition-colors">SEO Checklist</a></li>
+              <li><a href="#projects" className="hover:text-white transition-colors">Dine-Easy POS Engine</a></li>
+              <li><a href="#projects" className="hover:text-white transition-colors">MsgZone WhatsApp SaaS</a></li>
+              <li><a href="#projects" className="hover:text-white transition-colors">HelpKey Engine</a></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors font-semibold text-white">Engineering Blog</Link></li>
+              <li><Link href="/admin" className="hover:text-white transition-colors font-semibold text-[#FF4B23]">Internal Lead CRM</Link></li>
+              <li><button onClick={onOpenAuditModal} className="hover:text-white transition-colors text-left text-xs font-mono text-[#25D366]">Request Blueprint →</button></li>
             </ul>
           </div>
 
-          {/* Contact Details */}
+          {/* Technical Contact */}
           <div className="md:col-span-2 space-y-3">
             <div className="font-mono text-xs font-bold text-[#FF4B23] uppercase tracking-wider">
-              CONTACT
+              GET IN TOUCH
             </div>
             <div className="space-y-2 font-body text-sm text-[#8A8E96]">
               <a href="mailto:webifyit.in@gmail.com" className="block hover:text-white transition-colors break-all">
@@ -87,12 +89,12 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
         {/* Bottom Legal Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#8A8E96]">
           <div>
-            © 2026 WebifyIt. All rights reserved. Built with precision.
+            © 2026 WebifyIt. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Sitemap</a>
+            <a href="#" className="hover:text-white transition-colors">Site Speed Report</a>
           </div>
         </div>
 

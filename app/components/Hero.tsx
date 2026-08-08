@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, Zap, BarChart2, ShieldCheck, Layers, Sparkles, SquareArrowOutUpLeft } from "lucide-react";
+import { ArrowRight, CheckCircle2, Zap, BarChart2, ShieldCheck, Layers, Sparkles, SquareArrowOutUpLeft, Cpu, Bot } from "lucide-react";
 import Card3D from "./Card3D";
 
 interface HeroProps {
@@ -10,7 +10,7 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenAuditModal }: HeroProps) {
-  const [activeMetricView, setActiveMetricView] = useState<"traffic" | "conversions">("traffic");
+  const [activeMetricView, setActiveMetricView] = useState<"performance" | "agents">("performance");
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 24 },
@@ -22,35 +22,35 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
   };
 
   return (
-    <section id="hero" className="pt-28 pb-16 lg:pt-36 lg:pb-24 relative overflow-hidden bg-grid-pattern">
-      {/* Ambient 3D Depth Glow Background */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-radial from-[#1F3D8C]/10 via-[#FF4B23]/5 to-transparent blur-3xl pointer-events-none rounded-full" />
+    <section id="hero" className="pt-28 pb-16 lg:pt-36 lg:pb-24 relative overflow-hidden bg-grid-pattern border-b border-[#DCDDD6]">
+      {/* Ambient Depth Glow Background */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-radial from-[#1F3D8C]/10 via-[#FF4B23]/5 to-transparent blur-3xl pointer-events-none rounded-full" />
 
       <div className="max-w-[1180px] mx-auto px-5 sm:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
-          {/* Left Column: Authoritative Copy & CTAs */}
+          {/* Left Column: Authoritative Engineering Copy */}
           <motion.div
             initial="hidden"
             animate="visible"
             className="lg:col-span-6 flex flex-col items-start space-y-6"
           >
-            {/* Eyebrow */}
+            {/* Eyebrow Tag */}
             <motion.div custom={0} variants={fadeInUp} className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-white/90 backdrop-blur-md border border-[#C7C9C0] rounded-xs shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-[#FF4B23] animate-pulse"></span>
               <span className="font-mono text-xs font-bold tracking-wider text-[#12151B] uppercase">
-                WEBIFYIT STUDIO
+                WEBIFYIT — WEB & AI STUDIO
               </span>
-              <span className="font-mono text-[10px] text-[#8A8E96] border-l border-[#DCDDD6] pl-2">
-                BESPOKE 3D WEB & APP ARCHITECTURE
+              <span className="font-mono text-[10px] text-[#1F3D8C] border-l border-[#DCDDD6] pl-2 font-semibold">
+                CUSTOM WEB & AI SOLUTIONS
               </span>
             </motion.div>
 
             {/* Headline */}
-            <motion.h1 custom={1} variants={fadeInUp} className="font-display text-4xl sm:text-5xl lg:text-[54px] font-bold text-[#12151B] leading-[1.10] tracking-tight">
-              We build custom digital platforms that{" "}
+            <motion.h1 custom={1} variants={fadeInUp} className="font-display text-4xl sm:text-5xl lg:text-[52px] font-bold text-[#12151B] leading-[1.10] tracking-tight">
+              We build custom software &{" "}
               <span className="relative inline-block text-[#1F3D8C]">
-                scale & convert.
+                smart AI solutions.
                 <svg
                   className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#FF4B23]"
                   viewBox="0 0 100 12"
@@ -68,7 +68,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
 
             {/* Subhead */}
             <motion.p custom={2} variants={fadeInUp} className="font-body text-base sm:text-lg text-[#585D67] max-w-xl leading-relaxed">
-              Engineering high-frequency web apps, intelligent SaaS platforms, and conversion-optimized sales engines with 3D precision and sub-100ms response times.
+              We build fast websites, AI chatbots & voice assistants, and cloud software tools that help your business run better — in English and Hindi.
             </motion.p>
 
             {/* CTAs */}
@@ -80,14 +80,14 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                 className="btn-primary text-base py-3.5 px-6 group shadow-3d-accent"
               >
                 <SquareArrowOutUpLeft className="w-4 h-4 text-white" />
-                <span>Get Free Website Audit</span>
+                <span>Get a Free Project Plan</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </motion.button>
 
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                href="https://wa.me/916394575814?text=Hi%20WebifyIt!%20I%20would%20like%20to%20book%20a%2030-minute%20strategy%20call."
+                href="https://wa.me/916394575814?text=Hi%20WebifyIt!%20I%20would%20like%20to%20schedule%20a%20Technical%20Architecture%20Session."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary text-base py-3.5 px-6 text-center flex items-center justify-center gap-2"
@@ -95,23 +95,85 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                 <svg className="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
                 </svg>
-                <span>Book Strategy Call</span>
+                <span>Book a Free Call</span>
               </motion.a>
             </motion.div>
 
-            {/* Studio Metrics Highlights */}
-            <motion.div custom={4} variants={fadeInUp} className="pt-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-[#DCDDD6] w-full">
-              <div className="flex items-center gap-2 font-mono text-xs text-[#585D67]">
-                <Zap className="w-4 h-4 text-[#1F3D8C]" />
-                <span className="font-bold text-[#12151B]">Sub-100ms</span> TTFB Latency
+            {/* Live Projects Showcase Strip */}
+            <motion.div custom={4} variants={fadeInUp} className="pt-6 border-t border-[#DCDDD6] w-full space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-mono text-xs text-[#8A8E96] font-bold uppercase tracking-wider">
+                    Live in Production
+                  </span>
+                </div>
+                <a
+                  href="#projects"
+                  className="font-mono text-[11px] text-[#FF4B23] font-semibold hover:underline flex items-center gap-1 group"
+                >
+                  View all
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </a>
               </div>
-              <div className="flex items-center gap-2 font-mono text-xs text-[#585D67]">
-                <CheckCircle2 className="w-4 h-4 text-[#FF4B23]" />
-                <span className="font-bold text-[#12151B]">100/100</span> Lighthouse Architecture
-              </div>
-              <div className="flex items-center gap-2 font-mono text-xs text-[#585D67]">
-                <ShieldCheck className="w-4 h-4 text-[#12151B]" />
-                <span className="font-bold text-[#12151B]">3.8x</span> Conversion Funnels
+
+              <div className="grid grid-cols-3 gap-3">
+                {/* Project 1 */}
+                <a
+                  href="#projects"
+                  className="group flex flex-col gap-1.5 p-3 bg-white border border-[#DCDDD6] rounded-xs hover:border-[#1F3D8C] hover:shadow-sm transition-all duration-200"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-7 h-7 rounded-xs bg-[#1F3D8C] flex items-center justify-center font-mono font-bold text-white text-[10px]">
+                      DE
+                    </div>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  </div>
+                  <div className="font-display font-bold text-xs text-[#12151B] group-hover:text-[#1F3D8C] transition-colors leading-tight">
+                    Dine-Easy POS
+                  </div>
+                  <div className="font-mono text-[10px] text-[#FF4B23] font-semibold">
+                    4.8x Orders ↑
+                  </div>
+                </a>
+
+                {/* Project 2 */}
+                <a
+                  href="#projects"
+                  className="group flex flex-col gap-1.5 p-3 bg-white border border-[#DCDDD6] rounded-xs hover:border-[#FF4B23] hover:shadow-sm transition-all duration-200"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-7 h-7 rounded-xs bg-[#25D366] flex items-center justify-center font-mono font-bold text-white text-[10px]">
+                      MZ
+                    </div>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  </div>
+                  <div className="font-display font-bold text-xs text-[#12151B] group-hover:text-[#FF4B23] transition-colors leading-tight">
+                    MsgZone
+                  </div>
+                  <div className="font-mono text-[10px] text-[#FF4B23] font-semibold">
+                    50k+ Msgs/Day
+                  </div>
+                </a>
+
+                {/* Project 3 */}
+                <a
+                  href="#projects"
+                  className="group flex flex-col gap-1.5 p-3 bg-white border border-[#DCDDD6] rounded-xs hover:border-[#12151B] hover:shadow-sm transition-all duration-200"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="w-7 h-7 rounded-xs bg-[#12151B] flex items-center justify-center font-mono font-bold text-white text-[10px]">
+                      HK
+                    </div>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  </div>
+                  <div className="font-display font-bold text-xs text-[#12151B] group-hover:text-[#585D67] transition-colors leading-tight">
+                    HelpKey
+                  </div>
+                  <div className="font-mono text-[10px] text-[#FF4B23] font-semibold">
+                    Instant Booking
+                  </div>
+                </a>
               </div>
             </motion.div>
 
@@ -124,11 +186,10 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="lg:col-span-6 relative"
           >
-            {/* Wrapped in Card3D component for Subtle Mouse Tilt */}
             <Card3D intensity={3} className="shadow-3d">
               <div className="xmark bg-white border border-[#C7C9C0] p-4 sm:p-6 rounded-xs relative transition-all duration-500">
 
-                {/* Browser Header Bar (Z-Layer 1) */}
+                {/* Browser Header Bar */}
                 <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#DCDDD6] translate-z-10">
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded-full bg-[#FF4B23] shadow-xs"></span>
@@ -137,69 +198,66 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                   </div>
                   <div className="px-3.5 py-1 bg-[#F5F6F1] border border-[#DCDDD6] rounded-xs font-mono text-[11px] text-[#12151B] font-medium flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    app.webifyit.in/workspace
+                    engine.webifyit.in/telemetry
                   </div>
                   <div className="font-mono text-[10px] text-[#1F3D8C] font-bold uppercase tracking-wider">
                     SPEC_V5.0
                   </div>
                 </div>
 
-                {/* Sub-Header & Live Metric Toggle (Z-Layer 2) */}
+                {/* Metric Toggle */}
                 <div className="flex items-center justify-between mb-4 p-3 bg-[#EEF2FB] border border-[#1F3D8C]/20 rounded-xs translate-z-20 shadow-2xs">
                   <div>
                     <div className="font-mono text-[11px] font-bold text-[#1F3D8C] uppercase tracking-wider flex items-center gap-1.5">
-                      <BarChart2 className="w-3.5 h-3.5 text-[#1F3D8C]" />
-                      REAL-TIME CONVERSION MONITOR
+                      <Cpu className="w-3.5 h-3.5 text-[#1F3D8C]" />
+                      WEBSITE SPEED & AI PERFORMANCE
                     </div>
                     <div className="font-body text-xs text-[#585D67]">
-                      Live organic traffic & pipeline growth
+                      Lightning-fast websites & smart AI automation
                     </div>
                   </div>
                   <div className="flex gap-1 bg-white p-1 rounded-xs border border-[#C7C9C0]">
                     <button
-                      onClick={() => setActiveMetricView("traffic")}
-                      className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs transition-all ${activeMetricView === "traffic"
+                      onClick={() => setActiveMetricView("performance")}
+                      className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs transition-all ${activeMetricView === "performance"
                         ? "bg-[#1F3D8C] text-white font-bold"
                         : "text-[#585D67] hover:text-[#12151B]"
                         }`}
                     >
-                      Traffic
+                      Latency
                     </button>
                     <button
-                      onClick={() => setActiveMetricView("conversions")}
-                      className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs transition-all ${activeMetricView === "conversions"
+                      onClick={() => setActiveMetricView("agents")}
+                      className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs transition-all ${activeMetricView === "agents"
                         ? "bg-[#FF4B23] text-white font-bold"
                         : "text-[#585D67] hover:text-[#12151B]"
                         }`}
                     >
-                      Leads
+                      AI Voice
                     </button>
                   </div>
                 </div>
 
-                {/* Interactive Dynamic SVG Blueprint & Live Chart Area (Z-Layer 3) */}
+                {/* SVG Blueprint & Chart */}
                 <div className="bg-[#F5F6F1] p-4 border border-[#DCDDD6] rounded-xs relative mb-4 translate-z-30 overflow-hidden">
                   <AnimatePresence mode="wait">
-                    {activeMetricView === "traffic" ? (
+                    {activeMetricView === "performance" ? (
                       <motion.div
-                        key="traffic-graph"
+                        key="perf-graph"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
                         <svg className="w-full h-44 overflow-visible" viewBox="0 0 400 160">
-                          {/* Grid Lines */}
                           <line x1="0" y1="40" x2="400" y2="40" stroke="#DCDDD6" strokeDasharray="3,3" />
                           <line x1="0" y1="80" x2="400" y2="80" stroke="#DCDDD6" strokeDasharray="3,3" />
                           <line x1="0" y1="120" x2="400" y2="120" stroke="#DCDDD6" strokeDasharray="3,3" />
 
-                          {/* Area Fill */}
                           <path
                             d="M 10 130 Q 60 90 100 100 T 200 50 T 300 70 T 390 20 L 390 150 L 10 150 Z"
                             fill="url(#trafficGradient)"
                           />
-                          {/* Stroke Curve */}
                           <path
                             d="M 10 130 Q 60 90 100 100 T 200 50 T 300 70 T 390 20"
                             fill="none"
@@ -215,7 +273,6 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                             </linearGradient>
                           </defs>
 
-                          {/* Dynamic 3D Pulsing Data Nodes */}
                           <circle cx="200" cy="50" r="5" fill="#1F3D8C" className="animate-ping" />
                           <circle cx="200" cy="50" r="5" fill="#1F3D8C" />
                           <circle cx="390" cy="20" r="5" fill="#FF4B23" />
@@ -223,7 +280,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                       </motion.div>
                     ) : (
                       <motion.div
-                        key="conversions-graph"
+                        key="agent-graph"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -261,27 +318,26 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                     )}
                   </AnimatePresence>
 
-                  {/* Floating 3D Metric Indicator Tag (Z-Layer 40) */}
                   <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md border border-[#C7C9C0] p-3 rounded-xs shadow-md font-mono text-xs">
                     <div className="text-[#8A8E96] text-[10px] font-bold">
-                      {activeMetricView === "traffic" ? "LIVE MONTHLY VISITORS" : "MONTHLY QUALIFIED LEADS"}
+                      {activeMetricView === "performance" ? "WEBSITE LOAD SPEED" : "AI VOICE SPEED"}
                     </div>
                     <div className="font-bold text-[#12151B] text-base flex items-center gap-2">
-                      {activeMetricView === "traffic" ? "14,890" : "4,210"}
-                      <span className="text-emerald-600 text-[11px] bg-emerald-50 px-1.5 py-0.5 rounded-2xs font-semibold">+32.4%</span>
+                      {activeMetricView === "performance" ? "42ms" : "<220ms"}
+                      <span className="text-emerald-600 text-[11px] bg-emerald-50 px-1.5 py-0.5 rounded-2xs font-semibold">Ultra Fast</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Interactive Metric Tiles (Z-Layer 30) */}
+                {/* Bottom Metric Tiles */}
                 <div className="grid grid-cols-2 gap-3 translate-z-30">
                   <div className="p-3.5 bg-white border border-[#DCDDD6] rounded-xs shadow-2xs">
-                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase font-semibold">Conversion Rate</div>
-                    <div className="font-display font-bold text-xl text-[#12151B]">14.8%</div>
+                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase font-semibold">Google Speed Score</div>
+                    <div className="font-display font-bold text-xl text-[#12151B]">100 / 100</div>
                     <div className="w-full bg-[#F5F6F1] h-2 rounded-full mt-2 overflow-hidden border border-[#DCDDD6]">
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: "78%" }}
+                        animate={{ width: "100%" }}
                         transition={{ duration: 1.2, delay: 0.5 }}
                         className="bg-[#FF4B23] h-full"
                       />
@@ -289,33 +345,18 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                   </div>
 
                   <div className="p-3.5 bg-white border border-[#DCDDD6] rounded-xs shadow-2xs">
-                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase font-semibold">Avg Session Duration</div>
-                    <div className="font-display font-bold text-xl text-[#12151B]">3m 54s</div>
+                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase font-semibold">AI Language Support</div>
+                    <div className="font-display font-bold text-xl text-[#12151B]">English & Hindi</div>
                     <div className="w-full bg-[#F5F6F1] h-2 rounded-full mt-2 overflow-hidden border border-[#DCDDD6]">
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: "65%" }}
+                        animate={{ width: "95%" }}
                         transition={{ duration: 1.2, delay: 0.7 }}
                         className="bg-[#1F3D8C] h-full"
                       />
                     </div>
                   </div>
                 </div>
-
-                {/* Floating Z-Axis Spatial Badge (Z-Layer 50) */}
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-5 -left-5 bg-[#12151B] text-white p-3.5 rounded-xs shadow-2xl border border-[#12151B] hidden sm:flex items-center gap-3.5 translate-z-50"
-                >
-                  <div className="w-8 h-8 bg-[#FF4B23] text-white flex items-center justify-center font-mono font-bold text-xs rounded-xs shadow-3d-accent">
-                    100
-                  </div>
-                  <div>
-                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase tracking-wider font-bold">CORE WEB VITALS</div>
-                    <div className="font-body text-xs font-semibold text-white">100/100 Google Lighthouse</div>
-                  </div>
-                </motion.div>
 
               </div>
             </Card3D>

@@ -11,23 +11,23 @@ export default function FaqSection() {
   const faqs = [
     {
       id: "FAQ-01",
-      question: "What is your typical project timeline for web & mobile builds?",
+      question: "How long does a typical project take?",
       answer:
-        "Standard custom web projects typically range from 2 to 4 weeks. Complex full-stack SaaS platforms, custom mobile applications, or multi-tool AI integrations usually take 4 to 8 weeks. We work in structured 1-week sprints with full transparency, live staging previews, and regular progress updates.",
+        "Simple websites usually take 2 to 4 weeks. Bigger projects like full mobile apps, cloud software, or AI integrations usually take 4 to 8 weeks. We work in weekly stages and share updates and live previews throughout.",
       tags: ["timeline", "weeks", "process", "sprint"],
     },
     {
       id: "FAQ-02",
-      question: "How do you handle pricing and engagement models?",
+      question: "How much does it cost and how does pricing work?",
       answer:
-        "We offer two primary engagement models: Fixed-Scope Project Pricing (for defined web/app builds and audits) and Dedicated Sprint Retainers (for ongoing SaaS feature development, maintenance, and growth). All quotes include detailed scope breakdowns with zero hidden fees.",
+        "We offer two ways to work together: a fixed price for a defined project (like building a website or app), or a monthly retainer for ongoing work (like adding features or maintaining your software). All quotes are clear with no hidden fees.",
       tags: ["pricing", "cost", "quote", "retainer"],
     },
     {
       id: "FAQ-03",
-      question: "What technologies and frameworks do you specialize in?",
+      question: "What technologies do you use to build projects?",
       answer:
-        "We specialize in modern, high-performance tech stacks: Next.js 16, React 19, TypeScript, React Native, Node.js, PostgreSQL, Prisma, Tailwind CSS, OpenAI APIs, WebRTC, Socket.io, and Docker containerization deployed on AWS or Vercel.",
+        "We use modern, fast technologies: Next.js, React, TypeScript, React Native for mobile apps, Node.js, PostgreSQL, OpenAI APIs, WhatsApp APIs, and cloud platforms like AWS or Vercel. We always use the right tool for your specific project.",
       tags: ["tech stack", "nextjs", "react", "ai", "aws"],
     },
     {
@@ -39,9 +39,9 @@ export default function FaqSection() {
     },
     {
       id: "FAQ-05",
-      question: "What post-launch support and maintenance packages do you offer?",
+      question: "What support do you provide after the project launches?",
       answer:
-        "Every project includes 30 days of post-launch warranty support covering bug fixes and minor tweaks. We also offer ongoing maintenance retainers that include 24/7 uptime monitoring, security updates, server backups, SEO optimization, and feature enhancements.",
+        "Every project includes 30 days of free support after launch for bug fixes and small tweaks. We also offer ongoing support plans that include 24/7 monitoring, security updates, backups, SEO improvements, and new feature development.",
       tags: ["support", "maintenance", "warranty", "seo"],
     },
   ];
@@ -70,10 +70,10 @@ export default function FaqSection() {
               </span>
             </div>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#12151B] tracking-tight">
-              Frequently asked questions
+              Common questions
             </h2>
             <p className="font-body text-base text-[#585D67] mt-3 max-w-xl">
-              Everything you need to know about our services, technical process, and engagement models.
+              Everything you need to know about how we work, our pricing, and what you get.
             </p>
           </div>
 
@@ -148,7 +148,7 @@ export default function FaqSection() {
                           <div className="mt-4 pt-3 border-t border-[#DCDDD6] flex items-center justify-between text-[11px] font-mono text-[#8A8E96]">
                             <span className="flex items-center gap-1.5">
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                              Need a custom RFP quote?
+                              Still have questions?
                             </span>
                             <a
                               href="https://wa.me/916394575814"

@@ -13,23 +13,23 @@ export default function LeadGenGrowth({ onOpenAuditModal }: LeadGenGrowthProps) 
   const steps = [
     {
       num: "01",
-      title: "Technical Discovery & Audit",
-      desc: "We analyze your existing website speed, Lighthouse metrics, lead conversion drops, and search visibility.",
+      title: "We Check Your Current Website",
+      desc: "We look at how fast your site loads, how many visitors become customers, and how you show up on Google.",
     },
     {
       num: "02",
-      title: "Custom 3D Architecture & Wireframing",
-      desc: "We engineer a high-speed, modern visual layout with custom micro-interactions and interactive widgets.",
+      title: "We Design Your New Solution",
+      desc: "We create a clean, fast, modern design with smart features and interactive elements that engage your visitors.",
     },
     {
       num: "03",
-      title: "Production Build & API Integration",
-      desc: "Full-stack development with Next.js 16, TypeScript, WhatsApp API automation, and Razorpay payment setup.",
+      title: "We Build & Connect Everything",
+      desc: "Full development with the latest technology, WhatsApp integration, payment setup, and AI tools as needed.",
     },
     {
       num: "04",
-      title: "Launch & Continuous Optimization",
-      desc: "Instant cloud deployment with sub-100ms TTFB caching, analytics telemetry, and 24/7 technical monitoring.",
+      title: "We Launch & Keep It Running",
+      desc: "We go live fast, then monitor performance, fix issues, and keep your site running smoothly 24/7.",
     },
   ];
 
@@ -45,10 +45,10 @@ export default function LeadGenGrowth({ onOpenAuditModal }: LeadGenGrowthProps) 
             </span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#12151B] tracking-tight">
-            How we engineer high-converting platforms
+            How we build your project, step by step
           </h2>
           <p className="font-body text-base text-[#585D67] mt-3">
-            Our structured 4-stage process guarantees rapid delivery without compromising code quality, security, or design fidelity.
+            Our 4-step process delivers your project quickly, without cutting corners on quality or design.
           </p>
         </div>
 
@@ -97,10 +97,10 @@ export default function LeadGenGrowth({ onOpenAuditModal }: LeadGenGrowthProps) 
                 FAST TRACK PROJECT INITIATION
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                Ready to transform your web platform?
+                Want to grow your business online?
               </h3>
               <p className="font-body text-sm text-[#8A8E96] max-w-xl">
-                Get a free website technical audit, Lighthouse score breakdown, and custom architecture roadmap within 24 hours.
+                Get a free review of your website with suggestions on how to get more customers, faster load times, and better results — in 24 hours.
               </p>
             </div>
 
@@ -109,7 +109,7 @@ export default function LeadGenGrowth({ onOpenAuditModal }: LeadGenGrowthProps) 
                 onClick={onOpenAuditModal}
                 className="btn-primary py-3.5 px-6 text-sm shadow-3d-accent flex items-center gap-2 w-full sm:w-auto justify-center"
               >
-                <span>Request Free Audit</span>
+                <span>Get Free Website Review</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a

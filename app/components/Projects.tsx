@@ -108,10 +108,10 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
               </span>
             </div>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#12151B] tracking-tight">
-              Crafted digital platforms in production
+              Our work — live projects in production
             </h2>
             <p className="font-body text-base text-[#585D67] mt-3 max-w-2xl">
-              Explore recent software applications and high-conversion web platforms engineered by our studio.
+              Explore the apps and websites we’ve built for real businesses.
             </p>
           </div>
 
@@ -210,7 +210,7 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
                     <div className="translate-z-20 pt-4 border-t border-[#DCDDD6]">
                       <div className="font-mono text-[10px] text-[#8A8E96] uppercase tracking-wider mb-2 flex items-center gap-1 font-bold">
                         <Layers className="w-3 h-3 text-[#1F3D8C]" />
-                        STACK SPECIFICATION
+                        BUILT WITH
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {project.stack.map((tech) => (
@@ -236,7 +236,7 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
             className="btn-primary text-sm py-3.5 px-6 flex items-center gap-2 shadow-3d-accent"
           >
             <SquareArrowOutUpLeft className="w-4 h-4" />
-            <span>Initiate Custom Build Project</span>
+            <span>Start a New Project</span>
           </motion.button>
           <a
             href="https://wa.me/916394575814?text=Hi%20WebifyIt!%20I%20want%20to%20view%20your%20extended%20case%20studies."
@@ -244,7 +244,7 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
             rel="noopener noreferrer"
             className="btn-ghost text-sm py-3.5 px-6 font-semibold"
           >
-            Request Extended Case Studies
+            Request More Case Studies
           </a>
         </div>
 

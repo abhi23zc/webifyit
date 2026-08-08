@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, MessageCircle, X, SquareArrowOutUpLeft } from "lucide-react";
+import { MessageCircle, X, SquareArrowOutUpLeft } from "lucide-react";
 
 interface QuickAuditFabProps {
   onOpenAuditModal: () => void;
@@ -57,7 +57,7 @@ export default function QuickAuditFab({ onOpenAuditModal }: QuickAuditFabProps) 
               className="w-full btn-primary text-xs py-2 px-3 justify-center gap-1.5"
             >
               <SquareArrowOutUpLeft className="w-3.5 h-3.5" />
-              <span>Get Free Website Audit</span>
+              <span>Request a Technical Blueprint</span>
             </button>
 
             <a

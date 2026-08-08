@@ -23,7 +23,7 @@ export default function FinalCta({ onOpenAuditModal }: FinalCtaProps) {
             Ready to transform your digital presence?
           </h2>
           <p className="font-body text-base sm:text-lg text-[#8A8E96] mt-4">
-            Take the first step towards digital success. Choose the option that works best for you.
+            Pick the option that works best for you and let’s get started.
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function FinalCta({ onOpenAuditModal }: FinalCtaProps) {
                 Book a strategy call
               </h3>
               <p className="font-body text-sm text-[#8A8E96] leading-relaxed mb-6">
-                Schedule a 15-minute 1-on-1 call with our tech leads to discuss your project requirements and strategic goals.
+                Talk to our team in a quick 15-minute call. Tell us about your project and we’ll guide you on the best solution.
               </p>
             </div>
             <a
@@ -63,7 +63,7 @@ export default function FinalCta({ onOpenAuditModal }: FinalCtaProps) {
                 Get a free audit
               </h3>
               <p className="font-body text-sm text-[#DCDDD6] leading-relaxed mb-6">
-                Receive a comprehensive, 10-point audit of your website&apos;s UX, page speed, SEO, and conversion bottlenecks.
+                We’ll review your website and send you a detailed report on speed, design, SEO, and what’s stopping people from contacting you.
               </p>
             </div>
             <button
@@ -83,7 +83,7 @@ export default function FinalCta({ onOpenAuditModal }: FinalCtaProps) {
                 Start a conversation
               </h3>
               <p className="font-body text-sm text-[#8A8E96] leading-relaxed mb-6">
-                Have specific questions or custom RFP documents? Send us a direct message and we&apos;ll reply within 24 hours.
+                Have questions? Send us a message and we&apos;ll reply within 24 hours.
               </p>
             </div>
             <a

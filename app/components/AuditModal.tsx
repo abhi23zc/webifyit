@@ -2,22 +2,24 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2, ArrowRight, Sparkles, SquareArrowOutUpLeft } from "lucide-react";
+import { X, CheckCircle2, ArrowRight, SquareArrowOutUpLeft, ShieldCheck } from "lucide-react";
+import { saveNewLead } from "../lib/leadStore";
 
 interface AuditModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onLeadCaptured?: (leadName: string, auditFocus: string) => void;
 }
 
-export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
+export default function AuditModal({ isOpen, onClose, onLeadCaptured }: AuditModalProps) {
   const [submitted, setSubmitted] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    websiteUrl: "",
-    serviceNeeded: "Free 10-Point Audit",
+    businessInput: "",
+    auditFocus: "AI Integration Feasibility",
   });
 
   if (!isOpen) return null;
@@ -25,6 +27,24 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+
+    // Save lead to local storage CRM
+    saveNewLead({
+      name: formData.name || "Anonymous Founder",
+      contact: formData.phone || formData.email || "No contact provided",
+      email: formData.email,
+      businessDescription: formData.businessInput || "General Web & AI Inquiry",
+      auditFocus: formData.auditFocus,
+      source: "Blueprint Form",
+      taggedDomain:
+        formData.auditFocus.includes("AI") ? "AI Agent" :
+        formData.auditFocus.includes("SaaS") ? "Custom SaaS" :
+        formData.auditFocus.includes("Mobile") ? "Mobile App Engine" : "Web Architecture",
+    });
+
+    if (onLeadCaptured) {
+      onLeadCaptured(formData.name || "Founder", formData.auditFocus);
+    }
   };
 
   const resetAndClose = () => {
@@ -56,31 +76,38 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="py-8 text-center space-y-4"
+              className="py-6 text-center space-y-4"
             >
               <div className="w-12 h-12 bg-[#FF4B23] text-white flex items-center justify-center font-mono font-bold text-xl rounded-xs mx-auto shadow-md">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <h3 className="font-display text-2xl font-bold text-[#12151B]">
-                Audit Request Received!
+                Your Project Plan Request Received!
               </h3>
               <p className="font-body text-sm text-[#585D67] max-w-md mx-auto leading-relaxed">
-                Thank you, <span className="font-semibold text-[#12151B]">{formData.name}</span>. Our technical leads will analyze <span className="font-mono text-xs text-[#1F3D8C]">{formData.websiteUrl || "your project requirements"}</span> and deliver your 10-point audit report to <span className="font-semibold text-[#12151B]">{formData.email}</span> within 24 hours.
+                Thank you, <span className="font-semibold text-[#12151B]">{formData.name}</span>. Our team is reviewing:
+                <br />
+                <span className="font-mono text-xs text-[#1F3D8C] bg-[#EEF2FB] px-2.5 py-1 rounded inline-block mt-1 border border-[#1F3D8C]/20">
+                  {formData.businessInput || "Your Business Architecture Requirements"}
+                </span>
               </p>
 
-              <div className="p-3 bg-white border border-[#DCDDD6] rounded-xs text-left font-mono text-xs text-[#585D67] space-y-1.5">
-                <div className="text-[10px] uppercase font-bold text-[#FF4B23]">WHAT HAPPENS NEXT:</div>
-                <div className="flex items-center gap-2">✓ 100/100 Core Web Vitals Analysis</div>
-                <div className="flex items-center gap-2">✓ SEO Bottleneck & Keyword Audit</div>
-                <div className="flex items-center gap-2">✓ Conversion Funnel UX Diagnostic</div>
+              <div className="p-3.5 bg-white border border-[#DCDDD6] rounded-xs text-left font-mono text-xs text-[#585D67] space-y-2">
+                <div className="text-[10px] uppercase font-bold text-[#FF4B23] flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#FF4B23]" />
+                  WHAT HAPPENS NEXT:
+                </div>
+                <div className="flex items-center gap-2 text-[#12151B]">✓ WhatsApp message with your plan details</div>
+                <div className="flex items-center gap-2 text-[#12151B]">✓ Custom tech & tool suggestions for your business</div>
+                <div className="flex items-center gap-2 text-[#12151B]">✓ Cost estimate & time savings breakdown</div>
               </div>
 
-              <div className="pt-4">
+              <div className="pt-2">
                 <button
                   onClick={resetAndClose}
-                  className="btn-primary text-xs py-2.5 px-6"
+                  className="btn-primary text-xs py-2.5 px-6 shadow-3d-accent"
                 >
-                  Close & Return
+                  Go Back to Website
                 </button>
               </div>
             </motion.div>
@@ -91,7 +118,7 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#FF4B23] animate-pulse"></span>
                   <span className="font-mono text-xs font-semibold text-[#FF4B23] uppercase tracking-widest">
-                    SPEC_AUDIT_REQUEST
+                    SPEC_REQ_START
                   </span>
                 </div>
                 <div className="font-mono text-xs text-[#8A8E96]">
@@ -100,10 +127,10 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
               </div>
 
               <h3 className="font-display text-2xl font-bold text-[#12151B] tracking-tight">
-                Get Your Free Website Audit
+                Get a Free Project Plan
               </h3>
               <p className="font-body text-xs text-[#585D67] mb-6">
-                Enter your website & contact details for a comprehensive technical report.
+                Tell us about your business and we’ll send you a free plan with tool suggestions and cost estimate.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -116,45 +143,43 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
                   >
                     <div>
                       <label className="block font-mono text-[11px] uppercase text-[#585D67] mb-1">
-                        Website URL or App Link *
+                        Website URL OR briefly describe your business
                       </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="https://yourcompany.com"
-                        value={formData.websiteUrl}
-                        onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
-                        className="w-full bg-white border border-[#C7C9C0] p-2.5 text-sm rounded-xs font-mono text-[#12151B] focus:border-[#FF4B23] focus:outline-none"
+                      <textarea
+                        rows={3}
+                        placeholder="e.g., Wholesale manufacturing in Kanpur OR https://mycompany.com"
+                        value={formData.businessInput}
+                        onChange={(e) => setFormData({ ...formData, businessInput: e.target.value })}
+                        className="w-full bg-white border border-[#C7C9C0] p-2.5 text-sm rounded-xs font-body text-[#12151B] focus:border-[#FF4B23] focus:outline-none resize-none"
                       />
+                      <span className="font-mono text-[10px] text-[#8A8E96] mt-1 block">
+                        Optional — helps our architects prepare a more targeted blueprint.
+                      </span>
                     </div>
 
                     <div>
                       <label className="block font-mono text-[11px] uppercase text-[#585D67] mb-1">
-                        Primary Audit Focus
+                        What service are you interested in?
                       </label>
                       <select
-                        value={formData.serviceNeeded}
-                        onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
+                        value={formData.auditFocus}
+                        onChange={(e) => setFormData({ ...formData, auditFocus: e.target.value })}
                         className="w-full bg-white border border-[#C7C9C0] p-2.5 text-sm rounded-xs font-body text-[#12151B] focus:border-[#FF4B23] focus:outline-none"
                       >
-                        <option value="Free 10-Point Audit">Full 10-Point Digital Audit</option>
-                        <option value="Web & App Development">Web & App Speed Optimization</option>
-                        <option value="AI Integration">AI Integration Feasibility</option>
-                        <option value="Lead Generation">Lead Funnel Audit</option>
-                        <option value="Custom SaaS">Custom SaaS Architecture</option>
+                        <option value="AI Integration Feasibility">AI Chatbot & Voice Assistant</option>
+                        <option value="Custom SaaS Architecture">Cloud Software (SaaS)</option>
+                        <option value="High-Performance Web Architecture">Fast Website / Web App</option>
+                        <option value="Bespoke Mobile App Engine">Mobile App (Android / iOS)</option>
                       </select>
                     </div>
 
                     <div className="pt-2">
                       <button
                         type="button"
-                        onClick={() => {
-                          if (formData.websiteUrl) setStep(2);
-                        }}
-                        disabled={!formData.websiteUrl}
-                        className="w-full btn-primary py-3 justify-center text-sm font-semibold disabled:opacity-50"
+                        onClick={() => setStep(2)}
+                        className="w-full btn-primary py-3 justify-center text-sm font-semibold shadow-3d-accent"
                       >
-                        <span>Continue to Contact Info</span>
+                        <span>Continue</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
@@ -173,7 +198,7 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
                       <input
                         type="text"
                         required
-                        placeholder="Dipak Bhargav"
+                        placeholder="Abhishek Verma"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full bg-white border border-[#C7C9C0] p-2.5 text-sm rounded-xs font-body text-[#12151B] focus:border-[#FF4B23] focus:outline-none"
@@ -210,6 +235,10 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
                       </div>
                     </div>
 
+                    <div className="p-2.5 bg-[#EEF2FB] border border-[#1F3D8C]/20 rounded-xs text-[11px] font-mono text-[#1F3D8C]">
+                      ⚡ We will send you a WhatsApp message to confirm your request.
+                    </div>
+
                     <div className="pt-2 flex items-center gap-3">
                       <button
                         type="button"
@@ -220,10 +249,10 @@ export default function AuditModal({ isOpen, onClose }: AuditModalProps) {
                       </button>
                       <button
                         type="submit"
-                        className="flex-1 btn-primary py-3 justify-center text-sm font-semibold"
+                        className="flex-1 btn-primary py-3 justify-center text-sm font-semibold shadow-3d-accent"
                       >
                         <SquareArrowOutUpLeft className="w-4 h-4" />
-                        <span>Submit Audit Request</span>
+                        <span>Submit Request</span>
                       </button>
                     </div>
                   </motion.div>

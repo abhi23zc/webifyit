@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X, Sparkles, SquareArrowOutUpLeft } from "lucide-react";
+import { ArrowUpRight, Menu, X, SquareArrowOutUpLeft, Code, LayoutDashboard } from "lucide-react";
+import Link from "next/link";
 
 interface NavbarProps {
   onOpenAuditModal: () => void;
@@ -17,8 +18,7 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Section intersection detection
-      const sections = ["hero", "services", "impact", "projects", "testimonials", "insights", "faq", "contact"];
+      const sections = ["hero", "services", "projects", "lead-magnets", "positioning", "growth", "faq"];
       const current = sections.find((sec) => {
         const el = document.getElementById(sec);
         if (el) {
@@ -35,12 +35,13 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { label: "Home", href: "#hero", id: "hero" },
-    { label: "Services", href: "#services", id: "services" },
-    { label: "Projects", href: "#projects", id: "projects" },
-    { label: "Insights", href: "#insights", id: "insights" },
-    { label: "FAQ", href: "#faq", id: "faq" },
-    { label: "Contact", href: "#contact", id: "contact" },
+    { label: "Home", href: "/#hero", id: "hero" },
+    { label: "Services", href: "/#services", id: "services" },
+    { label: "Projects", href: "/#projects", id: "projects" },
+    { label: "AI Lead Tools", href: "/#lead-magnets", id: "lead-magnets" },
+    { label: "Matrix", href: "/#positioning", id: "positioning" },
+    { label: "Blog", href: "/blog", id: "blog" },
+    { label: "Admin CRM", href: "/admin", id: "admin" },
   ];
 
   return (
@@ -55,7 +56,7 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
     >
       <div className="max-w-[1180px] mx-auto px-5 sm:px-8 flex items-center justify-between">
         {/* Brand Logo */}
-        <a href="#hero" className="flex items-center gap-2.5 group">
+        <Link href="/" className="flex items-center gap-2.5 group">
           <motion.div
             whileHover={{ scale: 1.08, rotate: 2 }}
             whileTap={{ scale: 0.95 }}
@@ -68,22 +69,23 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
               Webify<span className="text-[#FF4B23]">It</span>
             </span>
             <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A8E96] -mt-1 flex items-center gap-1">
-              KANPUR · INDIA
+              WEB & AI STUDIO
               <span className="w-1 h-1 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
-                className={`font-body text-sm font-medium transition-colors relative py-1 ${isActive ? "text-[#12151B] font-semibold" : "text-[#585D67] hover:text-[#12151B]"
-                  }`}
+                className={`font-body text-xs font-semibold transition-colors relative py-1 uppercase tracking-wider ${
+                  isActive ? "text-[#12151B]" : "text-[#585D67] hover:text-[#12151B]"
+                }`}
               >
                 {link.label}
                 {isActive && (
@@ -93,21 +95,21 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-              </a>
+              </Link>
             );
           })}
         </nav>
 
-        {/* CTA & Mobile Menu Trigger */}
+        {/* CTA */}
         <div className="flex items-center gap-3">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
             onClick={onOpenAuditModal}
-            className="hidden sm:inline-flex btn-primary text-xs tracking-wide py-2.5 px-4 items-center gap-1.5 shadow-xs"
+            className="hidden sm:inline-flex btn-primary text-xs tracking-wide py-2.5 px-4 items-center gap-1.5 shadow-3d-accent"
           >
             <SquareArrowOutUpLeft className="w-3.5 h-3.5" />
-            <span>Get Started</span>
+            <span>Get a Free Quote</span>
           </motion.button>
 
           {/* Mobile Menu Button */}
@@ -133,7 +135,7 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
           >
             <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
@@ -141,7 +143,7 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
                 >
                   <span>{link.label}</span>
                   <ArrowUpRight className="w-4 h-4 text-[#8A8E96] group-hover:text-[#FF4B23] transition-colors" />
-                </a>
+                </Link>
               ))}
             </div>
             <div className="pt-2">
@@ -150,9 +152,9 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
                   setMobileMenuOpen(false);
                   onOpenAuditModal();
                 }}
-                className="w-full btn-primary justify-center text-sm py-3"
+                className="w-full btn-primary justify-center text-sm py-3 shadow-3d-accent"
               >
-                Get Started — Free Audit
+                Get a Free Project Plan
               </button>
             </div>
           </motion.div>

@@ -21,26 +21,57 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WebifyIt — Digital Services Agency | Web, App, AI & Lead Gen",
+  metadataBase: new URL("https://webifyit.in"),
+  title: {
+    template: "%s | WebifyIt Engineering Studio",
+    default:
+      "WebifyIt — Custom Software & AI Engineering Studio | Kanpur, India",
+  },
   description:
-    "Kanpur-based digital services agency crafting high-performance web & app solutions, AI integrations, SEO, lead generation, and custom SaaS platforms.",
+    "Custom Websites, Mobile Apps & AI Tools in Kanpur, India. We build fast websites, AI chatbots, voice assistants, cloud software, and mobile apps that help businesses grow.",
   keywords: [
     "WebifyIt",
-    "Digital Agency Kanpur",
-    "Web Development",
-    "App Development",
-    "AI Integration",
-    "SEO Optimization",
-    "Lead Generation",
+    "Custom Software Studio",
+    "AI Engineering",
+    "Next.js Development",
+    "AI Voice Agents",
     "Custom SaaS",
+    "Web Architecture",
+    "App Development Kanpur",
+    "Enterprise Software India",
+    "Cloud ERP",
   ],
-  authors: [{ name: "WebifyIt Team" }],
+  authors: [{ name: "WebifyIt Engineering Studio" }],
+  creator: "WebifyIt Engineering Studio",
+  publisher: "WebifyIt Engineering Studio",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "WebifyIt — Digital Services Agency",
-    description: "Transform your business with cutting-edge web, mobile, and AI solutions.",
+    title: "WebifyIt — Custom Software & AI Engineering Studio",
+    description:
+      "We build custom websites, AI chatbots, voice assistants, and cloud software that helps your business grow.",
     url: "https://webifyit.in",
-    siteName: "WebifyIt",
+    siteName: "WebifyIt Engineering Studio",
+    locale: "en_IN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WebifyIt — Custom Software & AI Engineering Studio",
+    description:
+      "Custom websites, AI chatbots, voice assistants, and mobile apps for your business.",
+  },
+  alternates: {
+    canonical: "https://webifyit.in",
   },
 };
 

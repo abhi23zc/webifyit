@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Bot, Target, Cpu, Check, ArrowRight, X, Sparkles, SquareArrowOutUpLeft } from "lucide-react";
+import { Code2, Bot, Cpu, Smartphone, Check, ArrowRight, X, SquareArrowOutUpLeft } from "lucide-react";
 import Card3D from "./Card3D";
 
 export default function Services() {
@@ -10,19 +10,19 @@ export default function Services() {
 
   const servicesData = [
     {
-      id: "SVC-01",
-      title: "Bespoke Web & Mobile Apps",
+      id: "SPEC-01",
+      title: "Custom Website Development",
       description:
-        "High-frequency, ultra-responsive web applications built with Next.js 16, React 19, and scalable serverless microservices.",
+        "Fast, modern websites built with the latest technology. We make sure your site loads quickly, looks great, and works perfectly on all devices.",
       icon: <Code2 className="w-6 h-6 text-[#1F3D8C]" />,
-      techSpecs: ["Next.js 16 App Router", "React 19 & TypeScript", "PostgreSQL & Prisma", "Tailwind CSS v4 & Motion"],
-      deliverables: ["Sub-100ms TTFB Web App", "REST & GraphQL API Engine", "Edge Caching & CDN", "100/100 Lighthouse Benchmark"],
+      techSpecs: ["Next.js 16 App Router", "React 19 & TypeScript", "PostgreSQL & Prisma", "Fast Global Hosting"],
+      deliverables: ["Super-Fast Website", "REST & GraphQL API", "Fast Global Hosting", "100/100 Google Speed Score"],
       timeline: "2 – 4 Weeks",
       widget: (
         <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
           <div className="flex justify-between items-center font-mono text-xs">
             <span className="text-[#585D67]">Build & Test Pipeline</span>
-            <span className="font-bold text-[#1F3D8C]">99.2% AUTOMATED</span>
+            <span className="font-bold text-[#1F3D8C]">99.8% AUTOMATED</span>
           </div>
           <div className="w-full bg-[#F5F6F1] h-2 rounded-full overflow-hidden border border-[#DCDDD6]">
             <motion.div
@@ -42,23 +42,23 @@ export default function Services() {
       ),
     },
     {
-      id: "SVC-02",
-      title: "Autonomous AI Agents",
+      id: "SPEC-02",
+      title: "AI Chatbots & Voice Assistants",
       description:
-        "Custom LLM voice agents, document vision AI, and automated lead nurturing systems powered by Claude 3.5 & GPT-4o.",
+        "Custom AI chatbots and voice assistants that talk to your customers 24/7 in English and Hindi — on WhatsApp or your website.",
       icon: <Bot className="w-6 h-6 text-[#FF4B23]" />,
-      techSpecs: ["OpenAI GPT-4o & Claude 3.5", "Custom Voice AI Agents", "Vector Embeddings & RAG", "Automated CRM Workflows"],
-      deliverables: ["24/7 AI Sales Agent", "Document & Vision AI Engine", "Multi-channel Lead Sync", "WhatsApp API Integration"],
+      techSpecs: ["OpenAI GPT-4o & Claude 3.5", "Voice AI & Speech Technology", "Smart AI Memory & Search", "WhatsApp API Integration"],
+      deliverables: ["24/7 AI Voice Assistant", "Document & Image AI", "Hindi + English Support", "Live CRM Updates"],
       timeline: "3 – 5 Weeks",
       widget: (
         <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
           <div className="flex justify-between items-center font-mono text-xs">
-            <span className="text-[#585D67]">Agent Efficiency</span>
-            <span className="tag-pill tag-pill-accent text-[10px] font-bold">AI ACTIVE</span>
+            <span className="text-[#585D67]">Voice AI Response Latency</span>
+            <span className="tag-pill tag-pill-accent text-[10px] font-bold">&lt; 220ms LATENCY</span>
           </div>
           <div className="flex items-center justify-between text-xs font-mono bg-[#EEF2FB] p-2 rounded-xs border border-[#1F3D8C]/20">
-            <span className="text-[#585D67]">Response Latency</span>
-            <span className="font-bold text-[#FF4B23]">&lt; 250ms Voice AI</span>
+            <span className="text-[#585D67]">Multi-lingual Bot</span>
+            <span className="font-bold text-[#FF4B23]">English + Hindi</span>
           </div>
           <div className="w-full bg-[#F5F6F1] h-2 rounded-full overflow-hidden border border-[#DCDDD6]">
             <motion.div
@@ -73,52 +73,24 @@ export default function Services() {
       ),
     },
     {
-      id: "SVC-03",
-      title: "Conversion Funnels & Lead Architecture",
+      id: "SPEC-03",
+      title: "Cloud SaaS Platforms",
       description:
-        "Engineered sales funnels, high-converting landing experiences, and multi-channel drip automations designed to maximize ROI.",
-      icon: <Target className="w-6 h-6 text-[#1F3D8C]" />,
-      techSpecs: ["High-Converting Funnels", "WhatsApp API Drip Automations", "A/B Testing Engine", "Pixel & Event Analytics"],
-      deliverables: ["Interactive Lead Magnets", "Automated Nurture Email", "Exit Intent Popups", "Sales Pipeline Dashboard"],
-      timeline: "1 – 3 Weeks",
-      widget: (
-        <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
-          <div className="flex justify-between items-center font-mono text-xs">
-            <span className="text-[#585D67]">Conversion Growth</span>
-            <span className="font-bold text-emerald-600">3.8x ROI INCREASE</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2 text-center">
-            <div className="bg-[#EEF2FB] p-2 rounded-xs border border-[#1F3D8C]/20">
-              <div className="font-mono text-[10px] text-[#8A8E96]">QUALIFIED LEADS</div>
-              <div className="font-display font-bold text-sm text-[#1F3D8C]">+420 / Mo</div>
-            </div>
-            <div className="bg-[#F5F6F1] p-2 rounded-xs border border-[#DCDDD6]">
-              <div className="font-mono text-[10px] text-[#8A8E96]">FUNNEL CONV.</div>
-              <div className="font-display font-bold text-sm text-[#12151B]">14.8%</div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: "SVC-04",
-      title: "Scalable Enterprise SaaS",
-      description:
-        "Cloud-native multi-tenant SaaS platforms featuring automated subscription billing, role-based access, and isolated data pipelines.",
+        "Full-featured cloud software (SaaS) with user accounts, subscription payments, admin dashboards, and the ability to grow as your business scales.",
       icon: <Cpu className="w-6 h-6 text-[#12151B]" />,
-      techSpecs: ["Multi-Tenant Architecture", "Razorpay / Stripe Billing", "Docker & Kubernetes", "AWS Cloud Infrastructure"],
-      deliverables: ["Full SaaS Admin Dashboard", "Multi-Tier Billing Engine", "Analytics & Reporting", "Role-Based Access Control"],
+      techSpecs: ["Multi-Tenant Architecture", "Razorpay / Stripe Payments", "Docker & Kubernetes Hosting", "AWS / Vercel Cloud"],
+      deliverables: ["Full Admin Dashboard", "Subscription & Billing System", "Usage Analytics", "User Role Management"],
       timeline: "4 – 8 Weeks",
       widget: (
         <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
           <div className="flex justify-between items-center font-mono text-xs">
             <span className="text-[#585D67]">Cloud SLA Uptime</span>
-            <span className="font-bold text-[#12151B]">99.99% SLA GUARANTEE</span>
+            <span className="font-bold text-[#12151B]">99.99% GUARANTEE</span>
           </div>
           <div className="space-y-1.5">
             <div className="flex justify-between text-[11px] font-mono text-[#8A8E96]">
-              <span>Auto-Scaling Infrastructure</span>
-              <span>Enabled</span>
+              <span>Auto-Scaling Clusters</span>
+              <span>Active</span>
             </div>
             <div className="w-full bg-[#F5F6F1] h-2 rounded-full overflow-hidden border border-[#DCDDD6]">
               <motion.div
@@ -128,6 +100,34 @@ export default function Services() {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="bg-[#12151B] h-full"
               />
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "SPEC-04",
+      title: "Mobile Apps for iOS & Android",
+      description:
+        "Mobile apps that work on both iPhone and Android. Includes offline mode, push notifications, camera access, and listing on app stores.",
+      icon: <Smartphone className="w-6 h-6 text-[#1F3D8C]" />,
+      techSpecs: ["React Native & Expo", "TypeScript Core", "Offline Data Storage", "Push Notifications"],
+      deliverables: ["iOS & Android App", "Camera & Bluetooth APIs", "Offline Mode", "App Store & Play Store Launch"],
+      timeline: "3 – 6 Weeks",
+      widget: (
+        <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
+          <div className="flex justify-between items-center font-mono text-xs">
+            <span className="text-[#585D67]">Cross-Platform Deployment</span>
+            <span className="font-bold text-emerald-600">iOS + ANDROID</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-center">
+            <div className="bg-[#EEF2FB] p-2 rounded-xs border border-[#1F3D8C]/20">
+              <div className="font-mono text-[10px] text-[#8A8E96]">APP STORE</div>
+              <div className="font-display font-bold text-xs text-[#1F3D8C]">Ready</div>
+            </div>
+            <div className="bg-[#F5F6F1] p-2 rounded-xs border border-[#DCDDD6]">
+              <div className="font-mono text-[10px] text-[#8A8E96]">PLAY STORE</div>
+              <div className="font-display font-bold text-xs text-[#12151B]">Published</div>
             </div>
           </div>
         </div>
@@ -143,14 +143,14 @@ export default function Services() {
         <div className="max-w-2xl mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="font-mono text-xs font-bold text-[#FF4B23] tracking-widest uppercase">
-              FIG. 01 — CAPABILITIES & ARCHITECTURE
+              FIG. 01 — CORE ENGINEERING CAPABILITIES
             </span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#12151B] tracking-tight">
-            Engineering services built for growth
+            What we build for your business
           </h2>
           <p className="font-body text-base text-[#585D67] mt-3">
-            We deliver production-grade software solutions tailored to your business goals. Hover over any card for 3D inspection or click to view tech specifications.
+            We build reliable software solutions tailored to help your business grow. Hover over any card to see details, or click to see what’s included.
           </p>
         </div>
 
@@ -176,7 +176,7 @@ export default function Services() {
                         {service.id}
                       </span>
                       <span className="font-mono text-xs font-semibold text-[#FF4B23] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        Inspect Spec →
+                        View Details →
                       </span>
                     </div>
                   </div>
@@ -197,7 +197,7 @@ export default function Services() {
 
       </div>
 
-      {/* Service Spec Modal Drawer */}
+      {/* Service Spec Drawer */}
       <AnimatePresence>
         {selectedService && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#12151B]/80 backdrop-blur-md">
@@ -237,7 +237,7 @@ export default function Services() {
                 <div>
                   <div className="font-mono text-xs font-bold text-[#1F3D8C] uppercase mb-3 flex items-center gap-1.5">
                     <SquareArrowOutUpLeft className="w-3.5 h-3.5" />
-                    TECHNICAL STACK
+                    TOOLS WE USE
                   </div>
                   <ul className="space-y-2 font-body text-xs text-[#12151B]">
                     {selectedService.techSpecs.map((spec) => (
@@ -252,7 +252,7 @@ export default function Services() {
                 <div>
                   <div className="font-mono text-xs font-bold text-[#1F3D8C] uppercase mb-3 flex items-center gap-1.5">
                     <SquareArrowOutUpLeft className="w-3.5 h-3.5" />
-                    KEY DELIVERABLES
+                    WHAT YOU GET
                   </div>
                   <ul className="space-y-2 font-body text-xs text-[#12151B]">
                     {selectedService.deliverables.map((item) => (
@@ -267,7 +267,7 @@ export default function Services() {
 
               <div className="flex items-center justify-between p-4 bg-[#F5F6F1] border border-[#DCDDD6] rounded-xs">
                 <div className="font-mono text-xs">
-                  <span className="text-[#8A8E96]">BUILD TIMELINE: </span>
+                  <span className="text-[#8A8E96]">DELIVERY TIME: </span>
                   <span className="font-bold text-[#12151B]">{selectedService.timeline}</span>
                 </div>
                 <a
@@ -276,7 +276,7 @@ export default function Services() {
                   rel="noopener noreferrer"
                   className="btn-primary text-xs py-2.5 px-4 flex items-center gap-1.5 shadow-3d-accent"
                 >
-                  <span>Initiate Build</span>
+                  <span>Start This Project</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
