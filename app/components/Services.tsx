@@ -117,7 +117,7 @@ export default function Services() {
       techSpecs: ["React Native & Expo", "TypeScript Core", "Offline Data Storage", "Push Notifications"],
       deliverables: ["iOS & Android App", "Camera & Bluetooth APIs", "Offline Mode", "App Store & Play Store Launch"],
       timeline: "3 – 6 Weeks",
-      imageSrc: "/images/services/mobile-app-mockup.png",
+      imageSrc: "/images/services/hisab_ai_mockup.png",
       widget: (
         <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
           <div className="flex justify-between items-center font-mono text-xs">
@@ -176,9 +176,9 @@ export default function Services() {
               {/* Service Mockup Image (Compact) */}
               <div className="w-full h-32 sm:h-36 bg-[#F5F6F1] border-b border-[#DCDDD6] overflow-hidden relative">
                 {service.imageSrc ? (
-                  <img 
-                    src={service.imageSrc} 
-                    alt={service.title} 
+                  <img
+                    src={service.imageSrc}
+                    alt={service.title}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                 ) : (
@@ -193,31 +193,31 @@ export default function Services() {
               <div className="relative z-10 p-5 flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-2.5 bg-blue-50 text-[#1F3D8C] border border-blue-100 rounded-xl group-hover:bg-[#1F3D8C] group-hover:text-white transition-colors duration-300 shadow-sm inline-flex">
-                    {React.cloneElement(service.icon as React.ReactElement, { className: "w-4 h-4" })}
+                    {React.cloneElement(service.icon as React.ReactElement<{ className?: string }>, { className: "w-4 h-4" })}
                   </div>
                 </div>
 
                 <h3 className="font-display text-lg font-bold text-[#12151B] group-hover:text-[#1F3D8C] transition-colors mb-2 leading-tight">
                   {service.title}
                 </h3>
-                
+
                 <div className="inline-flex items-center gap-1 font-mono text-[10px] font-semibold text-[#FF4B23] bg-[#FF4B23]/10 border border-[#FF4B23]/20 px-2 py-0.5 rounded-sm mb-3 w-fit">
                   <span>⚡ {service.timeline}</span>
                 </div>
-                
+
                 <p className="font-body text-[13px] text-[#585D67] leading-relaxed mb-4 flex-1 line-clamp-3">
                   {service.description}
                 </p>
 
                 {/* Minimal interaction hint */}
                 <div className="mt-auto flex items-center justify-between border-t border-[#DCDDD6]/60 pt-3">
-                   <div className="text-[11px] font-medium text-[#8A8E96] flex items-center gap-1">
-                      <Check className="w-3 h-3 text-emerald-500" />
-                      {service.deliverables.length} features
-                   </div>
-                   <span className="font-mono text-[10px] font-bold text-[#1F3D8C] group-hover:text-[#FF4B23] transition-colors">
-                     View Details →
-                   </span>
+                  <div className="text-[11px] font-medium text-[#8A8E96] flex items-center gap-1">
+                    <Check className="w-3 h-3 text-emerald-500" />
+                    {service.deliverables.length} features
+                  </div>
+                  <span className="font-mono text-[10px] font-bold text-[#1F3D8C] group-hover:text-[#FF4B23] transition-colors">
+                    View Details →
+                  </span>
                 </div>
               </div>
             </motion.div>
