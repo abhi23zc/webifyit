@@ -11,6 +11,10 @@ export interface LeadItem {
   taggedDomain: "AI Agent" | "Web Architecture" | "Custom SaaS" | "Mobile App Engine";
   status: "New" | "In Review" | "Blueprint Sent" | "Closed";
   timestamp: string;
+  // Optional qualification fields (from LeadQualification section & AI Advisor)
+  teamSize?: "1-10" | "11-50" | "51-250" | "250+";
+  timeline?: "Exploring" | "Ready in 1-3 months" | "Ready now";
+  budgetBand?: string;
 }
 
 export interface BlogAnalytics {
@@ -29,8 +33,8 @@ const DEFAULT_LEADS: LeadItem[] = [
     id: "LEAD-101",
     name: "Ramesh Sharma",
     contact: "+91 98390 12345",
-    email: "ramesh@kanpurtextiles.com",
-    businessDescription: "Wholesale manufacturing in Kanpur, managing inventory manually",
+    email: "ramesh@lucknowtextiles.com",
+    businessDescription: "Wholesale manufacturing in Lucknow, managing inventory manually",
     auditFocus: "Custom SaaS Architecture",
     source: "Blueprint Form",
     taggedDomain: "Custom SaaS",

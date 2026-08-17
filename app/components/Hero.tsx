@@ -36,21 +36,21 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
             className="lg:col-span-6 flex flex-col items-start space-y-6"
           >
             {/* Eyebrow Tag */}
-            <motion.div custom={0} variants={fadeInUp} className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-white/90 backdrop-blur-md border border-[#C7C9C0] rounded-xs shadow-2xs">
+            <motion.div custom={0} variants={fadeInUp} className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-white/90 backdrop-blur-md border border-[#C7C9C0] rounded-xs shadow-2xs flex-wrap">
               <span className="w-2 h-2 rounded-full bg-[#FF4B23] animate-pulse"></span>
               <span className="font-mono text-xs font-bold tracking-wider text-[#12151B] uppercase">
-                WEBIFYIT — WEB & AI STUDIO
+                BUILT FOR INDIAN BUSINESSES
               </span>
-              <span className="font-mono text-[10px] text-[#1F3D8C] border-l border-[#DCDDD6] pl-2 font-semibold">
-                CUSTOM WEB & AI SOLUTIONS
+              <span className="font-mono text-[10px] text-emerald-600 border-l border-[#DCDDD6] pl-2 font-semibold hidden sm:inline">
+                HIGH CONVERSION WEBSITES & APPS
               </span>
             </motion.div>
 
             {/* Headline */}
             <motion.h1 custom={1} variants={fadeInUp} className="font-display text-4xl sm:text-5xl lg:text-[52px] font-bold text-[#12151B] leading-[1.10] tracking-tight">
-              We build custom software &{" "}
+              We engineer custom software,{" "}
               <span className="relative inline-block text-[#1F3D8C]">
-                smart AI solutions.
+                SaaS & AI.
                 <svg
                   className="absolute -bottom-1.5 left-0 w-full h-2.5 text-[#FF4B23]"
                   viewBox="0 0 100 12"
@@ -68,7 +68,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
 
             {/* Subhead */}
             <motion.p custom={2} variants={fadeInUp} className="font-body text-base sm:text-lg text-[#585D67] max-w-xl leading-relaxed">
-              We build fast websites, AI chatbots & voice assistants, and cloud software tools that help your business run better — in English and Hindi.
+              Your full-stack engineering partner. Get scalable custom web applications, enterprise SaaS platforms, and autonomous AI assistants built to accelerate your business.
             </motion.p>
 
             {/* CTAs */}
@@ -87,7 +87,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                href="https://wa.me/916394575814?text=Hi%20WebifyIt!%20I%20would%20like%20to%20schedule%20a%20Technical%20Architecture%20Session."
+                href="https://wa.me/919026665814?text=Hi%20WebifyIt!%20I%20would%20like%20to%20schedule%20a%20Technical%20Architecture%20Session."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary text-base py-3.5 px-6 text-center flex items-center justify-center gap-2"
@@ -117,7 +117,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                 </a>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {/* Project 1 */}
                 <a
                   href="#projects"
@@ -179,185 +179,146 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
 
           </motion.div>
 
-          {/* Right Column: Interactive Browser Engine */}
+          {/* Right Column: Premium Dashboard UI */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="lg:col-span-6 relative"
+            className="lg:col-span-6 relative w-full flex items-center justify-center pt-8 lg:pt-0"
           >
-            <Card3D intensity={3} className="shadow-3d">
-              <div className="xmark bg-white border border-[#C7C9C0] p-4 sm:p-6 rounded-xs relative transition-all duration-500">
-
-                {/* Browser Header Bar */}
-                <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#DCDDD6] translate-z-10">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-[#FF4B23] shadow-xs"></span>
-                    <span className="w-3 h-3 rounded-full bg-[#FFB800] opacity-80"></span>
-                    <span className="w-3 h-3 rounded-full bg-emerald-500 opacity-80"></span>
+            <Card3D intensity={3} className="w-full max-w-[550px]">
+              <div className="bg-white rounded-xl shadow-2xl border border-[#DCDDD6] overflow-hidden flex flex-col w-full">
+                {/* macOS Style Window Header */}
+                <div className="h-10 bg-[#F5F6F1] border-b border-[#DCDDD6] flex items-center px-4 justify-between">
+                  {/* Traffic Lights */}
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
                   </div>
-                  <div className="px-3.5 py-1 bg-[#F5F6F1] border border-[#DCDDD6] rounded-xs font-mono text-[11px] text-[#12151B] font-medium flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    engine.webifyit.in/telemetry
+                  
+                  {/* URL Bar */}
+                  <div className="bg-white border border-[#DCDDD6] px-4 py-1 rounded-md text-[10px] font-mono text-[#585D67] shadow-sm flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                    webifyit.engineering/system
                   </div>
-                  <div className="font-mono text-[10px] text-[#1F3D8C] font-bold uppercase tracking-wider">
+                  
+                  {/* Version Tag */}
+                  <div className="font-mono text-[9px] font-bold text-[#1F3D8C] uppercase tracking-wider">
                     SPEC_V5.0
                   </div>
                 </div>
 
-                {/* Metric Toggle */}
-                <div className="flex items-center justify-between mb-4 p-3 bg-[#EEF2FB] border border-[#1F3D8C]/20 rounded-xs translate-z-20 shadow-2xs">
-                  <div>
-                    <div className="font-mono text-[11px] font-bold text-[#1F3D8C] uppercase tracking-wider flex items-center gap-1.5">
-                      <Cpu className="w-3.5 h-3.5 text-[#1F3D8C]" />
-                      WEBSITE SPEED & AI PERFORMANCE
+                {/* Dashboard Body */}
+                <div className="p-5 sm:p-6 bg-white flex flex-col gap-5">
+                  
+                  {/* Dashboard Header Bar */}
+                  <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3 sm:p-4 flex justify-between items-center">
+                    <div>
+                      <div className="font-mono text-[10px] font-bold text-[#1F3D8C] flex items-center gap-1.5 mb-1">
+                        <Cpu className="w-3.5 h-3.5" />
+                        APPLICATION PERFORMANCE
+                      </div>
+                      <div className="text-[11px] text-[#585D67]">Production infrastructure & application health</div>
                     </div>
-                    <div className="font-body text-xs text-[#585D67]">
-                      Lightning-fast websites & smart AI automation
+                    
+                    {/* Toggle Switch */}
+                    <div className="flex bg-white border border-[#DCDDD6] rounded-md p-1 shadow-sm shrink-0 ml-4">
+                      <button className="bg-[#1F3D8C] text-white text-[10px] font-bold px-3 py-1.5 rounded-sm shadow-sm transition-colors flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        LIVE
+                      </button>
+                      <button className="text-[#585D67] hover:text-[#12151B] text-[10px] font-bold px-3 py-1.5 transition-colors">PRODUCTION</button>
                     </div>
                   </div>
-                  <div className="flex gap-1 bg-white p-1 rounded-xs border border-[#C7C9C0]">
-                    <button
-                      onClick={() => setActiveMetricView("performance")}
-                      className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs transition-all ${activeMetricView === "performance"
-                        ? "bg-[#1F3D8C] text-white font-bold"
-                        : "text-[#585D67] hover:text-[#12151B]"
-                        }`}
+
+                  {/* Chart Area */}
+                  <div className="relative h-[200px] w-full border border-[#DCDDD6] rounded-lg bg-[#FAFAFA]">
+                    {/* SVG Chart Wrapper */}
+                    <div className="absolute inset-0 rounded-lg overflow-hidden">
+                      <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 500 200">
+                        <defs>
+                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#1F3D8C" stopOpacity="0.15" />
+                            <stop offset="100%" stopColor="#1F3D8C" stopOpacity="0.0" />
+                          </linearGradient>
+                          <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4 4" />
+                          </pattern>
+                        </defs>
+                        
+                        <rect width="100%" height="100%" fill="url(#gridPattern)" />
+                        
+                        <path 
+                          d="M -20 170 C 80 110, 120 140, 180 140 C 260 140, 290 50, 350 50 C 410 50, 430 150, 480 120 C 510 100, 520 100, 520 100 L 520 220 L -20 220 Z" 
+                          fill="url(#chartGradient)" 
+                        />
+                        <path 
+                          d="M -20 170 C 80 110, 120 140, 180 140 C 260 140, 290 50, 350 50 C 410 50, 430 150, 480 120 C 510 100, 520 100, 520 100" 
+                          fill="none" 
+                          stroke="#1F3D8C" 
+                          strokeWidth="3.5"
+                          strokeLinecap="round"
+                          className="drop-shadow-sm"
+                        />
+                        
+                        {/* Data point dot */}
+                        <circle cx="350" cy="50" r="5" fill="#1F3D8C" stroke="white" strokeWidth="2.5" className="drop-shadow-md" />
+                      </svg>
+                    </div>
+
+                    {/* Tooltip */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8, type: "spring" }}
+                      className="absolute top-[25%] left-[70%] -translate-x-1/2 -translate-y-full mb-2 bg-white border border-[#DCDDD6] rounded-md shadow-xl p-3 z-10 w-max"
                     >
-                      Latency
-                    </button>
-                    <button
-                      onClick={() => setActiveMetricView("agents")}
-                      className={`font-mono text-[10px] px-2.5 py-1 rounded-2xs transition-all ${activeMetricView === "agents"
-                        ? "bg-[#FF4B23] text-white font-bold"
-                        : "text-[#585D67] hover:text-[#12151B]"
-                        }`}
-                    >
-                      AI Voice
-                    </button>
+                      <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-1 text-center">
+                        API RESPONSE LATENCY
+                      </div>
+                      <div className="flex items-baseline justify-center gap-2">
+                        <span className="font-display text-2xl font-extrabold text-[#12151B] leading-none">21ms</span>
+                        <span className="font-mono text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-sm">OPTIMAL</span>
+                      </div>
+                    </motion.div>
                   </div>
+
+                  {/* Bottom Stats Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                    {/* Card 1: API RESPONSE */}
+                    <div className="border border-[#DCDDD6] rounded-lg p-3 sm:p-4 flex flex-col justify-center bg-white shadow-sm hover:border-[#1F3D8C] transition-colors">
+                      <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-1.5">API RESPONSE</div>
+                      <div className="font-display text-xl sm:text-2xl font-extrabold text-[#12151B]">
+                        21ms
+                      </div>
+                      <div className="font-mono text-[9px] text-[#585D67] mt-1">Avg. latency</div>
+                    </div>
+
+                    {/* Card 2: SYSTEM UPTIME */}
+                    <div className="border border-[#DCDDD6] rounded-lg p-3 sm:p-4 flex flex-col justify-center bg-white shadow-sm hover:border-[#1F3D8C] transition-colors">
+                      <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-1.5">SYSTEM UPTIME</div>
+                      <div className="font-display text-xl sm:text-2xl font-extrabold text-[#12151B]">
+                        99.99%
+                      </div>
+                      <div className="font-mono text-[9px] text-[#585D67] mt-1">Production availability</div>
+                    </div>
+
+                    {/* Card 3: REQUESTS */}
+                    <div className="border border-[#DCDDD6] rounded-lg p-3 sm:p-4 flex flex-col justify-center bg-white shadow-sm hover:border-[#1F3D8C] transition-colors relative overflow-hidden">
+                      <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-1.5">REQUESTS</div>
+                      <div className="font-display text-xl sm:text-2xl font-extrabold text-[#12151B]">
+                        2.4M
+                      </div>
+                      <div className="font-mono text-[9px] text-[#585D67] mt-1">Processed</div>
+                      {/* Subtle tech detail */}
+                      <div className="absolute top-0 right-0 w-6 h-6 bg-[#F5F6F1] rounded-bl-xl flex items-start justify-end p-1.5 border-l border-b border-[#DCDDD6]">
+                         <div className="w-1.5 h-1.5 bg-[#1F3D8C] rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-
-                {/* SVG Blueprint & Chart */}
-                <div className="bg-[#F5F6F1] p-4 border border-[#DCDDD6] rounded-xs relative mb-4 translate-z-30 overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    {activeMetricView === "performance" ? (
-                      <motion.div
-                        key="perf-graph"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <svg className="w-full h-44 overflow-visible" viewBox="0 0 400 160">
-                          <line x1="0" y1="40" x2="400" y2="40" stroke="#DCDDD6" strokeDasharray="3,3" />
-                          <line x1="0" y1="80" x2="400" y2="80" stroke="#DCDDD6" strokeDasharray="3,3" />
-                          <line x1="0" y1="120" x2="400" y2="120" stroke="#DCDDD6" strokeDasharray="3,3" />
-
-                          <path
-                            d="M 10 130 Q 60 90 100 100 T 200 50 T 300 70 T 390 20 L 390 150 L 10 150 Z"
-                            fill="url(#trafficGradient)"
-                          />
-                          <path
-                            d="M 10 130 Q 60 90 100 100 T 200 50 T 300 70 T 390 20"
-                            fill="none"
-                            stroke="#1F3D8C"
-                            strokeWidth="3"
-                            className="draw-path"
-                          />
-
-                          <defs>
-                            <linearGradient id="trafficGradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#1F3D8C" stopOpacity="0.25" />
-                              <stop offset="100%" stopColor="#1F3D8C" stopOpacity="0.0" />
-                            </linearGradient>
-                          </defs>
-
-                          <circle cx="200" cy="50" r="5" fill="#1F3D8C" className="animate-ping" />
-                          <circle cx="200" cy="50" r="5" fill="#1F3D8C" />
-                          <circle cx="390" cy="20" r="5" fill="#FF4B23" />
-                        </svg>
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="agent-graph"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <svg className="w-full h-44 overflow-visible" viewBox="0 0 400 160">
-                          <line x1="0" y1="40" x2="400" y2="40" stroke="#DCDDD6" strokeDasharray="3,3" />
-                          <line x1="0" y1="80" x2="400" y2="80" stroke="#DCDDD6" strokeDasharray="3,3" />
-                          <line x1="0" y1="120" x2="400" y2="120" stroke="#DCDDD6" strokeDasharray="3,3" />
-
-                          <path
-                            d="M 10 140 Q 80 120 140 110 T 240 70 T 330 40 T 390 25 L 390 150 L 10 150 Z"
-                            fill="url(#conversionsGradient)"
-                          />
-                          <path
-                            d="M 10 140 Q 80 120 140 110 T 240 70 T 330 40 T 390 25"
-                            fill="none"
-                            stroke="#FF4B23"
-                            strokeWidth="3"
-                            className="draw-path"
-                          />
-
-                          <defs>
-                            <linearGradient id="conversionsGradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#FF4B23" stopOpacity="0.25" />
-                              <stop offset="100%" stopColor="#FF4B23" stopOpacity="0.0" />
-                            </linearGradient>
-                          </defs>
-
-                          <circle cx="240" cy="70" r="5" fill="#FF4B23" className="animate-ping" />
-                          <circle cx="240" cy="70" r="5" fill="#FF4B23" />
-                          <circle cx="390" cy="25" r="5" fill="#1F3D8C" />
-                        </svg>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md border border-[#C7C9C0] p-3 rounded-xs shadow-md font-mono text-xs">
-                    <div className="text-[#8A8E96] text-[10px] font-bold">
-                      {activeMetricView === "performance" ? "WEBSITE LOAD SPEED" : "AI VOICE SPEED"}
-                    </div>
-                    <div className="font-bold text-[#12151B] text-base flex items-center gap-2">
-                      {activeMetricView === "performance" ? "42ms" : "<220ms"}
-                      <span className="text-emerald-600 text-[11px] bg-emerald-50 px-1.5 py-0.5 rounded-2xs font-semibold">Ultra Fast</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom Metric Tiles */}
-                <div className="grid grid-cols-2 gap-3 translate-z-30">
-                  <div className="p-3.5 bg-white border border-[#DCDDD6] rounded-xs shadow-2xs">
-                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase font-semibold">Google Speed Score</div>
-                    <div className="font-display font-bold text-xl text-[#12151B]">100 / 100</div>
-                    <div className="w-full bg-[#F5F6F1] h-2 rounded-full mt-2 overflow-hidden border border-[#DCDDD6]">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: 1.2, delay: 0.5 }}
-                        className="bg-[#FF4B23] h-full"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 bg-white border border-[#DCDDD6] rounded-xs shadow-2xs">
-                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase font-semibold">AI Language Support</div>
-                    <div className="font-display font-bold text-xl text-[#12151B]">English & Hindi</div>
-                    <div className="w-full bg-[#F5F6F1] h-2 rounded-full mt-2 overflow-hidden border border-[#DCDDD6]">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: "95%" }}
-                        transition={{ duration: 1.2, delay: 0.7 }}
-                        className="bg-[#1F3D8C] h-full"
-                      />
-                    </div>
-                  </div>
-                </div>
-
               </div>
             </Card3D>
           </motion.div>

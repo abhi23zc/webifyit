@@ -41,8 +41,8 @@ export default function FaqSection() {
       id: "FAQ-05",
       question: "What support do you provide after the project launches?",
       answer:
-        "Every project includes 30 days of free support after launch for bug fixes and small tweaks. We also offer ongoing support plans that include 24/7 monitoring, security updates, backups, SEO improvements, and new feature development.",
-      tags: ["support", "maintenance", "warranty", "seo"],
+        "Every project includes 30 days of free support after launch for bug fixes and small tweaks. We also offer ongoing support plans that include 24/7 monitoring, security updates, backups, performance optimizations, and new feature development.",
+      tags: ["support", "maintenance", "warranty", "performance"],
     },
   ];
 
@@ -151,7 +151,7 @@ export default function FaqSection() {
                               Still have questions?
                             </span>
                             <a
-                              href="https://wa.me/916394575814"
+                              href="https://wa.me/919026665814"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-[#1F3D8C] font-semibold hover:text-[#FF4B23] flex items-center gap-1"

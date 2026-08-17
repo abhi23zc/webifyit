@@ -42,7 +42,7 @@ export default function FinalCta({ onOpenAuditModal }: FinalCtaProps) {
               </p>
             </div>
             <a
-              href="https://wa.me/916394575814?text=Hi%20WebifyIt!%20I%20want%20to%20book%20a%20strategy%20call."
+              href="https://wa.me/919026665814?text=Hi%20WebifyIt!%20I%20want%20to%20book%20a%20strategy%20call."
               target="_blank"
               rel="noopener noreferrer"
               className="w-full btn-primary justify-between text-xs py-3 px-4"
@@ -63,7 +63,7 @@ export default function FinalCta({ onOpenAuditModal }: FinalCtaProps) {
                 Get a free audit
               </h3>
               <p className="font-body text-sm text-[#DCDDD6] leading-relaxed mb-6">
-                We’ll review your website and send you a detailed report on speed, design, SEO, and what’s stopping people from contacting you.
+                We’ll review your current infrastructure and send you a detailed report on architecture, scalability, security, and potential AI integrations.
               </p>
             </div>
             <button

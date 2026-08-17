@@ -74,17 +74,24 @@ export default function MarketPositioningMatrix({ onOpenAuditModal }: MarketPosi
         {/* Matrix Card Container */}
         <Card3D intensity={4}>
           <div className="xmark bg-white border border-[#C7C9C0] rounded-xs shadow-3d overflow-hidden">
-            {/* Table Header */}
-            <div className="grid grid-cols-12 bg-[#12151B] text-white p-4 sm:p-6 items-center border-b border-[#12151B] font-mono text-xs uppercase tracking-wider">
-              <div className="col-span-4 sm:col-span-3 text-[#8A8E96] font-bold">Feature Category</div>
-              <div className="col-span-4 sm:col-span-4 text-red-400 font-semibold flex items-center gap-1.5">
-                <X className="w-4 h-4 text-red-400 shrink-0 hidden sm:inline" />
+            {/* Table Header - Hidden on mobile */}
+            <div className="hidden md:grid grid-cols-12 bg-[#12151B] text-white p-4 sm:p-6 items-center border-b border-[#12151B] font-mono text-xs uppercase tracking-wider">
+              <div className="col-span-3 text-[#8A8E96] font-bold">Feature Category</div>
+              <div className="col-span-4 text-red-400 font-semibold flex items-center gap-1.5">
+                <X className="w-4 h-4 text-red-400 shrink-0" />
                 Generic Agencies
               </div>
-              <div className="col-span-4 sm:col-span-5 text-[#25D366] font-extrabold flex items-center gap-1.5 text-sm sm:text-base">
+              <div className="col-span-5 text-[#25D366] font-extrabold flex items-center gap-1.5 text-sm">
                 <Check className="w-5 h-5 text-[#25D366] shrink-0" />
                 WebifyIt Engineering Studio
               </div>
+            </div>
+
+            {/* Mobile Header */}
+            <div className="md:hidden bg-[#12151B] text-white p-4 border-b border-[#12151B] font-mono text-xs uppercase tracking-wider text-center">
+              <span className="text-[#25D366] font-extrabold">WebifyIt</span>
+              <span className="text-[#8A8E96]"> vs </span>
+              <span className="text-red-400">Generic Agencies</span>
             </div>
 
             {/* Matrix Rows */}
@@ -96,30 +103,57 @@ export default function MarketPositioningMatrix({ onOpenAuditModal }: MarketPosi
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: idx * 0.08 }}
-                  className="grid grid-cols-12 p-4 sm:p-6 items-center hover:bg-[#F5F6F1]/50 transition-colors"
+                  className="p-4 sm:p-6 hover:bg-[#F5F6F1]/50 transition-colors"
                 >
-                  {/* Feature Label */}
-                  <div className="col-span-4 sm:col-span-3 font-mono text-xs font-bold text-[#12151B] flex items-center gap-2 pr-2">
-                    <span className="p-1.5 bg-[#EEF2FB] rounded border border-[#1F3D8C]/20 shrink-0">
-                      {row.icon}
-                    </span>
-                    <span>{row.feature}</span>
+                  {/* Desktop: 3-column grid */}
+                  <div className="hidden md:grid grid-cols-12 items-center">
+                    {/* Feature Label */}
+                    <div className="col-span-3 font-mono text-xs font-bold text-[#12151B] flex items-center gap-2 pr-2">
+                      <span className="p-1.5 bg-[#EEF2FB] rounded border border-[#1F3D8C]/20 shrink-0">
+                        {row.icon}
+                      </span>
+                      <span>{row.feature}</span>
+                    </div>
+
+                    {/* Generic Agency */}
+                    <div className="col-span-4 text-sm text-[#585D67] font-body pr-4 flex items-center gap-2">
+                      <span className="w-4 h-4 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[10px] font-bold shrink-0">
+                        ✕
+                      </span>
+                      <span>{row.generic}</span>
+                    </div>
+
+                    {/* WebifyIt Engineering */}
+                    <div className="col-span-5 text-sm font-semibold text-[#12151B] font-body bg-[#EEF2FB]/60 p-3 rounded-xs border border-[#1F3D8C]/20 flex items-center gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[11px] font-bold shrink-0 shadow-xs">
+                        ✓
+                      </span>
+                      <span>{row.webifyIt}</span>
+                    </div>
                   </div>
 
-                  {/* Generic Agency */}
-                  <div className="col-span-4 sm:col-span-4 text-xs sm:text-sm text-[#585D67] font-body pr-4 flex items-center gap-2">
-                    <span className="w-4 h-4 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[10px] font-bold shrink-0">
-                      ✕
-                    </span>
-                    <span>{row.generic}</span>
-                  </div>
+                  {/* Mobile: Stacked card layout */}
+                  <div className="md:hidden space-y-3">
+                    <div className="font-mono text-xs font-bold text-[#12151B] flex items-center gap-2">
+                      <span className="p-1.5 bg-[#EEF2FB] rounded border border-[#1F3D8C]/20 shrink-0">
+                        {row.icon}
+                      </span>
+                      <span>{row.feature}</span>
+                    </div>
 
-                  {/* WebifyIt Engineering */}
-                  <div className="col-span-4 sm:col-span-5 text-xs sm:text-sm font-semibold text-[#12151B] font-body bg-[#EEF2FB]/60 p-3 rounded-xs border border-[#1F3D8C]/20 flex items-center gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[11px] font-bold shrink-0 shadow-xs">
-                      ✓
-                    </span>
-                    <span>{row.webifyIt}</span>
+                    <div className="text-xs text-[#585D67] font-body flex items-start gap-2 pl-1">
+                      <span className="w-4 h-4 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                        ✕
+                      </span>
+                      <span>{row.generic}</span>
+                    </div>
+
+                    <div className="text-xs font-semibold text-[#12151B] font-body bg-[#EEF2FB]/60 p-3 rounded-xs border border-[#1F3D8C]/20 flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[11px] font-bold shrink-0 mt-0.5 shadow-xs">
+                        ✓
+                      </span>
+                      <span>{row.webifyIt}</span>
+                    </div>
                   </div>
                 </motion.div>
               ))}

@@ -295,17 +295,17 @@ export default function AnalyticsInsights() {
                 <div className="bg-[#EEF2FB] border border-[#1F3D8C]/20 p-4 rounded-xs flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div>
                     <div className="font-mono text-xs text-[#585D67]">PROJECTED MONTHLY LEADS:</div>
-                    <div className="font-display font-bold text-2xl text-[#1F3D8C] flex items-center gap-2">
+                    <div className="font-display font-bold text-2xl text-[#1F3D8C] flex flex-wrap items-center gap-2">
                       <span>{estimatedLeadsOptimized} Leads / Mo</span>
                       <span className="text-xs text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-2xs font-semibold flex items-center gap-1">
-                        <TrendingUp className="w-3.5 h-3.5" />
+                        <TrendingUp className="w-3.5 h-3.5 shrink-0" />
                         +{leadDifference} Additional
                       </span>
                     </div>
                   </div>
 
                   <a
-                    href={`https://wa.me/916394575814?text=Hi%20WebifyIt!%20My%20website%20gets%20${monthlyVisitors}%20visitors%20and%20I%20want%20to%20reach%20${estimatedLeadsOptimized}%20monthly%20leads.`}
+                    href={`https://wa.me/919026665814?text=Hi%20WebifyIt!%20My%20website%20gets%20${monthlyVisitors}%20visitors%20and%20I%20want%20to%20reach%20${estimatedLeadsOptimized}%20monthly%20leads.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary text-xs py-2.5 px-4 flex items-center gap-1.5 shrink-0 shadow-3d-accent"

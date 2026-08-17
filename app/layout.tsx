@@ -25,10 +25,10 @@ export const metadata: Metadata = {
   title: {
     template: "%s | WebifyIt Engineering Studio",
     default:
-      "WebifyIt — Custom Software & AI Engineering Studio | Kanpur, India",
+      "WebifyIt — Custom Software & AI Engineering Studio | Lucknow, India",
   },
   description:
-    "Custom Websites, Mobile Apps & AI Tools in Kanpur, India. We build fast websites, AI chatbots, voice assistants, cloud software, and mobile apps that help businesses grow.",
+    "Custom Websites, Mobile Apps & AI Tools in Lucknow, India. We build fast websites, AI chatbots, voice assistants, cloud software, and mobile apps for restaurants, fintech, e-commerce, and manufacturing businesses.",
   keywords: [
     "WebifyIt",
     "Custom Software Studio",
@@ -37,7 +37,10 @@ export const metadata: Metadata = {
     "AI Voice Agents",
     "Custom SaaS",
     "Web Architecture",
-    "App Development Kanpur",
+    "App Development Lucknow",
+    "Restaurant Software Lucknow",
+    "Fintech Software India",
+    "Manufacturing ERP Lucknow",
     "Enterprise Software India",
     "Cloud ERP",
   ],

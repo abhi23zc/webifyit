@@ -38,8 +38,8 @@ export default function AuditModal({ isOpen, onClose, onLeadCaptured }: AuditMod
       source: "Blueprint Form",
       taggedDomain:
         formData.auditFocus.includes("AI") ? "AI Agent" :
-        formData.auditFocus.includes("SaaS") ? "Custom SaaS" :
-        formData.auditFocus.includes("Mobile") ? "Mobile App Engine" : "Web Architecture",
+          formData.auditFocus.includes("SaaS") ? "Custom SaaS" :
+            formData.auditFocus.includes("Mobile") ? "Mobile App Engine" : "Web Architecture",
     });
 
     if (onLeadCaptured) {
@@ -61,12 +61,12 @@ export default function AuditModal({ isOpen, onClose, onLeadCaptured }: AuditMod
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="bg-[#F5F6F1] border-2 border-[#12151B] w-full max-w-lg rounded-xs shadow-2xl p-6 sm:p-8 relative xmark"
+          className="bg-[#F5F6F1] border-2 border-[#12151B] w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xs shadow-2xl p-6 sm:p-8 relative"
         >
           {/* Close Button */}
           <button
             onClick={resetAndClose}
-            className="absolute top-4 right-4 w-8 h-8 bg-white border border-[#C7C9C0] rounded-xs flex items-center justify-center text-[#12151B] hover:bg-[#FF4B23] hover:text-white transition-colors"
+            className="absolute top-4 right-4 z-10 w-8 h-8 bg-white border border-[#C7C9C0] rounded-xs flex items-center justify-center text-[#12151B] hover:bg-[#FF4B23] hover:text-white transition-colors"
             aria-label="Close modal"
           >
             <X className="w-4 h-4" />
@@ -114,14 +114,14 @@ export default function AuditModal({ isOpen, onClose, onLeadCaptured }: AuditMod
           ) : (
             <div>
               {/* Step indicator */}
-              <div className="flex items-center justify-between mb-4 border-b border-[#DCDDD6] pb-3">
+              <div className="flex items-center justify-between mb-4 border-b border-[#DCDDD6] pb-3 pr-10">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#FF4B23] animate-pulse"></span>
                   <span className="font-mono text-xs font-semibold text-[#FF4B23] uppercase tracking-widest">
                     SPEC_REQ_START
                   </span>
                 </div>
-                <div className="font-mono text-xs text-[#8A8E96]">
+                <div className="font-mono text-xs text-[#8A8E96] shrink-0 font-bold">
                   STEP {step} OF 2
                 </div>
               </div>
@@ -147,7 +147,7 @@ export default function AuditModal({ isOpen, onClose, onLeadCaptured }: AuditMod
                       </label>
                       <textarea
                         rows={3}
-                        placeholder="e.g., Wholesale manufacturing in Kanpur OR https://mycompany.com"
+                        placeholder="e.g., Wholesale manufacturing in Lucknow OR https://mycompany.com"
                         value={formData.businessInput}
                         onChange={(e) => setFormData({ ...formData, businessInput: e.target.value })}
                         className="w-full bg-white border border-[#C7C9C0] p-2.5 text-sm rounded-xs font-body text-[#12151B] focus:border-[#FF4B23] focus:outline-none resize-none"

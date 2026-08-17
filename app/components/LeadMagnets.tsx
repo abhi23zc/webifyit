@@ -7,7 +7,7 @@ import Card3D from "./Card3D";
 import { saveNewLead } from "../lib/leadStore";
 
 interface LeadMagnetsProps {
-  onLeadCaptured: (name: string, auditFocus: string) => void;
+  onLeadCaptured?: (name: string, auditFocus: string) => void;
 }
 
 export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
@@ -105,7 +105,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
       taggedDomain: "AI Agent",
     });
 
-    onLeadCaptured("Architect User", "AI Architect Blueprint");
+    if (onLeadCaptured) onLeadCaptured("Architect User", "AI Architect Blueprint");
   };
 
   // --- 2. BUSINESS BOTTLENECK QUIZ STATE ---
@@ -205,7 +205,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
       taggedDomain: "Custom SaaS",
     });
 
-    onLeadCaptured("Quiz Participant", "Business Bottleneck Quiz");
+    if (onLeadCaptured) onLeadCaptured("Quiz Participant", "Business Bottleneck Quiz");
   };
 
   // --- 3. OPERATIONAL SAVINGS CALCULATOR STATE ---
@@ -235,7 +235,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
       taggedDomain: "AI Agent",
     });
 
-    onLeadCaptured("Calculator User", "Savings Calculator Blueprint");
+    if (onLeadCaptured) onLeadCaptured("Calculator User", "Savings Calculator Blueprint");
   };
 
   return (
@@ -334,7 +334,7 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
                   </button>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div className="text-xs font-mono text-[#8A8E96] flex items-center gap-2">
                     {isListening && (
                       <span className="text-[#FF4B23] font-bold animate-pulse">
@@ -342,13 +342,13 @@ export default function LeadMagnets({ onLeadCaptured }: LeadMagnetsProps) {
                       </span>
                     )}
                     {!isListening && (
-                      <span>Sample input preset: &quot;Wholesale Kanpur textile business needing AI orders&quot;</span>
+                      <span className="hidden sm:inline">Sample input preset: &quot;Wholesale Lucknow textile business needing AI orders&quot;</span>
                     )}
                   </div>
                   <button
                     type="submit"
                     disabled={isAnalyzing || !userInput.trim()}
-                    className="btn-primary text-xs py-3 px-6 shadow-3d-accent disabled:opacity-50 flex items-center gap-2"
+                    className="btn-primary text-xs py-3 px-6 shadow-3d-accent disabled:opacity-50 flex items-center gap-2 w-full sm:w-auto justify-center shrink-0"
                   >
                     {isAnalyzing ? (
                       <>

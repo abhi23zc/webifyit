@@ -9,7 +9,7 @@ export default function LogoMarquee() {
     { name: "Goodgut", tagline: "HEALTH & WELLNESS", code: "GG-03" },
     { name: "OyeStore", tagline: "E-COMMERCE PLATFORM", code: "OS-04" },
     { name: "GrowPlus", tagline: "FINANCIAL SERVICES", code: "GP-05" },
-    { name: "Synergon", tagline: "AI MARKETING CRM", code: "SY-06" },
+    { name: "Synergon", tagline: "AI SALES CRM", code: "SY-06" },
   ];
 
   // Duplicate for seamless infinite scrolling loop

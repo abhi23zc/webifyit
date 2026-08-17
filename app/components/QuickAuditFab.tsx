@@ -61,7 +61,7 @@ export default function QuickAuditFab({ onOpenAuditModal }: QuickAuditFabProps) 
             </button>
 
             <a
-              href="https://wa.me/916394575814?text=Hi%20WebifyIt!%20I%20want%20to%20discuss%20a%20new%20project."
+              href="https://wa.me/919026665814?text=Hi%20WebifyIt!%20I%20want%20to%20discuss%20a%20new%20project."
               target="_blank"
               rel="noopener noreferrer"
               className="w-full btn-secondary text-xs py-2 px-3 justify-center gap-1.5"

@@ -5,95 +5,82 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import LogoMarquee from "./components/LogoMarquee";
 import Services from "./components/Services";
-import MarketPositioningMatrix from "./components/MarketPositioningMatrix";
 import LeadMagnets from "./components/LeadMagnets";
 import ImpactStats from "./components/ImpactStats";
 import Projects from "./components/Projects";
+import IndustriesWeServe from "./components/IndustriesWeServe";
 import Testimonials from "./components/Testimonials";
 import LeadGenGrowth from "./components/LeadGenGrowth";
+import LeadQualification from "./components/LeadQualification";
 import FaqSection from "./components/FaqSection";
+import DataProtection from "./components/DataProtection";
 import FinalCta from "./components/FinalCta";
 import Footer from "./components/Footer";
 import AuditModal from "./components/AuditModal";
 import QuickAuditFab from "./components/QuickAuditFab";
-import MsgZoneNotification from "./components/MsgZoneNotification";
 
 export default function Home() {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
-  const [msgZoneLead, setMsgZoneLead] = useState<{ name: string; focus: string } | null>(null);
 
-  const handleOpenAuditModal = () => {
-    setIsAuditModalOpen(true);
-  };
-
-  const handleCloseAuditModal = () => {
-    setIsAuditModalOpen(false);
-  };
-
-  const handleLeadCaptured = (name: string, focus: string) => {
-    setMsgZoneLead({ name, focus });
-  };
+  const handleOpenAuditModal = () => setIsAuditModalOpen(true);
+  const handleCloseAuditModal = () => setIsAuditModalOpen(false);
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Sticky Navigation */}
       <Navbar onOpenAuditModal={handleOpenAuditModal} />
 
-      {/* Main Content Sections */}
       <main className="flex-grow">
-        {/* 1. Hero Section (Phase 1 Positioning) */}
+        {/* 1. Hero — "What do you do?" */}
         <Hero onOpenAuditModal={handleOpenAuditModal} />
 
-        {/* 2. Client Logo Marquee */}
+        {/* 2. Client Logo Strip — "Who have you worked with?" */}
         <LogoMarquee />
 
-        {/* 3. Services (Phase 1 Engineering Capabilities) */}
+        {/* 3. Services — "What exactly can you build for me?" */}
         <Services />
 
-        {/* 4. Market Positioning Matrix (Phase 6) */}
-        <MarketPositioningMatrix onOpenAuditModal={handleOpenAuditModal} />
+        {/* 4. Interactive Lead Magnets — "Prove it — let me test your AI tools" */}
+        <LeadMagnets />
 
-        {/* 5. Interactive Lead Magnets (Phase 3 AI Architect, Quiz, Calculator) */}
-        <LeadMagnets onLeadCaptured={handleLeadCaptured} />
-
-        {/* 6. Achievements / Stats */}
+        {/* 5. Impact Stats — "What results have you delivered?" */}
         <ImpactStats />
 
-        {/* 7. Featured Work (Living Proof: Dineezy, MsgZone, HelpKey, HisabAI) */}
+        {/* 6. Projects / Case Studies — "Show me real work" */}
         <Projects onOpenAuditModal={handleOpenAuditModal} />
 
-        {/* 8. Client Reviews & Engineering Testimonials */}
+        {/* 7. Industries We Serve — "Do you understand MY industry?" */}
+        <IndustriesWeServe onOpenAuditModal={handleOpenAuditModal} />
+
+        {/* 8. Client Testimonials — "What do your clients say?" */}
         <Testimonials />
 
-        {/* 9. Process & Execution Engine */}
+        {/* 9. How We Work — "How would working together actually work?" */}
         <LeadGenGrowth onOpenAuditModal={handleOpenAuditModal} />
 
-        {/* 10. Technical FAQ Accordion */}
+        {/* 10. Lead Qualification — "Am I the right fit for you?" */}
+        <LeadQualification onOpenAuditModal={handleOpenAuditModal} />
+
+        {/* 11. FAQ — "I have some concerns..." */}
         <FaqSection />
 
-        {/* 11. Dark Full-Bleed Final CTA */}
+        {/* 12. Data Protection & Security — "Can I trust you with my data / IP?" */}
+        <DataProtection />
+
+        {/* 13. Final CTA — "OK, I'm ready — what's next?" */}
         <FinalCta onOpenAuditModal={handleOpenAuditModal} />
       </main>
 
-      {/* Footer (Phase 1 Refined Engineering Branding) */}
+      {/* Footer */}
       <Footer onOpenAuditModal={handleOpenAuditModal} />
 
-      {/* Quick Access Floating Action Button */}
+      {/* Quick Access FAB */}
       <QuickAuditFab onOpenAuditModal={handleOpenAuditModal} />
 
-      {/* Technical Blueprint Request Modal (Phase 2) */}
+      {/* Blueprint Request Modal */}
       <AuditModal
         isOpen={isAuditModalOpen}
         onClose={handleCloseAuditModal}
-        onLeadCaptured={handleLeadCaptured}
-      />
-
-      {/* MsgZone WhatsApp Automation Notification (Phase 4) */}
-      <MsgZoneNotification
-        isOpen={!!msgZoneLead}
-        leadName={msgZoneLead?.name}
-        auditFocus={msgZoneLead?.focus}
-        onClose={() => setMsgZoneLead(null)}
       />
     </div>
   );

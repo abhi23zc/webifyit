@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 interface FooterProps {
-  onOpenAuditModal: () => void;
+  onOpenAuditModal?: () => void;
 }
 
 export default function Footer({ onOpenAuditModal }: FooterProps) {
@@ -27,7 +27,7 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
 
             <div className="font-mono text-xs text-[#8A8E96] flex items-center gap-2 pt-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              HEADQUARTERED IN KANPUR, UTTAR PRADESH, INDIA
+              HEADQUARTERED IN LUCKNOW, UTTAR PRADESH, INDIA
             </div>
           </div>
 
@@ -57,7 +57,7 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
               <li><a href="#projects" className="hover:text-white transition-colors">HelpKey Engine</a></li>
               <li><Link href="/blog" className="hover:text-white transition-colors font-semibold text-white">Engineering Blog</Link></li>
               <li><Link href="/admin" className="hover:text-white transition-colors font-semibold text-[#FF4B23]">Internal Lead CRM</Link></li>
-              <li><button onClick={onOpenAuditModal} className="hover:text-white transition-colors text-left text-xs font-mono text-[#25D366]">Request Blueprint →</button></li>
+              <li><button onClick={() => onOpenAuditModal && onOpenAuditModal()} className="hover:text-white transition-colors text-left text-xs font-mono text-[#25D366]">Request Blueprint →</button></li>
             </ul>
           </div>
 
@@ -70,11 +70,11 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
               <a href="mailto:webifyit.in@gmail.com" className="block hover:text-white transition-colors break-all">
                 webifyit.in@gmail.com
               </a>
-              <a href="tel:+916394575814" className="block hover:text-white transition-colors">
-                +91 63945 75814
+              <a href="tel:+919026665814" className="block hover:text-white transition-colors">
+                +91 90266 65814
               </a>
               <div className="text-xs text-[#8A8E96] pt-1">
-                Kanpur, Uttar Pradesh, India
+                Lucknow, Uttar Pradesh, India
               </div>
             </div>
           </div>

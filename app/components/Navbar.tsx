@@ -6,7 +6,7 @@ import { ArrowUpRight, Menu, X, SquareArrowOutUpLeft, Code, LayoutDashboard } fr
 import Link from "next/link";
 
 interface NavbarProps {
-  onOpenAuditModal: () => void;
+  onOpenAuditModal?: () => void;
 }
 
 export default function Navbar({ onOpenAuditModal }: NavbarProps) {
@@ -18,7 +18,7 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = ["hero", "services", "projects", "lead-magnets", "positioning", "growth", "faq"];
+      const sections = ["hero", "services", "projects", "industries", "lead-magnets", "growth", "qualification", "faq", "security"];
       const current = sections.find((sec) => {
         const el = document.getElementById(sec);
         if (el) {
@@ -38,10 +38,8 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
     { label: "Home", href: "/#hero", id: "hero" },
     { label: "Services", href: "/#services", id: "services" },
     { label: "Projects", href: "/#projects", id: "projects" },
-    { label: "AI Lead Tools", href: "/#lead-magnets", id: "lead-magnets" },
-    { label: "Matrix", href: "/#positioning", id: "positioning" },
+    { label: "How We Work", href: "/#growth", id: "growth" },
     { label: "Blog", href: "/blog", id: "blog" },
-    { label: "Admin CRM", href: "/admin", id: "admin" },
   ];
 
   return (
@@ -90,7 +88,7 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
-            onClick={onOpenAuditModal}
+            onClick={() => onOpenAuditModal && onOpenAuditModal()}
             className="hidden sm:inline-flex btn-primary text-xs tracking-wide py-2.5 px-4 items-center gap-1.5 shadow-3d-accent"
           >
             <SquareArrowOutUpLeft className="w-3.5 h-3.5" />
@@ -135,7 +133,7 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenAuditModal();
+                  if (onOpenAuditModal) onOpenAuditModal();
                 }}
                 className="w-full btn-primary justify-center text-sm py-3 shadow-3d-accent"
               >

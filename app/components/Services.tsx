@@ -11,13 +11,14 @@ export default function Services() {
   const servicesData = [
     {
       id: "SPEC-01",
-      title: "Custom Website Development",
+      title: "Custom Web Applications",
       description:
-        "Fast, modern websites built with the latest technology. We make sure your site loads quickly, looks great, and works perfectly on all devices.",
+        "Fast, scalable web applications built with the latest enterprise technology. We ensure your platform handles high traffic seamlessly and works perfectly on all devices.",
       icon: <Code2 className="w-6 h-6 text-[#1F3D8C]" />,
       techSpecs: ["Next.js 16 App Router", "React 19 & TypeScript", "PostgreSQL & Prisma", "Fast Global Hosting"],
       deliverables: ["Super-Fast Website", "REST & GraphQL API", "Fast Global Hosting", "100/100 Google Speed Score"],
       timeline: "2 – 4 Weeks",
+      imageSrc: "/images/services/web-app-mockup.png",
       widget: (
         <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
           <div className="flex justify-between items-center font-mono text-xs">
@@ -50,6 +51,7 @@ export default function Services() {
       techSpecs: ["OpenAI GPT-4o & Claude 3.5", "Voice AI & Speech Technology", "Smart AI Memory & Search", "WhatsApp API Integration"],
       deliverables: ["24/7 AI Voice Assistant", "Document & Image AI", "Hindi + English Support", "Live CRM Updates"],
       timeline: "3 – 5 Weeks",
+      imageSrc: "/images/services/ai-chat-mockup.png",
       widget: (
         <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
           <div className="flex justify-between items-center font-mono text-xs">
@@ -81,6 +83,7 @@ export default function Services() {
       techSpecs: ["Multi-Tenant Architecture", "Razorpay / Stripe Payments", "Docker & Kubernetes Hosting", "AWS / Vercel Cloud"],
       deliverables: ["Full Admin Dashboard", "Subscription & Billing System", "Usage Analytics", "User Role Management"],
       timeline: "4 – 8 Weeks",
+      imageSrc: "/images/services/saas-dashboard-mockup.png",
       widget: (
         <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
           <div className="flex justify-between items-center font-mono text-xs">
@@ -114,6 +117,7 @@ export default function Services() {
       techSpecs: ["React Native & Expo", "TypeScript Core", "Offline Data Storage", "Push Notifications"],
       deliverables: ["iOS & Android App", "Camera & Bluetooth APIs", "Offline Mode", "App Store & Play Store Launch"],
       timeline: "3 – 6 Weeks",
+      imageSrc: "/images/services/mobile-app-mockup.png",
       widget: (
         <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
           <div className="flex justify-between items-center font-mono text-xs">
@@ -143,7 +147,7 @@ export default function Services() {
         <div className="max-w-2xl mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="font-mono text-xs font-bold text-[#FF4B23] tracking-widest uppercase">
-              FIG. 01 — CORE ENGINEERING CAPABILITIES
+              WHAT WE BUILD
             </span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#12151B] tracking-tight">
@@ -154,44 +158,74 @@ export default function Services() {
           </p>
         </div>
 
-        {/* 3D Grid */}
+        {/* Visual Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {servicesData.map((service, idx) => (
-            <Card3D key={service.id} intensity={10} className="h-full">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                onClick={() => setSelectedService(service)}
-                className="xmark bg-white border border-[#C7C9C0] p-6 sm:p-8 rounded-xs hover:shadow-3d transition-all duration-300 flex flex-col justify-between cursor-pointer group h-full"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4 translate-z-10">
-                    <div className="p-3 bg-[#F5F6F1] border border-[#DCDDD6] rounded-xs group-hover:border-[#FF4B23] transition-colors shadow-2xs">
-                      {service.icon}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs text-[#8A8E96] border border-[#DCDDD6] px-2 py-0.5 rounded-xs">
-                        {service.id}
-                      </span>
-                      <span className="font-mono text-xs font-semibold text-[#FF4B23] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        View Details →
-                      </span>
-                    </div>
-                  </div>
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              onClick={() => setSelectedService(service)}
+              className="bg-white border border-[#DCDDD6] hover:border-[#1F3D8C] rounded-[1.5rem] hover:shadow-3d transition-all duration-300 flex flex-col justify-between cursor-pointer group h-full relative overflow-hidden"
+            >
+              {/* Subtle gradient glow on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-[#EEF2FB] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                  <h3 className="font-display text-xl font-bold text-[#12151B] group-hover:text-[#FF4B23] transition-colors mb-2 translate-z-20">
-                    {service.title}
-                  </h3>
-                  <p className="font-body text-sm text-[#585D67] leading-relaxed translate-z-10">
-                    {service.description}
-                  </p>
+              {/* Service Mockup Image */}
+              <div className="w-full h-48 sm:h-56 bg-[#F5F6F1] border-b border-[#DCDDD6] overflow-hidden relative">
+                {service.imageSrc ? (
+                  <img 
+                    src={service.imageSrc} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-[#8A8E96] font-mono text-xs">Image Placeholder</div>
+                )}
+                {/* Floating ID badge */}
+                <div className="absolute top-4 right-4 font-mono text-[10px] font-bold text-[#1F3D8C] bg-white/90 backdrop-blur-sm border border-[#DCDDD6] px-2.5 py-1 rounded-full shadow-sm">
+                  {service.id}
+                </div>
+              </div>
+
+              <div className="relative z-10 p-6 sm:p-8 flex flex-col flex-1">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="p-3 bg-blue-50 text-[#1F3D8C] border border-blue-100 rounded-xl group-hover:bg-[#1F3D8C] group-hover:text-white transition-colors duration-300 shadow-sm inline-flex">
+                    {React.cloneElement(service.icon as React.ReactElement, { className: "w-5 h-5" })}
+                  </div>
+                  <span className="font-mono text-[10px] font-bold text-[#FF4B23] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Details →
+                  </span>
                 </div>
 
-                {service.widget}
-              </motion.div>
-            </Card3D>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#12151B] group-hover:text-[#1F3D8C] transition-colors mb-2">
+                  {service.title}
+                </h3>
+                <div className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-[#FF4B23] bg-[#FF4B23]/10 border border-[#FF4B23]/20 px-2.5 py-0.5 rounded-sm mb-3 w-fit">
+                  <span>⚡ Delivery: {service.timeline}</span>
+                </div>
+                <p className="font-body text-[14px] text-[#585D67] leading-relaxed mb-6 flex-1">
+                  {service.description}
+                </p>
+
+                {/* Visual Badges */}
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {service.deliverables.slice(0, 3).map((item) => (
+                    <div key={item} className="bg-[#F5F6F1] border border-[#DCDDD6] text-[#585D67] text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1.5">
+                      <Check className="w-3 h-3 text-emerald-500" />
+                      {item}
+                    </div>
+                  ))}
+                  {service.deliverables.length > 3 && (
+                    <div className="bg-[#F5F6F1] border border-[#DCDDD6] text-[#585D67] text-[11px] font-medium px-2 py-1 rounded-md">
+                      +{service.deliverables.length - 3} more
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
@@ -206,17 +240,17 @@ export default function Services() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="bg-white border-2 border-[#12151B] w-full max-w-xl rounded-xs p-6 sm:p-8 relative xmark shadow-2xl"
+              className="bg-white border border-[#DCDDD6] w-full max-w-xl rounded-[1.5rem] p-6 sm:p-8 relative shadow-2xl"
             >
               <button
                 onClick={() => setSelectedService(null)}
-                className="absolute top-4 right-4 p-2 border border-[#C7C9C0] rounded-xs text-[#12151B] hover:bg-[#FF4B23] hover:text-white transition-colors"
+                className="absolute top-4 right-4 p-2 bg-[#F5F6F1] border border-[#DCDDD6] rounded-full text-[#585D67] hover:bg-[#FF4B23] hover:text-white hover:border-[#FF4B23] transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
 
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-3 bg-[#F5F6F1] border border-[#DCDDD6] rounded-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-3 bg-blue-50 text-[#1F3D8C] border border-blue-100 rounded-xl">
                   {selectedService.icon}
                 </div>
                 <div>
@@ -235,43 +269,47 @@ export default function Services() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 pt-4 border-t border-[#DCDDD6]">
                 <div>
-                  <div className="font-mono text-xs font-bold text-[#1F3D8C] uppercase mb-3 flex items-center gap-1.5">
-                    <SquareArrowOutUpLeft className="w-3.5 h-3.5" />
-                    TOOLS WE USE
+                  <div className="font-mono text-[10px] font-bold text-[#8A8E96] uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                    <SquareArrowOutUpLeft className="w-3.5 h-3.5 text-[#1F3D8C]" />
+                    TECH STACK
                   </div>
-                  <ul className="space-y-2 font-body text-xs text-[#12151B]">
+                  <ul className="space-y-2.5 font-body text-xs text-[#12151B]">
                     {selectedService.techSpecs.map((spec) => (
                       <li key={spec} className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#FF4B23] shrink-0" />
-                        <span className="font-medium">{spec}</span>
+                        <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                          <Check className="w-2.5 h-2.5 text-emerald-600" />
+                        </div>
+                        <span className="font-medium text-[13px]">{spec}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div>
-                  <div className="font-mono text-xs font-bold text-[#1F3D8C] uppercase mb-3 flex items-center gap-1.5">
-                    <SquareArrowOutUpLeft className="w-3.5 h-3.5" />
+                  <div className="font-mono text-[10px] font-bold text-[#8A8E96] uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                    <Check className="w-3.5 h-3.5 text-[#1F3D8C]" />
                     WHAT YOU GET
                   </div>
-                  <ul className="space-y-2 font-body text-xs text-[#12151B]">
+                  <ul className="space-y-2.5 font-body text-xs text-[#12151B]">
                     {selectedService.deliverables.map((item) => (
                       <li key={item} className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#1F3D8C] shrink-0" />
-                        <span className="font-medium">{item}</span>
+                        <div className="w-4 h-4 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
+                          <Check className="w-2.5 h-2.5 text-[#1F3D8C]" />
+                        </div>
+                        <span className="font-medium text-[13px]">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-[#F5F6F1] border border-[#DCDDD6] rounded-xs">
-                <div className="font-mono text-xs">
-                  <span className="text-[#8A8E96]">DELIVERY TIME: </span>
-                  <span className="font-bold text-[#12151B]">{selectedService.timeline}</span>
+              <div className="flex flex-col sm:flex-row items-center justify-between p-5 bg-[#EEF2FB] border border-blue-100 rounded-xl mt-2">
+                <div className="font-mono text-[11px] mb-3 sm:mb-0">
+                  <span className="text-[#8A8E96] uppercase font-bold tracking-wider">Estimated Timeline: </span>
+                  <span className="font-bold text-[#1F3D8C]">{selectedService.timeline}</span>
                 </div>
                 <a
-                  href={`https://wa.me/916394575814?text=Hi%20WebifyIt!%20I%20want%20to%20discuss%20${encodeURIComponent(selectedService.title)}.`}
+                  href={`https://wa.me/919026665814?text=Hi%20WebifyIt!%20I%20want%20to%20discuss%20${encodeURIComponent(selectedService.title)}.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary text-xs py-2.5 px-4 flex items-center gap-1.5 shadow-3d-accent"
