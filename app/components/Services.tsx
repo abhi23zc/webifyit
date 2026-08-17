@@ -158,8 +158,8 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Visual Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Visual Grid - Compact 4 Column Bento Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {servicesData.map((service, idx) => (
             <motion.div
               key={service.id}
@@ -168,13 +168,13 @@ export default function Services() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => setSelectedService(service)}
-              className="bg-white border border-[#DCDDD6] hover:border-[#1F3D8C] rounded-[1.5rem] hover:shadow-3d transition-all duration-300 flex flex-col justify-between cursor-pointer group h-full relative overflow-hidden"
+              className="bg-white border border-[#DCDDD6] hover:border-[#1F3D8C] rounded-[1.25rem] hover:shadow-3d transition-all duration-300 flex flex-col justify-between cursor-pointer group h-full relative overflow-hidden"
             >
               {/* Subtle gradient glow on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent to-[#EEF2FB] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-              {/* Service Mockup Image */}
-              <div className="w-full h-48 sm:h-56 bg-[#F5F6F1] border-b border-[#DCDDD6] overflow-hidden relative">
+              {/* Service Mockup Image (Compact) */}
+              <div className="w-full h-32 sm:h-36 bg-[#F5F6F1] border-b border-[#DCDDD6] overflow-hidden relative">
                 {service.imageSrc ? (
                   <img 
                     src={service.imageSrc} 
@@ -185,44 +185,39 @@ export default function Services() {
                   <div className="w-full h-full flex items-center justify-center text-[#8A8E96] font-mono text-xs">Image Placeholder</div>
                 )}
                 {/* Floating ID badge */}
-                <div className="absolute top-4 right-4 font-mono text-[10px] font-bold text-[#1F3D8C] bg-white/90 backdrop-blur-sm border border-[#DCDDD6] px-2.5 py-1 rounded-full shadow-sm">
+                <div className="absolute top-3 right-3 font-mono text-[9px] font-bold text-[#1F3D8C] bg-white/90 backdrop-blur-sm border border-[#DCDDD6] px-2 py-0.5 rounded-full shadow-sm">
                   {service.id}
                 </div>
               </div>
 
-              <div className="relative z-10 p-6 sm:p-8 flex flex-col flex-1">
+              <div className="relative z-10 p-5 flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 bg-blue-50 text-[#1F3D8C] border border-blue-100 rounded-xl group-hover:bg-[#1F3D8C] group-hover:text-white transition-colors duration-300 shadow-sm inline-flex">
-                    {React.cloneElement(service.icon as React.ReactElement, { className: "w-5 h-5" })}
+                  <div className="p-2.5 bg-blue-50 text-[#1F3D8C] border border-blue-100 rounded-xl group-hover:bg-[#1F3D8C] group-hover:text-white transition-colors duration-300 shadow-sm inline-flex">
+                    {React.cloneElement(service.icon as React.ReactElement, { className: "w-4 h-4" })}
                   </div>
-                  <span className="font-mono text-[10px] font-bold text-[#FF4B23] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    View Details →
-                  </span>
                 </div>
 
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#12151B] group-hover:text-[#1F3D8C] transition-colors mb-2">
+                <h3 className="font-display text-lg font-bold text-[#12151B] group-hover:text-[#1F3D8C] transition-colors mb-2 leading-tight">
                   {service.title}
                 </h3>
-                <div className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-[#FF4B23] bg-[#FF4B23]/10 border border-[#FF4B23]/20 px-2.5 py-0.5 rounded-sm mb-3 w-fit">
-                  <span>⚡ Delivery: {service.timeline}</span>
+                
+                <div className="inline-flex items-center gap-1 font-mono text-[10px] font-semibold text-[#FF4B23] bg-[#FF4B23]/10 border border-[#FF4B23]/20 px-2 py-0.5 rounded-sm mb-3 w-fit">
+                  <span>⚡ {service.timeline}</span>
                 </div>
-                <p className="font-body text-[14px] text-[#585D67] leading-relaxed mb-6 flex-1">
+                
+                <p className="font-body text-[13px] text-[#585D67] leading-relaxed mb-4 flex-1 line-clamp-3">
                   {service.description}
                 </p>
 
-                {/* Visual Badges */}
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {service.deliverables.slice(0, 3).map((item) => (
-                    <div key={item} className="bg-[#F5F6F1] border border-[#DCDDD6] text-[#585D67] text-[11px] font-medium px-2.5 py-1 rounded-md flex items-center gap-1.5">
+                {/* Minimal interaction hint */}
+                <div className="mt-auto flex items-center justify-between border-t border-[#DCDDD6]/60 pt-3">
+                   <div className="text-[11px] font-medium text-[#8A8E96] flex items-center gap-1">
                       <Check className="w-3 h-3 text-emerald-500" />
-                      {item}
-                    </div>
-                  ))}
-                  {service.deliverables.length > 3 && (
-                    <div className="bg-[#F5F6F1] border border-[#DCDDD6] text-[#585D67] text-[11px] font-medium px-2 py-1 rounded-md">
-                      +{service.deliverables.length - 3} more
-                    </div>
-                  )}
+                      {service.deliverables.length} features
+                   </div>
+                   <span className="font-mono text-[10px] font-bold text-[#1F3D8C] group-hover:text-[#FF4B23] transition-colors">
+                     View Details →
+                   </span>
                 </div>
               </div>
             </motion.div>
