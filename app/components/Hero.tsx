@@ -124,16 +124,14 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                   className="group flex flex-col gap-1.5 p-3 bg-white border border-[#DCDDD6] rounded-xs hover:border-[#1F3D8C] hover:shadow-sm transition-all duration-200"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="w-7 h-7 rounded-xs bg-[#1F3D8C] flex items-center justify-center font-mono font-bold text-white text-[10px]">
-                      DE
-                    </div>
+                    <img src="/dineezy-logo.png" alt="Dineezy POS" className="w-8 h-8 rounded-xs object-contain" />
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   </div>
                   <div className="font-display font-bold text-xs text-[#12151B] group-hover:text-[#1F3D8C] transition-colors leading-tight">
                     Dineezy POS
                   </div>
-                  <div className="font-mono text-[10px] text-[#FF4B23] font-semibold">
-                    4.8x Orders ↑
+                  <div className="font-mono text-[10px] text-[#585D67]">
+                    Restaurant QR ordering & table management system
                   </div>
                 </a>
 
@@ -143,16 +141,14 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                   className="group flex flex-col gap-1.5 p-3 bg-white border border-[#DCDDD6] rounded-xs hover:border-[#FF4B23] hover:shadow-sm transition-all duration-200"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="w-7 h-7 rounded-xs bg-[#25D366] flex items-center justify-center font-mono font-bold text-white text-[10px]">
-                      MZ
-                    </div>
+                    <img src="https://m.msgzone.in/assets/logo.png" alt="MsgZone" className="w-8 h-8 rounded-xs object-contain" />
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   </div>
                   <div className="font-display font-bold text-xs text-[#12151B] group-hover:text-[#FF4B23] transition-colors leading-tight">
                     MsgZone
                   </div>
-                  <div className="font-mono text-[10px] text-[#FF4B23] font-semibold">
-                    50k+ Msgs/Day
+                  <div className="font-mono text-[10px] text-[#585D67]">
+                    Bulk WhatsApp messaging & marketing automation
                   </div>
                 </a>
 
@@ -162,16 +158,14 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                   className="group flex flex-col gap-1.5 p-3 bg-white border border-[#DCDDD6] rounded-xs hover:border-[#12151B] hover:shadow-sm transition-all duration-200"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="w-7 h-7 rounded-xs bg-[#12151B] flex items-center justify-center font-mono font-bold text-white text-[10px]">
-                      HK
-                    </div>
+                    <img src="https://hisabai.in/app-icon.svg" alt="Hisab AI" className="w-8 h-8 rounded-xs object-contain" />
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   </div>
                   <div className="font-display font-bold text-xs text-[#12151B] group-hover:text-[#585D67] transition-colors leading-tight">
-                    HelpKey
+                    Hisab AI
                   </div>
-                  <div className="font-mono text-[10px] text-[#FF4B23] font-semibold">
-                    Instant Booking
+                  <div className="font-mono text-[10px] text-[#585D67]">
+                    AI-powered expense tracking & bill splitting app
                   </div>
                 </a>
               </div>
@@ -196,13 +190,13 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                     <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
                     <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
                   </div>
-                  
+
                   {/* URL Bar */}
                   <div className="bg-white border border-[#DCDDD6] px-4 py-1 rounded-md text-[10px] font-mono text-[#585D67] shadow-sm flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                     webifyit.engineering/system
                   </div>
-                  
+
                   {/* Version Tag */}
                   <div className="font-mono text-[9px] font-bold text-[#1F3D8C] uppercase tracking-wider">
                     SPEC_V5.0
@@ -211,7 +205,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
 
                 {/* Dashboard Body */}
                 <div className="p-5 sm:p-6 bg-white flex flex-col gap-5">
-                  
+
                   {/* Dashboard Header Bar */}
                   <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3 sm:p-4 flex justify-between items-center">
                     <div>
@@ -221,7 +215,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                       </div>
                       <div className="text-[11px] text-[#585D67]">Production infrastructure & application health</div>
                     </div>
-                    
+
                     {/* Toggle Switch */}
                     <div className="flex bg-white border border-[#DCDDD6] rounded-md p-1 shadow-sm shrink-0 ml-4">
                       <button className="bg-[#1F3D8C] text-white text-[10px] font-bold px-3 py-1.5 rounded-sm shadow-sm transition-colors flex items-center gap-1.5">
@@ -246,29 +240,29 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                             <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4 4" />
                           </pattern>
                         </defs>
-                        
+
                         <rect width="100%" height="100%" fill="url(#gridPattern)" />
-                        
-                        <path 
-                          d="M -20 170 C 80 110, 120 140, 180 140 C 260 140, 290 50, 350 50 C 410 50, 430 150, 480 120 C 510 100, 520 100, 520 100 L 520 220 L -20 220 Z" 
-                          fill="url(#chartGradient)" 
+
+                        <path
+                          d="M -20 170 C 80 110, 120 140, 180 140 C 260 140, 290 50, 350 50 C 410 50, 430 150, 480 120 C 510 100, 520 100, 520 100 L 520 220 L -20 220 Z"
+                          fill="url(#chartGradient)"
                         />
-                        <path 
-                          d="M -20 170 C 80 110, 120 140, 180 140 C 260 140, 290 50, 350 50 C 410 50, 430 150, 480 120 C 510 100, 520 100, 520 100" 
-                          fill="none" 
-                          stroke="#1F3D8C" 
+                        <path
+                          d="M -20 170 C 80 110, 120 140, 180 140 C 260 140, 290 50, 350 50 C 410 50, 430 150, 480 120 C 510 100, 520 100, 520 100"
+                          fill="none"
+                          stroke="#1F3D8C"
                           strokeWidth="3.5"
                           strokeLinecap="round"
                           className="drop-shadow-sm"
                         />
-                        
+
                         {/* Data point dot */}
                         <circle cx="350" cy="50" r="5" fill="#1F3D8C" stroke="white" strokeWidth="2.5" className="drop-shadow-md" />
                       </svg>
                     </div>
 
                     {/* Tooltip */}
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.8, type: "spring" }}
@@ -313,7 +307,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                       <div className="font-mono text-[9px] text-[#585D67] mt-1">Processed</div>
                       {/* Subtle tech detail */}
                       <div className="absolute top-0 right-0 w-6 h-6 bg-[#F5F6F1] rounded-bl-xl flex items-start justify-end p-1.5 border-l border-b border-[#DCDDD6]">
-                         <div className="w-1.5 h-1.5 bg-[#1F3D8C] rounded-full"></div>
+                        <div className="w-1.5 h-1.5 bg-[#1F3D8C] rounded-full"></div>
                       </div>
                     </div>
                   </div>

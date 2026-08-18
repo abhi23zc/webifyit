@@ -104,6 +104,10 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       domain: "Enterprise Platform",
       highlight: "Real-time Voice Sentiment AI",
       stats: "Instant Audio Feedback",
+      media: {
+        type: "image",
+        url: "/images/interview/1.png"
+      }
     },
   ];
 
@@ -190,7 +194,7 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
                   key={`${project.id}-${idx}`}
                   className="w-[320px] sm:w-[360px] md:w-[400px] shrink-0 h-full"
                 >
-                  <motion.a 
+                  <motion.a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -204,11 +208,11 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
                       ) : (
                         <div className="font-mono text-xs text-[#8A8E96]">Preview Available</div>
                       )}
-                      
+
                       {/* Floating Badge */}
                       <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full border border-[#DCDDD6] shadow-sm flex items-center gap-1.5">
-                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                         <span className="font-mono text-[9px] font-bold text-[#12151B] uppercase">{project.stats}</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        <span className="font-mono text-[9px] font-bold text-[#12151B] uppercase">{project.stats}</span>
                       </div>
                     </div>
 

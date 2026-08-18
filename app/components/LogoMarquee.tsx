@@ -4,12 +4,12 @@ import React from "react";
 
 export default function LogoMarquee() {
   const clients = [
-    { name: "Helpkey", tagline: "HOTEL BOOKING & SAAS", code: "HK-01" },
-    { name: "Renascence Hosiers", tagline: "TEXTILE & APPAREL", code: "RH-02" },
-    { name: "Goodgut", tagline: "HEALTH & WELLNESS", code: "GG-03" },
-    { name: "OyeStore", tagline: "E-COMMERCE PLATFORM", code: "OS-04" },
-    { name: "GrowPlus", tagline: "FINANCIAL SERVICES", code: "GP-05" },
-    { name: "Synergon", tagline: "AI SALES CRM", code: "SY-06" },
+    { name: "Helpkey", tagline: "HOTEL BOOKING & SAAS", logo: null, initials: "HK", bgColor: "#12151B" },
+    { name: "Renascence Hosiers", tagline: "TEXTILE & APPAREL", logo: null, initials: "RH", bgColor: "#7C3AED" },
+    { name: "Goodgut", tagline: "HEALTH & WELLNESS", logo: "/logos/goodgut.png" },
+    { name: "OyeStore", tagline: "E-COMMERCE PLATFORM", logo: "/logos/oyestore.png" },
+    { name: "GrowPlus", tagline: "FINANCIAL SERVICES", logo: "/logos/growplus.png" },
+    { name: "Synergon", tagline: "AI SALES CRM", logo: "/logos/synergon.png" },
   ];
 
   // Duplicate for seamless infinite scrolling loop
@@ -36,9 +36,20 @@ export default function LogoMarquee() {
               key={`${client.name}-${idx}`}
               className="flex items-center gap-3 px-4 py-2 border border-[#DCDDD6] bg-[#F5F6F1] rounded-xs hover:border-[#12151B] transition-colors whitespace-nowrap group shrink-0"
             >
-              <span className="font-mono text-[10px] font-bold text-[#FF4B23] bg-white border border-[#C7C9C0] px-1.5 py-0.5 rounded-xs">
-                {client.code}
-              </span>
+              {client.logo ? (
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="w-8 h-8 rounded-xs object-contain"
+                />
+              ) : (
+                <div
+                  className="w-8 h-8 rounded-xs flex items-center justify-center font-mono font-bold text-white text-[11px]"
+                  style={{ backgroundColor: client.bgColor }}
+                >
+                  {client.initials}
+                </div>
+              )}
               <div className="flex flex-col">
                 <span className="font-display font-bold text-base tracking-tight text-[#12151B] group-hover:text-[#1F3D8C] transition-colors">
                   {client.name}

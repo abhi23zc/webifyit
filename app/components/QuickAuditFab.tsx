@@ -74,13 +74,15 @@ export default function QuickAuditFab({ onOpenAuditModal }: QuickAuditFabProps) 
       </AnimatePresence>
 
       <motion.button
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.94 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => setExpanded(!expanded)}
-        className="bg-[#12151B] text-white p-3.5 rounded-xs border-2 border-[#12151B] shadow-xl hover:bg-[#FF4B23] hover:border-[#FF4B23] transition-colors flex items-center gap-2 font-mono text-xs font-semibold"
+        className="bg-[#12151B] text-white p-3.5 sm:p-4 rounded-full shadow-2xl hover:bg-[#FF4B23] transition-all flex items-center justify-center gap-0 group relative overflow-hidden"
       >
-        <SquareArrowOutUpLeft className="w-4 h-4 text-[#FF4B23] animate-pulse" />
-        <span className="hidden sm:inline">Audit & Strategy</span>
+        <SquareArrowOutUpLeft className="w-5 h-5 text-[#FF4B23] group-hover:text-white transition-colors z-10 relative" />
+        <span className="font-mono text-xs font-semibold whitespace-nowrap max-w-0 opacity-0 group-hover:max-w-[200px] group-hover:opacity-100 group-hover:ml-3 group-hover:pr-2 transition-all duration-300 ease-in-out z-10 relative">
+          Audit & Strategy
+        </span>
       </motion.button>
     </div>
   );
