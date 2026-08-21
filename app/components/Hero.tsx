@@ -1,17 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, Zap, BarChart2, ShieldCheck, Layers, Sparkles, SquareArrowOutUpLeft, Cpu, Bot } from "lucide-react";
-import Card3D from "./Card3D";
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, SquareArrowOutUpLeft } from "lucide-react";
+import dynamic from "next/dynamic";
+
+// Dynamic import for Three.js component (no SSR)
+const ProductMockup = dynamic(
+  () => import("./ProductMockup/ProductMockup"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[350px] lg:min-h-[500px] flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-[#DCDDD6] border-t-[#FF4B23] rounded-full animate-spin" />
+      </div>
+    ),
+  }
+);
 
 interface HeroProps {
   onOpenAuditModal: () => void;
 }
 
 export default function Hero({ onOpenAuditModal }: HeroProps) {
-  const [activeMetricView, setActiveMetricView] = useState<"performance" | "agents">("performance");
-
   const fadeInUp = {
     hidden: { opacity: 0, y: 24 },
     visible: (i: number) => ({
@@ -173,148 +184,16 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
 
           </motion.div>
 
-          {/* Right Column: Premium Dashboard UI */}
+          {/* Right Column: 3D Product Mockup */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="lg:col-span-6 relative w-full flex items-center justify-center pt-8 lg:pt-0"
           >
-            <Card3D intensity={3} className="w-full max-w-[550px]">
-              <div className="bg-white rounded-xl shadow-2xl border border-[#DCDDD6] overflow-hidden flex flex-col w-full">
-                {/* macOS Style Window Header */}
-                <div className="h-10 bg-[#F5F6F1] border-b border-[#DCDDD6] flex items-center px-4 justify-between">
-                  {/* Traffic Lights */}
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
-                  </div>
-
-                  {/* URL Bar */}
-                  <div className="bg-white border border-[#DCDDD6] px-4 py-1 rounded-md text-[10px] font-mono text-[#585D67] shadow-sm flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                    webifyit.engineering/system
-                  </div>
-
-                  {/* Version Tag */}
-                  <div className="font-mono text-[9px] font-bold text-[#1F3D8C] uppercase tracking-wider">
-                    SPEC_V5.0
-                  </div>
-                </div>
-
-                {/* Dashboard Body */}
-                <div className="p-5 sm:p-6 bg-white flex flex-col gap-5">
-
-                  {/* Dashboard Header Bar */}
-                  <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3 sm:p-4 flex justify-between items-center">
-                    <div>
-                      <div className="font-mono text-[10px] font-bold text-[#1F3D8C] flex items-center gap-1.5 mb-1">
-                        <Cpu className="w-3.5 h-3.5" />
-                        APPLICATION PERFORMANCE
-                      </div>
-                      <div className="text-[11px] text-[#585D67]">Production infrastructure & application health</div>
-                    </div>
-
-                    {/* Toggle Switch */}
-                    <div className="flex bg-white border border-[#DCDDD6] rounded-md p-1 shadow-sm shrink-0 ml-4">
-                      <button className="bg-[#1F3D8C] text-white text-[10px] font-bold px-3 py-1.5 rounded-sm shadow-sm transition-colors flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        LIVE
-                      </button>
-                      <button className="text-[#585D67] hover:text-[#12151B] text-[10px] font-bold px-3 py-1.5 transition-colors">PRODUCTION</button>
-                    </div>
-                  </div>
-
-                  {/* Chart Area */}
-                  <div className="relative h-[200px] w-full border border-[#DCDDD6] rounded-lg bg-[#FAFAFA]">
-                    {/* SVG Chart Wrapper */}
-                    <div className="absolute inset-0 rounded-lg overflow-hidden">
-                      <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 500 200">
-                        <defs>
-                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#1F3D8C" stopOpacity="0.15" />
-                            <stop offset="100%" stopColor="#1F3D8C" stopOpacity="0.0" />
-                          </linearGradient>
-                          <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4 4" />
-                          </pattern>
-                        </defs>
-
-                        <rect width="100%" height="100%" fill="url(#gridPattern)" />
-
-                        <path
-                          d="M -20 170 C 80 110, 120 140, 180 140 C 260 140, 290 50, 350 50 C 410 50, 430 150, 480 120 C 510 100, 520 100, 520 100 L 520 220 L -20 220 Z"
-                          fill="url(#chartGradient)"
-                        />
-                        <path
-                          d="M -20 170 C 80 110, 120 140, 180 140 C 260 140, 290 50, 350 50 C 410 50, 430 150, 480 120 C 510 100, 520 100, 520 100"
-                          fill="none"
-                          stroke="#1F3D8C"
-                          strokeWidth="3.5"
-                          strokeLinecap="round"
-                          className="drop-shadow-sm"
-                        />
-
-                        {/* Data point dot */}
-                        <circle cx="350" cy="50" r="5" fill="#1F3D8C" stroke="white" strokeWidth="2.5" className="drop-shadow-md" />
-                      </svg>
-                    </div>
-
-                    {/* Tooltip */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.8, type: "spring" }}
-                      className="absolute top-[25%] left-[70%] -translate-x-1/2 -translate-y-full mb-2 bg-white border border-[#DCDDD6] rounded-md shadow-xl p-3 z-10 w-max"
-                    >
-                      <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-1 text-center">
-                        API RESPONSE LATENCY
-                      </div>
-                      <div className="flex items-baseline justify-center gap-2">
-                        <span className="font-display text-2xl font-extrabold text-[#12151B] leading-none">21ms</span>
-                        <span className="font-mono text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-sm">OPTIMAL</span>
-                      </div>
-                    </motion.div>
-                  </div>
-
-                  {/* Bottom Stats Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                    {/* Card 1: API RESPONSE */}
-                    <div className="border border-[#DCDDD6] rounded-lg p-3 sm:p-4 flex flex-col justify-center bg-white shadow-sm hover:border-[#1F3D8C] transition-colors">
-                      <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-1.5">API RESPONSE</div>
-                      <div className="font-display text-xl sm:text-2xl font-extrabold text-[#12151B]">
-                        21ms
-                      </div>
-                      <div className="font-mono text-[9px] text-[#585D67] mt-1">Avg. latency</div>
-                    </div>
-
-                    {/* Card 2: SYSTEM UPTIME */}
-                    <div className="border border-[#DCDDD6] rounded-lg p-3 sm:p-4 flex flex-col justify-center bg-white shadow-sm hover:border-[#1F3D8C] transition-colors">
-                      <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-1.5">SYSTEM UPTIME</div>
-                      <div className="font-display text-xl sm:text-2xl font-extrabold text-[#12151B]">
-                        99.99%
-                      </div>
-                      <div className="font-mono text-[9px] text-[#585D67] mt-1">Production availability</div>
-                    </div>
-
-                    {/* Card 3: REQUESTS */}
-                    <div className="border border-[#DCDDD6] rounded-lg p-3 sm:p-4 flex flex-col justify-center bg-white shadow-sm hover:border-[#1F3D8C] transition-colors relative overflow-hidden">
-                      <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-1.5">REQUESTS</div>
-                      <div className="font-display text-xl sm:text-2xl font-extrabold text-[#12151B]">
-                        2.4M
-                      </div>
-                      <div className="font-mono text-[9px] text-[#585D67] mt-1">Processed</div>
-                      {/* Subtle tech detail */}
-                      <div className="absolute top-0 right-0 w-6 h-6 bg-[#F5F6F1] rounded-bl-xl flex items-start justify-end p-1.5 border-l border-b border-[#DCDDD6]">
-                        <div className="w-1.5 h-1.5 bg-[#1F3D8C] rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </Card3D>
+            <div className="w-full h-[400px] sm:h-[480px] lg:h-[560px]">
+              <ProductMockup product="hisabai" />
+            </div>
           </motion.div>
 
         </div>

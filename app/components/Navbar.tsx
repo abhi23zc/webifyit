@@ -66,9 +66,8 @@ export default function Navbar({ onOpenAuditModal }: NavbarProps) {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`font-body text-xs font-semibold transition-colors relative py-1 uppercase tracking-wider ${
-                  isActive ? "text-[#12151B]" : "text-[#585D67] hover:text-[#12151B]"
-                }`}
+                className={`font-body text-xs font-semibold transition-colors relative py-1 uppercase tracking-wider ${isActive ? "text-[#12151B]" : "text-[#585D67] hover:text-[#12151B]"
+                  }`}
               >
                 {link.label}
                 {isActive && (
