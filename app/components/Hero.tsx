@@ -45,7 +45,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
   };
 
   return (
-    <section id="hero" className="pt-28 pb-16 lg:pt-36 lg:pb-24 relative overflow-hidden bg-grid-pattern border-b border-[#DCDDD6]">
+    <section id="hero" className="pt-28 pb-20 lg:pt-36 lg:pb-32 relative overflow-hidden bg-grid-pattern border-b border-[#DCDDD6]">
       {/* Ambient Depth Glow Background */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-radial from-[#1F3D8C]/10 via-[#FF4B23]/5 to-transparent blur-3xl pointer-events-none rounded-full" />
 
@@ -115,8 +115,15 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
                 rel="noopener noreferrer"
                 className="btn-secondary text-base py-3.5 px-6 text-center flex items-center justify-center gap-2"
               >
-                <svg className="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none">
+                  <path
+                    fill="#25D366"
+                    d="M12.011 2C6.505 2 2.023 6.48 2.023 11.987c0 1.83.494 3.618 1.433 5.187L2 22l4.981-1.307a9.946 9.946 0 005.03 1.349h.004c5.504 0 9.986-4.48 9.986-9.988 0-2.668-1.039-5.176-2.928-7.065C17.185 3.039 14.678 2 12.011 2z"
+                  />
+                  <path
+                    fill="#FFF"
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"
+                  />
                 </svg>
                 <span>Book a Free Call</span>
               </motion.a>
@@ -201,11 +208,21 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="lg:col-span-6 relative w-full flex items-center justify-center pt-8 lg:pt-0"
+            className="lg:col-span-6 relative w-full flex items-center justify-center pt-8 lg:pt-0 lg:-mt-12 xl:-mt-20"
           >
-            {/* Desktop Mockup (Hidden on mobile) */}
-            <div className="hidden lg:block w-full h-[400px] sm:h-[480px] lg:h-[560px]">
+            {/* Desktop Dual-Device Mockup (Hidden on mobile) */}
+            <div className="hidden lg:block w-full h-[400px] sm:h-[480px] lg:h-[560px] relative">
               <LaptopMockup product="dineezy" />
+              
+              {/* Overlapping Mobile Mockup */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30, x: 20 }}
+                animate={{ opacity: 1, y: 0, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+                className="absolute -bottom-4 -right-4 xl:-bottom-6 xl:-right-8 w-[120px] xl:w-[140px] h-[240px] xl:h-[280px] z-20 drop-shadow-2xl"
+              >
+                <MobileMockup product="hisabai" />
+              </motion.div>
             </div>
             
             {/* Mobile Mockup (Hidden on desktop) */}

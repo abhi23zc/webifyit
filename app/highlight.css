@@ -1,0 +1,122 @@
+/**
+ * Code syntax highlighting theme — matches the Formwork design system.
+ * Custom dark theme for code blocks using highlight.js classes.
+ */
+
+/* Base */
+.hljs {
+  color: #e4e4e7;
+  background: #12151b;
+}
+
+/* Comments */
+.hljs-comment,
+.hljs-quote {
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Keywords */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #c084fc;
+}
+
+/* Strings */
+.hljs-string,
+.hljs-doctag,
+.hljs-regexp {
+  color: #86efac;
+}
+
+/* Numbers */
+.hljs-number,
+.hljs-literal {
+  color: #fdba74;
+}
+
+/* Types / Classes */
+.hljs-type,
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-class,
+.hljs-selector-id {
+  color: #67e8f9;
+}
+
+/* Functions */
+.hljs-title.function_,
+.hljs-function .hljs-title {
+  color: #93c5fd;
+}
+
+/* Built-in / Attribute */
+.hljs-built_in,
+.hljs-attr {
+  color: #fca5a5;
+}
+
+/* Variables / Params */
+.hljs-variable,
+.hljs-params {
+  color: #e4e4e7;
+}
+
+/* Tags (HTML/XML) */
+.hljs-tag {
+  color: #6b7280;
+}
+
+.hljs-tag .hljs-name {
+  color: #fca5a5;
+}
+
+.hljs-tag .hljs-attr {
+  color: #93c5fd;
+}
+
+/* Meta / Preprocessor */
+.hljs-meta,
+.hljs-meta .hljs-keyword {
+  color: #fb923c;
+}
+
+/* Deletion (diff) */
+.hljs-deletion {
+  color: #fca5a5;
+  background: rgba(252, 165, 165, 0.1);
+}
+
+/* Addition (diff) */
+.hljs-addition {
+  color: #86efac;
+  background: rgba(134, 239, 172, 0.1);
+}
+
+/* Emphasis */
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+/* Symbol / Bullet */
+.hljs-symbol,
+.hljs-bullet {
+  color: #fdba74;
+}
+
+/* Link */
+.hljs-link {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+/* Subst / Template */
+.hljs-subst {
+  color: #e4e4e7;
+}

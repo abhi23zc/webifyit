@@ -2,7 +2,13 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Bot, Cpu, Smartphone, Check, ArrowRight, X, SquareArrowOutUpLeft } from "lucide-react";
+import { 
+  Code2, Bot, Cpu, Smartphone, Check, ArrowRight, X, SquareArrowOutUpLeft,
+  Layout, Server, Database, Cloud, Laptop, LayoutDashboard, MonitorSmartphone, Search,
+  Brain, GitMerge, Terminal, MessageCircle, Clock, MessageSquare, Languages, Magnet,
+  CloudCog, Box, CreditCard, ShieldCheck, PanelLeft, Receipt, BarChart3, Users,
+  SmartphoneNfc, Code, FileCode2, Rocket, Play, Bell, Camera
+} from "lucide-react";
 import Card3D from "./Card3D";
 
 export default function Services() {
@@ -19,8 +25,18 @@ export default function Services() {
         { name: "Next.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
         { name: "Node.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" }
       ],
-      techSpecs: ["React & Next.js", "Node.js Backend", "Secure Databases", "Fast Cloud Hosting"],
-      deliverables: ["Custom Web App", "Admin Dashboard", "Mobile Responsive", "SEO Optimized"],
+      techSpecs: [
+        { name: "React & Next.js", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+        { name: "Node.js Backend", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+        { name: "Secure Databases", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+        { name: "Fast Cloud Hosting", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" }
+      ],
+      deliverables: [
+        { name: "Custom Web App", icon: <Laptop /> },
+        { name: "Admin Dashboard", icon: <LayoutDashboard /> },
+        { name: "Mobile Responsive", icon: <MonitorSmartphone /> },
+        { name: "SEO Optimized", icon: <Search /> }
+      ],
       timeline: "2 – 4 Weeks",
       imageSrc: "/images/services/web-app-mockup.png",
     },
@@ -34,8 +50,18 @@ export default function Services() {
         { name: "n8n", url: "https://cdn.worldvectorlogo.com/logos/n8n.svg" },
         { name: "Python", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" }
       ],
-      techSpecs: ["OpenAI GPT-4", "n8n Automation", "Python AI Models", "WhatsApp API"],
-      deliverables: ["24/7 Customer Support", "WhatsApp Integration", "Hindi + English", "Automated Lead Capture"],
+      techSpecs: [
+        { name: "OpenAI GPT-4", iconSrc: "https://cdn.worldvectorlogo.com/logos/openai-2.svg" },
+        { name: "n8n Automation", iconSrc: "https://cdn.worldvectorlogo.com/logos/n8n.svg" },
+        { name: "Python AI Models", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+        { name: "WhatsApp API", iconSrc: "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" }
+      ],
+      deliverables: [
+        { name: "24/7 Customer Support", icon: <Clock /> },
+        { name: "WhatsApp Integration", icon: <MessageSquare /> },
+        { name: "Hindi + English", icon: <Languages /> },
+        { name: "Automated Lead Capture", icon: <Magnet /> }
+      ],
       timeline: "3 – 5 Weeks",
       imageSrc: "/images/services/ai-chat-mockup.png",
     },
@@ -49,8 +75,18 @@ export default function Services() {
         { name: "Docker", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
         { name: "Stripe", url: "https://cdn.worldvectorlogo.com/logos/stripe-4.svg" }
       ],
-      techSpecs: ["AWS Cloud", "Docker Containers", "Stripe Payments", "Secure Authentication"],
-      deliverables: ["User Dashboards", "Subscription Billing", "Usage Analytics", "Role Management"],
+      techSpecs: [
+        { name: "AWS Cloud", iconSrc: "https://cdn.worldvectorlogo.com/logos/aws-2.svg" },
+        { name: "Docker Containers", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+        { name: "Stripe Payments", iconSrc: "https://cdn.worldvectorlogo.com/logos/stripe-4.svg" },
+        { name: "Secure Authentication", iconSrc: "https://cdn.worldvectorlogo.com/logos/auth0.svg" }
+      ],
+      deliverables: [
+        { name: "User Dashboards", icon: <PanelLeft /> },
+        { name: "Subscription Billing", icon: <Receipt /> },
+        { name: "Usage Analytics", icon: <BarChart3 /> },
+        { name: "Role Management", icon: <Users /> }
+      ],
       timeline: "4 – 8 Weeks",
       imageSrc: "/images/services/saas-dashboard-mockup.png",
     },
@@ -64,8 +100,18 @@ export default function Services() {
         { name: "Android", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg" },
         { name: "Kotlin", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" }
       ],
-      techSpecs: ["iOS Native", "Android Native", "React Native", "Kotlin"],
-      deliverables: ["App Store Launch", "Play Store Launch", "Push Notifications", "Camera Integration"],
+      techSpecs: [
+        { name: "iOS Native", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apple/apple-original.svg" },
+        { name: "Android Native", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg" },
+        { name: "React Native", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+        { name: "Kotlin", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" }
+      ],
+      deliverables: [
+        { name: "App Store Launch", icon: <Rocket /> },
+        { name: "Play Store Launch", icon: <Play /> },
+        { name: "Push Notifications", icon: <Bell /> },
+        { name: "Camera Integration", icon: <Camera /> }
+      ],
       timeline: "3 – 6 Weeks",
       imageSrc: "/images/services/hisab_ai_mockup.png",
     },
@@ -94,7 +140,7 @@ export default function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
           {servicesData.map((service, idx) => (
             <motion.div
-              key={service.id}
+              key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -209,11 +255,13 @@ export default function Services() {
                   </div>
                   <ul className="space-y-2.5 font-body text-xs text-[#12151B]">
                     {selectedService.techSpecs.map((spec) => (
-                      <li key={spec} className="flex items-center gap-2">
-                        <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-                          <Check className="w-2.5 h-2.5 text-emerald-600" />
+                      <li key={spec.name} className="flex items-center gap-2.5">
+                        <div className="w-6 h-6 rounded-md bg-[#F5F6F1] flex items-center justify-center shrink-0 border border-[#DCDDD6] shadow-sm p-1">
+                          {spec.iconSrc && (
+                             <img src={spec.iconSrc} alt={spec.name} className="w-full h-full object-contain" />
+                          )}
                         </div>
-                        <span className="font-medium text-[13px]">{spec}</span>
+                        <span className="font-medium text-[13px]">{spec.name}</span>
                       </li>
                     ))}
                   </ul>
@@ -226,11 +274,11 @@ export default function Services() {
                   </div>
                   <ul className="space-y-2.5 font-body text-xs text-[#12151B]">
                     {selectedService.deliverables.map((item) => (
-                      <li key={item} className="flex items-center gap-2">
-                        <div className="w-4 h-4 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100">
-                          <Check className="w-2.5 h-2.5 text-[#1F3D8C]" />
+                      <li key={item.name} className="flex items-center gap-2.5">
+                        <div className="w-6 h-6 rounded-md bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100 shadow-sm">
+                          {React.cloneElement(item.icon as React.ReactElement<{ className?: string }>, { className: "w-3.5 h-3.5 text-[#1F3D8C]" })}
                         </div>
-                        <span className="font-medium text-[13px]">{item}</span>
+                        <span className="font-medium text-[13px]">{item.name}</span>
                       </li>
                     ))}
                   </ul>

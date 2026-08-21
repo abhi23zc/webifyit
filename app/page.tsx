@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import LogoMarquee from "./components/LogoMarquee";
 import Services from "./components/Services";
-import LeadMagnets from "./components/LeadMagnets";
+// import LeadMagnets from "./components/LeadMagnets";
 import ImpactStats from "./components/ImpactStats";
 import Projects from "./components/Projects";
 import IndustriesWeServe from "./components/IndustriesWeServe";
@@ -41,7 +41,7 @@ export default function Home() {
         <Services />
 
         {/* 4. Interactive Lead Magnets — "Prove it — let me test your AI tools" */}
-        <LeadMagnets />
+        {/* <LeadMagnets /> */}
 
         {/* 5. Impact Stats — "What results have you delivered?" */}
         <ImpactStats />

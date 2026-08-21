@@ -1,239 +1,479 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
-import { Plus, Trash, Check, Loader2, ArrowRight } from "lucide-react";
-import { createPost, type BlogInput } from "../../actions/blog";
+import React, { useState, useTransition, useCallback, useEffect } from "react";
+import {
+  ArrowRight,
+  Loader2,
+  Save,
+  Send,
+  FileText,
+  Tag,
+  Hash,
+  Clock,
+  AlertTriangle,
+  Calendar,
+} from "lucide-react";
+import { createPost, updatePost, type BlogInput } from "../../actions/blog";
+import { countWords, calculateReadTime } from "../../lib/blog-data";
+import { useToast } from "./Toast";
+import MarkdownEditor from "./MarkdownEditor";
+import MarkdownPreview from "./MarkdownPreview";
+import ImageUploader from "./ImageUploader";
+import CoverImageUpload from "./CoverImageUpload";
+import RelatedPostsPicker from "./RelatedPostsPicker";
 
-export default function BlogManager() {
+// ─── Types ──────────────────────────────────────────────────────
+
+interface BlogFormData {
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  customCategory: string;
+  tags: string[];
+  author_name: string;
+  author_role: string;
+  cover_image_url: string;
+  cover_image_alt: string;
+  content_markdown: string;
+  tech_takeaways: string[];
+  related_slugs: string[];
+  status: "draft" | "published" | "scheduled";
+  scheduled_date: string;
+}
+
+interface BlogManagerProps {
+  /** If provided, the editor is in "edit" mode for this post. */
+  editSlug?: string;
+  initialData?: Partial<BlogFormData>;
+  onSaved?: () => void;
+}
+
+const CATEGORIES = [
+  "Technology",
+  "Business",
+  "Design",
+  "Tutorials",
+  "Case Studies",
+  "Product Updates",
+  "Industry Insights",
+  "AI & Automation",
+  "Web Development",
+  "Mobile",
+];
+
+const INITIAL_FORM: BlogFormData = {
+  title: "",
+  slug: "",
+  description: "",
+  category: "",
+  customCategory: "",
+  tags: [],
+  author_name: "Abhishek Verma",
+  author_role: "Tech Lead",
+  cover_image_url: "",
+  cover_image_alt: "",
+  content_markdown: "",
+  tech_takeaways: [""],
+  related_slugs: [],
+  status: "draft",
+  scheduled_date: "",
+};
+
+// ─── Component ──────────────────────────────────────────────────
+
+export default function BlogManager({
+  editSlug,
+  initialData,
+  onSaved,
+}: BlogManagerProps) {
   const [isPending, startTransition] = useTransition();
-  const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const [formData, setFormData] = useState<BlogInput>({
-    title: "",
-    slug: "",
-    description: "",
-    category: "",
-    author_name: "Abhishek Verma",
-    author_role: "Tech Lead",
-    read_time: "5 min read",
-    tags: [],
-    content: [""],
-    tech_takeaways: [""],
-    related_slugs: [],
-  });
-
+  const [showPreview, setShowPreview] = useState(false);
+  const [showImageUploader, setShowImageUploader] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [tagInput, setTagInput] = useState("");
+  const { showToast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(false);
+  const [form, setForm] = useState<BlogFormData>(() => ({
+    ...INITIAL_FORM,
+    ...initialData,
+  }));
 
-    // Filter out empty arrays
-    const cleanData = {
-      ...formData,
-      content: formData.content.filter((c) => c.trim() !== ""),
-      tech_takeaways: formData.tech_takeaways.filter((t) => t.trim() !== ""),
-    };
+  // Derived stats
+  const wordCount = countWords(form.content_markdown);
+  const readTime = calculateReadTime(wordCount);
 
-    if (cleanData.content.length === 0) {
-      setError("Please add at least one paragraph of content.");
-      return;
-    }
-
-    startTransition(async () => {
-      const res = await createPost(cleanData);
-      if (res.success) {
-        setSuccess(true);
-        // Reset form except author details
-        setFormData({
-          title: "",
-          slug: "",
-          description: "",
-          category: "",
-          author_name: "Abhishek Verma",
-          author_role: "Tech Lead",
-          read_time: "5 min read",
-          tags: [],
-          content: [""],
-          tech_takeaways: [""],
-          related_slugs: [],
-        });
-      } else {
-        setError(res.error || "Failed to publish blog post.");
+  // Track unsaved changes
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
       }
-    });
-  };
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [hasUnsavedChanges]);
 
-  const handleAddTag = () => {
-    if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
-      setFormData({ ...formData, tags: [...formData.tags, tagInput.trim()] });
+  // ─── Form update helper ───────────────────────────────────────
+
+  const updateForm = useCallback(
+    <K extends keyof BlogFormData>(key: K, value: BlogFormData[K]) => {
+      setForm((prev) => ({ ...prev, [key]: value }));
+      setHasUnsavedChanges(true);
+
+    },
+    []
+  );
+
+  // Auto-generate slug from title
+  const handleTitleChange = useCallback(
+    (title: string) => {
+      const slug = title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)+/g, "");
+      setForm((prev) => ({ ...prev, title, slug }));
+      setHasUnsavedChanges(true);
+
+    },
+    []
+  );
+
+  // ─── Tag management ───────────────────────────────────────────
+
+  const addTag = useCallback(() => {
+    const tag = tagInput.trim();
+    if (tag && !form.tags.includes(tag)) {
+      updateForm("tags", [...form.tags, tag]);
       setTagInput("");
     }
-  };
+  }, [tagInput, form.tags, updateForm]);
 
-  const handleArrayChange = (
-    index: number,
-    value: string,
-    field: "content" | "tech_takeaways"
-  ) => {
-    const newArr = [...formData[field]];
-    newArr[index] = value;
-    setFormData({ ...formData, [field]: newArr });
-  };
+  const removeTag = useCallback(
+    (tag: string) => {
+      updateForm(
+        "tags",
+        form.tags.filter((t) => t !== tag)
+      );
+    },
+    [form.tags, updateForm]
+  );
 
-  const handleAddArrayItem = (field: "content" | "tech_takeaways") => {
-    setFormData({ ...formData, [field]: [...formData[field], ""] });
-  };
+  // ─── Takeaway management ──────────────────────────────────────
 
-  const handleRemoveArrayItem = (
-    index: number,
-    field: "content" | "tech_takeaways"
-  ) => {
-    const newArr = formData[field].filter((_, i) => i !== index);
-    setFormData({ ...formData, [field]: newArr });
-  };
+  const updateTakeaway = useCallback(
+    (index: number, value: string) => {
+      const updated = [...form.tech_takeaways];
+      updated[index] = value;
+      updateForm("tech_takeaways", updated);
+    },
+    [form.tech_takeaways, updateForm]
+  );
+
+  const addTakeaway = useCallback(() => {
+    updateForm("tech_takeaways", [...form.tech_takeaways, ""]);
+  }, [form.tech_takeaways, updateForm]);
+
+  const removeTakeaway = useCallback(
+    (index: number) => {
+      updateForm(
+        "tech_takeaways",
+        form.tech_takeaways.filter((_, i) => i !== index)
+      );
+    },
+    [form.tech_takeaways, updateForm]
+  );
+
+  // ─── Image upload handler ─────────────────────────────────────
+
+  const handleImageInsert = useCallback(
+    (markdown: string) => {
+      // Insert the image markdown at the end of content (or at cursor if we had ref)
+      updateForm(
+        "content_markdown",
+        form.content_markdown + "\n\n" + markdown + "\n"
+      );
+      setShowImageUploader(false);
+    },
+    [form.content_markdown, updateForm]
+  );
+
+  // ─── Form submission ──────────────────────────────────────────
+
+  const handleSubmit = useCallback(
+    (publishStatus: "draft" | "published") => {
+      setError(null);
+
+
+      // Validation
+      if (!form.title.trim()) {
+        setError("Title is required.");
+        return;
+      }
+      if (!form.slug.trim()) {
+        setError("Slug is required.");
+        return;
+      }
+      if (!form.description.trim()) {
+        setError("Meta description is required.");
+        return;
+      }
+      if (!form.category && !form.customCategory) {
+        setError("Category is required.");
+        return;
+      }
+      if (!form.content_markdown.trim()) {
+        setError("Article content is required.");
+        return;
+      }
+
+      const category = form.customCategory || form.category;
+      const takeaways = form.tech_takeaways.filter((t) => t.trim());
+
+      const payload: BlogInput = {
+        slug: form.slug,
+        title: form.title,
+        description: form.description,
+        category,
+        tags: form.tags,
+        author_name: form.author_name,
+        author_role: form.author_role,
+        cover_image_url: form.cover_image_url || undefined,
+        cover_image_alt: form.cover_image_alt || undefined,
+        content_markdown: form.content_markdown,
+        tech_takeaways: takeaways,
+        related_slugs: form.related_slugs,
+        status: publishStatus,
+        scheduled_date: form.scheduled_date || undefined,
+      };
+
+      startTransition(async () => {
+        const result = editSlug
+          ? await updatePost(editSlug, payload)
+          : await createPost(payload);
+
+        if (result.success) {
+          setHasUnsavedChanges(false);
+          showToast(
+            editSlug
+              ? "Article updated successfully!"
+              : publishStatus === "draft"
+              ? "Draft saved."
+              : "Article published!",
+            "success"
+          );
+          if (!editSlug) {
+            setForm(INITIAL_FORM);
+          }
+          onSaved?.();
+        } else {
+          setError(result.error || "Failed to save post.");
+          showToast(result.error || "Failed to save post.", "error");
+        }
+      });
+    },
+    [form, editSlug, onSaved, showToast]
+  );
+
+  // ─── Render ─────────────────────────────────────────────────
 
   return (
-    <div className="bg-white border border-[#C7C9C0] p-6 rounded-xs shadow-3d">
-      <div className="flex items-center justify-between border-b border-[#DCDDD6] pb-4 mb-6">
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-[#DCDDD6] pb-4">
         <div>
           <h2 className="font-display text-xl font-bold text-[#12151B]">
-            Publish New Blog Post
+            {editSlug ? "Edit Article" : "Compose New Article"}
           </h2>
           <p className="font-body text-xs text-[#585D67] mt-1">
-            Publishing here will save to Supabase and instantly rebuild the
-            static blog pages via Server Actions.
+            Write in Markdown. Preview renders exactly as the live blog.
           </p>
+        </div>
+
+        {/* Live stats */}
+        <div className="flex items-center gap-4 font-mono text-xs text-[#8A8E96]">
+          <span className="flex items-center gap-1">
+            <Hash className="w-3.5 h-3.5" />
+            {wordCount.toLocaleString()} words
+          </span>
+          <span className="flex items-center gap-1">
+            <Clock className="w-3.5 h-3.5" />
+            {readTime}
+          </span>
+          {hasUnsavedChanges && (
+            <span className="flex items-center gap-1 text-[#FF4B23]">
+              <AlertTriangle className="w-3.5 h-3.5" />
+              Unsaved
+            </span>
+          )}
         </div>
       </div>
 
-      {success && (
-        <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded text-emerald-800 text-sm font-semibold flex items-center gap-2">
-          <Check className="w-4 h-4" />
-          Blog post published successfully! The live site has been updated.
-        </div>
-      )}
-
+      {/* Error message */}
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded text-red-800 text-sm font-semibold">
-          Error: {error}
+        <div className="p-4 bg-red-50 border border-red-200 rounded-xs text-red-800 text-sm font-semibold">
+          {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
+      {/* ─── FORM ─────────────────────────────────────────── */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit("published");
+        }}
+        className="space-y-8"
+      >
+        {/* ── Section: Meta ──────────────────────────────── */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Title */}
+          <div className="space-y-1.5 lg:col-span-2">
             <label className="font-mono text-xs font-bold text-[#12151B]">
-              Article Title
+              Article Title *
             </label>
             <input
-              required
               type="text"
-              value={formData.title}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  title: e.target.value,
-                  slug: e.target.value
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]+/g, "-")
-                    .replace(/(^-|-$)+/g, ""),
-                })
-              }
-              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm focus:border-[#1F3D8C] focus:outline-none"
-              placeholder="e.g. Deploying Multilingual AI Agents"
+              required
+              value={form.title}
+              onChange={(e) => handleTitleChange(e.target.value)}
+              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-3 rounded-xs font-display text-lg font-bold text-[#12151B] focus:border-[#1F3D8C] focus:outline-none placeholder:font-normal placeholder:text-[#8A8E96]"
+              placeholder="e.g. How We Built a Real-Time Order System for 50+ Restaurants"
             />
           </div>
 
-          <div className="space-y-2">
+          {/* Slug */}
+          <div className="space-y-1.5">
             <label className="font-mono text-xs font-bold text-[#12151B]">
-              URL Slug
+              URL Slug *
             </label>
-            <input
-              required
-              type="text"
-              value={formData.slug}
-              onChange={(e) =>
-                setFormData({ ...formData, slug: e.target.value })
-              }
-              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-mono text-xs text-[#585D67]"
-              placeholder="deploying-multilingual-ai"
-            />
+            <div className="flex items-center gap-0 bg-[#F5F6F1] border border-[#C7C9C0] rounded-xs overflow-hidden focus-within:border-[#1F3D8C]">
+              <span className="font-mono text-xs text-[#8A8E96] pl-3 shrink-0">
+                /blog/
+              </span>
+              <input
+                type="text"
+                required
+                value={form.slug}
+                onChange={(e) => updateForm("slug", e.target.value)}
+                className="flex-grow bg-transparent px-1 py-2.5 font-mono text-sm text-[#12151B] focus:outline-none"
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="space-y-2">
-          <label className="font-mono text-xs font-bold text-[#12151B]">
-            Meta Description (max 160 chars)
-          </label>
-          <textarea
-            required
-            maxLength={160}
-            rows={2}
-            value={formData.description}
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
-            className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="space-y-2">
+          {/* Category */}
+          <div className="space-y-1.5">
             <label className="font-mono text-xs font-bold text-[#12151B]">
-              Category
+              Category *
             </label>
             <select
-              required
-              value={formData.category}
-              onChange={(e) =>
-                setFormData({ ...formData, category: e.target.value })
-              }
-              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm"
+              value={form.category}
+              onChange={(e) => {
+                updateForm("category", e.target.value);
+                if (e.target.value) updateForm("customCategory", "");
+              }}
+              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm text-[#12151B] focus:border-[#1F3D8C] focus:outline-none"
             >
-              <option value="">Select Category...</option>
-              <option value="AI Engineering">AI Engineering</option>
-              <option value="Industrial Tech & SaaS">Industrial Tech & SaaS</option>
-              <option value="Proprietary Architecture">
-                Proprietary Architecture
-              </option>
+              <option value="">Select or type custom...</option>
+              {CATEGORIES.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
             </select>
+            {!form.category && (
+              <input
+                type="text"
+                value={form.customCategory}
+                onChange={(e) => updateForm("customCategory", e.target.value)}
+                placeholder="Custom category name"
+                className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2 rounded-xs font-body text-sm mt-1.5 focus:border-[#1F3D8C] focus:outline-none"
+              />
+            )}
           </div>
-          <div className="space-y-2">
+
+          {/* Description */}
+          <div className="space-y-1.5 lg:col-span-2">
+            <label className="font-mono text-xs font-bold text-[#12151B] flex items-center justify-between">
+              <span>Meta Description * (SEO)</span>
+              <span
+                className={`font-normal ${
+                  form.description.length > 160
+                    ? "text-red-500"
+                    : "text-[#8A8E96]"
+                }`}
+              >
+                {form.description.length}/160
+              </span>
+            </label>
+            <textarea
+              required
+              maxLength={200}
+              rows={2}
+              value={form.description}
+              onChange={(e) => updateForm("description", e.target.value)}
+              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm text-[#12151B] focus:border-[#1F3D8C] focus:outline-none resize-none"
+              placeholder="Concise summary for search engines and social cards..."
+            />
+          </div>
+        </section>
+
+        {/* ── Section: Author & Cover ────────────────────── */}
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 border-t border-[#DCDDD6] pt-6">
+          <div className="space-y-1.5">
             <label className="font-mono text-xs font-bold text-[#12151B]">
               Author Name
             </label>
             <input
-              required
               type="text"
-              value={formData.author_name}
-              onChange={(e) =>
-                setFormData({ ...formData, author_name: e.target.value })
-              }
-              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm"
+              value={form.author_name}
+              onChange={(e) => updateForm("author_name", e.target.value)}
+              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm focus:border-[#1F3D8C] focus:outline-none"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="font-mono text-xs font-bold text-[#12151B]">
-              Read Time
+              Author Role
             </label>
             <input
-              required
               type="text"
-              value={formData.read_time}
-              onChange={(e) =>
-                setFormData({ ...formData, read_time: e.target.value })
-              }
-              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm"
+              value={form.author_role}
+              onChange={(e) => updateForm("author_role", e.target.value)}
+              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm focus:border-[#1F3D8C] focus:outline-none"
             />
           </div>
-        </div>
+          <div className="space-y-1.5">
+            <label className="font-mono text-xs font-bold text-[#12151B]">
+              Status
+            </label>
+            <select
+              value={form.status}
+              onChange={(e) =>
+                updateForm("status", e.target.value as BlogFormData["status"])
+              }
+              className="w-full bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm text-[#12151B] focus:border-[#1F3D8C] focus:outline-none"
+            >
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+              <option value="scheduled">Scheduled</option>
+            </select>
+          </div>
 
-        {/* Tags */}
-        <div className="space-y-2 border-t border-[#DCDDD6] pt-6">
-          <label className="font-mono text-xs font-bold text-[#12151B]">
+          {/* Cover Image */}
+          <div className="lg:col-span-3">
+            <CoverImageUpload
+              value={form.cover_image_url}
+              altText={form.cover_image_alt}
+              onUrlChange={(url) => updateForm("cover_image_url", url)}
+              onAltChange={(alt) => updateForm("cover_image_alt", alt)}
+            />
+          </div>
+        </section>
+
+        {/* ── Section: Tags ──────────────────────────────── */}
+        <section className="border-t border-[#DCDDD6] pt-6 space-y-3">
+          <label className="font-mono text-xs font-bold text-[#12151B] flex items-center gap-1.5">
+            <Tag className="w-3.5 h-3.5 text-[#8A8E96]" />
             SEO Tags
           </label>
           <div className="flex gap-2">
@@ -241,158 +481,197 @@ export default function BlogManager() {
               type="text"
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleAddTag())}
-              className="flex-grow bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm"
-              placeholder="e.g. Next.js"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  addTag();
+                }
+              }}
+              className="flex-grow bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm focus:border-[#1F3D8C] focus:outline-none"
+              placeholder="Type a tag and press Enter..."
             />
             <button
               type="button"
-              onClick={handleAddTag}
-              className="btn-primary px-4 shadow-3d shrink-0"
+              onClick={addTag}
+              className="btn-secondary text-xs py-2 px-4 shrink-0"
             >
-              Add Tag
+              Add
             </button>
           </div>
-          <div className="flex flex-wrap gap-2 mt-2">
-            {formData.tags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-[#12151B] text-white font-mono text-[10px] px-2 py-1 rounded flex items-center gap-1"
-              >
-                {tag}
-                <button
-                  type="button"
-                  onClick={() =>
-                    setFormData({
-                      ...formData,
-                      tags: formData.tags.filter((t) => t !== tag),
-                    })
-                  }
-                  className="hover:text-[#FF4B23]"
+          {form.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {form.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1.5 bg-[#12151B] text-white font-mono text-[11px] px-2.5 py-1 rounded"
                 >
-                  <X className="w-3 h-3" />
-                </button>
-              </span>
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => removeTag(tag)}
+                    className="hover:text-[#FF4B23] transition-colors"
+                    aria-label={`Remove tag: ${tag}`}
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* ── Section: Content Editor ────────────────────── */}
+        <section className="border-t border-[#DCDDD6] pt-6 space-y-3">
+          <label className="font-mono text-xs font-bold text-[#12151B] flex items-center gap-1.5">
+            <FileText className="w-3.5 h-3.5 text-[#8A8E96]" />
+            Article Content (Markdown) *
+          </label>
+
+          <MarkdownEditor
+            value={form.content_markdown}
+            onChange={(val) => updateForm("content_markdown", val)}
+            preview={showPreview}
+            onTogglePreview={() => setShowPreview((p) => !p)}
+            onImageUpload={() => setShowImageUploader(true)}
+            minHeight="500px"
+          />
+
+          {/* Preview panel (rendered below editor when active) */}
+          {showPreview && (
+            <div className="border border-[#C7C9C0] rounded-xs bg-white overflow-hidden">
+              <div className="px-4 py-2 bg-[#EEF2FB] border-b border-[#DCDDD6] font-mono text-[10px] font-bold text-[#1F3D8C] uppercase tracking-wider">
+                Live Preview
+              </div>
+              <MarkdownPreview
+                content={form.content_markdown}
+                className="max-h-[600px] overflow-y-auto"
+              />
+            </div>
+          )}
+        </section>
+
+        {/* ── Section: Tech Takeaways ────────────────────── */}
+        <section className="border-t border-[#DCDDD6] pt-6 space-y-3">
+          <div className="flex items-center justify-between">
+            <label className="font-mono text-xs font-bold text-[#12151B]">
+              Key Points (optional)
+            </label>
+            <button
+              type="button"
+              onClick={addTakeaway}
+              className="font-mono text-xs font-bold text-[#1F3D8C] hover:underline"
+            >
+              + Add Point
+            </button>
+          </div>
+          <div className="space-y-2">
+            {form.tech_takeaways.map((takeaway, idx) => (
+              <div key={idx} className="flex items-center gap-2">
+                <span className="font-mono text-xs text-[#8A8E96] w-5 shrink-0">
+                  {idx + 1}.
+                </span>
+                <input
+                  type="text"
+                  value={takeaway}
+                  onChange={(e) => updateTakeaway(idx, e.target.value)}
+                  className="flex-grow bg-[#F5F6F1] border border-[#C7C9C0] px-3 py-2 rounded-xs font-body text-sm focus:border-[#1F3D8C] focus:outline-none"
+                  placeholder="e.g. Reduced page load time by 60% with edge caching"
+                />
+                {form.tech_takeaways.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeTakeaway(idx)}
+                    className="text-[#8A8E96] hover:text-red-500 transition-colors p-1"
+                    aria-label="Remove takeaway"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Content Paragraphs */}
-        <div className="space-y-4 border-t border-[#DCDDD6] pt-6">
-          <div className="flex items-center justify-between">
-            <label className="font-mono text-xs font-bold text-[#12151B]">
-              Article Content (Paragraphs)
+        {/* ── Section: Related Posts ─────────────────────── */}
+        <section className="border-t border-[#DCDDD6] pt-6">
+          <RelatedPostsPicker
+            selectedSlugs={form.related_slugs}
+            currentSlug={editSlug}
+            onChange={(slugs) => updateForm("related_slugs", slugs)}
+          />
+        </section>
+
+        {/* ── Section: Scheduled Date ────────────────────── */}
+        {form.status === "scheduled" && (
+          <section className="border-t border-[#DCDDD6] pt-6 space-y-2">
+            <label className="font-mono text-xs font-bold text-[#12151B] flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-[#8A8E96]" />
+              Scheduled Publish Date
             </label>
+            <input
+              type="datetime-local"
+              value={form.scheduled_date}
+              onChange={(e) => updateForm("scheduled_date", e.target.value)}
+              className="w-full sm:w-72 bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-mono text-sm text-[#12151B] focus:border-[#1F3D8C] focus:outline-none"
+            />
+            <p className="font-mono text-[10px] text-[#8A8E96]">
+              Post will be automatically visible after this date.
+            </p>
+          </section>
+        )}
+
+        {/* ── Section: Actions ────────────────────────────── */}
+        <section className="border-t border-[#DCDDD6] pt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+          <p className="font-mono text-[10px] text-[#8A8E96] uppercase">
+            Read time & word count are auto-calculated on save.
+          </p>
+
+          <div className="flex items-center gap-3">
+            {/* Save as Draft */}
             <button
               type="button"
-              onClick={() => handleAddArrayItem("content")}
-              className="text-xs font-bold text-[#1F3D8C] hover:underline flex items-center gap-1"
+              onClick={() => handleSubmit("draft")}
+              disabled={isPending}
+              className="btn-secondary text-xs py-2.5 px-5 flex items-center gap-2"
             >
-              <Plus className="w-3 h-3" /> Add Paragraph
+              {isPending ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Save className="w-4 h-4" />
+              )}
+              Save Draft
             </button>
-          </div>
-          {formData.content.map((p, idx) => (
-            <div key={idx} className="flex gap-3">
-              <textarea
-                required
-                rows={3}
-                value={p}
-                onChange={(e) =>
-                  handleArrayChange(idx, e.target.value, "content")
-                }
-                className="flex-grow bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2.5 rounded-xs font-body text-sm leading-relaxed"
-                placeholder={`Paragraph ${idx + 1}...`}
-              />
-              <button
-                type="button"
-                onClick={() => handleRemoveArrayItem(idx, "content")}
-                className="text-red-500 hover:text-red-700 shrink-0 self-start p-2"
-                disabled={formData.content.length === 1}
-              >
-                <Trash className="w-4 h-4" />
-              </button>
-            </div>
-          ))}
-        </div>
 
-        {/* Tech Takeaways */}
-        <div className="space-y-4 border-t border-[#DCDDD6] pt-6">
-          <div className="flex items-center justify-between">
-            <label className="font-mono text-xs font-bold text-[#12151B]">
-              Key Engineering Takeaways
-            </label>
+            {/* Publish */}
             <button
-              type="button"
-              onClick={() => handleAddArrayItem("tech_takeaways")}
-              className="text-xs font-bold text-[#1F3D8C] hover:underline flex items-center gap-1"
+              type="submit"
+              disabled={isPending}
+              className="btn-primary text-xs py-2.5 px-6 flex items-center gap-2 shadow-3d-accent"
             >
-              <Plus className="w-3 h-3" /> Add Takeaway
+              {isPending ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Send className="w-4 h-4" />
+                  {editSlug ? "Update & Publish" : "Publish Article"}
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </button>
           </div>
-          {formData.tech_takeaways.map((t, idx) => (
-            <div key={idx} className="flex gap-3 items-center">
-              <span className="font-mono text-xs text-[#8A8E96] shrink-0">
-                {idx + 1}.
-              </span>
-              <input
-                required
-                type="text"
-                value={t}
-                onChange={(e) =>
-                  handleArrayChange(idx, e.target.value, "tech_takeaways")
-                }
-                className="flex-grow bg-[#F5F6F1] border border-[#C7C9C0] px-4 py-2 rounded-xs font-body text-sm"
-              />
-              <button
-                type="button"
-                onClick={() => handleRemoveArrayItem(idx, "tech_takeaways")}
-                className="text-red-500 hover:text-red-700 shrink-0"
-              >
-                <Trash className="w-4 h-4" />
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <div className="pt-8 border-t border-[#DCDDD6] flex justify-end">
-          <button
-            type="submit"
-            disabled={isPending}
-            className="btn-primary py-3 px-8 shadow-3d flex items-center gap-2"
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" /> Publishing...
-              </>
-            ) : (
-              <>
-                Publish Article to Database <ArrowRight className="w-4 h-4" />
-              </>
-            )}
-          </button>
-        </div>
+        </section>
       </form>
-    </div>
-  );
-}
 
-// Quick helper to render X icon since it was missing from lucide import
-function X({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
-    </svg>
+      {/* Image Uploader Modal */}
+      {showImageUploader && (
+        <ImageUploader
+          onUpload={handleImageInsert}
+          onClose={() => setShowImageUploader(false)}
+        />
+      )}
+    </div>
   );
 }

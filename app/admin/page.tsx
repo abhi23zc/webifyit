@@ -1,288 +1,316 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { Users, BookOpen, CheckCircle, Clock, Eye, Sparkles, Filter, RefreshCw, PhoneCall, Tag, ArrowRight, ShieldCheck } from "lucide-react";
-import { getStoredLeads, getStoredBlogAnalytics, LeadItem, BlogAnalytics } from "../lib/leadStore";
-import Card3D from "../components/Card3D";
+import {
+  Plus,
+  ArrowRight,
+  ArrowLeft,
+  RefreshCw,
+  ShieldCheck,
+  BookOpen,
+  Users,
+} from "lucide-react";
+import { ToastProvider } from "./_components/Toast";
 import BlogManager from "./_components/BlogManager";
+import PostList from "./_components/PostList";
+import LeadsCRM from "./_components/LeadsCRM";
+import type { BlogPost } from "../lib/blog-data";
+import type { Lead } from "../actions/leads";
 
-export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState<"leads" | "cms" | "publish">("leads");
-  const [leads, setLeads] = useState<LeadItem[]>([]);
-  const [blogs, setBlogs] = useState<BlogAnalytics[]>([]);
-  const [leadFilter, setLeadFilter] = useState<string>("all");
-  const [statusMsg, setStatusMsg] = useState<string | null>(null);
+type MainTab = "blog" | "leads";
+type BlogView = "list" | "create" | "edit";
 
-  useEffect(() => {
-    setLeads(getStoredLeads());
-    setBlogs(getStoredBlogAnalytics());
+function AdminContent() {
+  const [mainTab, setMainTab] = useState<MainTab>("leads");
+  const [blogView, setBlogView] = useState<BlogView>("list");
+  const [editSlug, setEditSlug] = useState<string | null>(null);
+  const [editData, setEditData] = useState<Partial<Record<string, unknown>> | null>(null);
+
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [postsLoading, setPostsLoading] = useState(true);
+
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [leadsLoading, setLeadsLoading] = useState(true);
+
+  // ─── Data fetching ──────────────────────────────────────────
+
+  const fetchPosts = useCallback(async () => {
+    setPostsLoading(true);
+    try {
+      const res = await fetch("/api/admin/posts");
+      if (res.ok) {
+        const data = await res.json();
+        setPosts(data.posts || []);
+      }
+    } catch (err) {
+      console.error("Failed to fetch posts:", err);
+    } finally {
+      setPostsLoading(false);
+    }
   }, []);
 
-  const refreshData = () => {
-    setLeads(getStoredLeads());
-    setBlogs(getStoredBlogAnalytics());
-    setStatusMsg("Data telemetry refreshed!");
-    setTimeout(() => setStatusMsg(null), 3000);
-  };
-
-  const handleUpdateStatus = (id: string, newStatus: LeadItem["status"]) => {
-    const updated = leads.map((l) => (l.id === id ? { ...l, status: newStatus } : l));
-    setLeads(updated);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("webifyit_leads", JSON.stringify(updated));
+  const fetchLeads = useCallback(async () => {
+    setLeadsLoading(true);
+    try {
+      const res = await fetch("/api/admin/leads");
+      if (res.ok) {
+        const data = await res.json();
+        setLeads(data.leads || []);
+      }
+    } catch (err) {
+      console.error("Failed to fetch leads:", err);
+    } finally {
+      setLeadsLoading(false);
     }
-  };
+  }, []);
 
-  const filteredLeads =
-    leadFilter === "all"
-      ? leads
-      : leads.filter((l) => l.taggedDomain.toLowerCase().includes(leadFilter.toLowerCase()));
+  // Fetch both on mount
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      setPostsLoading(true);
+      setLeadsLoading(true);
+      try {
+        const [postsRes, leadsRes] = await Promise.all([
+          fetch("/api/admin/posts"),
+          fetch("/api/admin/leads"),
+        ]);
+
+        if (!cancelled) {
+          if (postsRes.ok) {
+            const data = await postsRes.json();
+            setPosts(data.posts || []);
+          }
+          if (leadsRes.ok) {
+            const data = await leadsRes.json();
+            setLeads(data.leads || []);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch admin data:", err);
+      } finally {
+        if (!cancelled) {
+          setPostsLoading(false);
+          setLeadsLoading(false);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // ─── Blog handlers ──────────────────────────────────────────
+
+  const handleEditPost = useCallback(
+    (slug: string) => {
+      const post = posts.find((p) => p.slug === slug);
+      if (!post) return;
+
+      setEditSlug(slug);
+      setEditData({
+        title: post.title,
+        slug: post.slug,
+        description: post.description,
+        category: post.category,
+        customCategory: "",
+        tags: post.tags,
+        author_name: post.author.name,
+        author_role: post.author.role,
+        cover_image_url: post.coverImageUrl || "",
+        cover_image_alt: post.coverImageAlt || "",
+        content_markdown: post.contentMarkdown || post.content.join("\n\n"),
+        tech_takeaways: post.techTakeaways.length > 0 ? post.techTakeaways : [""],
+        related_slugs: post.relatedSlugs,
+        status: post.status,
+        scheduled_date: post.scheduledDate || "",
+      });
+      setBlogView("edit");
+    },
+    [posts]
+  );
+
+  const handlePostSaved = useCallback(() => {
+    fetchPosts();
+  }, [fetchPosts]);
+
+  const handleBackToBlogList = useCallback(() => {
+    setBlogView("list");
+    setEditSlug(null);
+    setEditData(null);
+  }, []);
+
+  // ─── Render ─────────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen bg-[#12151B] text-white p-5 sm:p-8 font-sans">
-      <div className="max-w-[1280px] mx-auto space-y-8">
-        
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-6 gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-2 font-mono text-xs text-[#25D366]">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse" />
-              <span>ABHISHEK&apos;S COMMAND CENTER // WEBIFYIT CONTROL ROOM</span>
+    <div className="min-h-screen bg-[#F5F6F1]">
+      {/* Top bar */}
+      <header className="sticky top-0 z-40 bg-white border-b border-[#DCDDD6] px-5 sm:px-8 py-3">
+        <div className="max-w-[1180px] mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-[#1F3D8C]" />
+              <span className="font-display text-lg font-bold text-[#12151B]">
+                Admin
+              </span>
             </div>
-            <h1 className="font-display text-3xl font-extrabold tracking-tight">
-              Internal Lead CRM & Blog Telemetry CMS
-            </h1>
+            <span className="font-mono text-[10px] text-[#8A8E96] uppercase tracking-wider hidden sm:inline">
+              WebifyIt Control Room
+            </span>
           </div>
 
           <div className="flex items-center gap-3">
-            <button
-              onClick={refreshData}
-              className="btn-secondary bg-white/10 text-white border-white/20 hover:bg-white/20 text-xs py-2 px-3 flex items-center gap-1.5 font-mono"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Refresh Telemetry</span>
-            </button>
+            {mainTab === "blog" && blogView !== "list" && (
+              <button
+                onClick={handleBackToBlogList}
+                className="btn-ghost text-xs py-2 px-3 flex items-center gap-1.5"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                All Posts
+              </button>
+            )}
+            {mainTab === "blog" && blogView === "list" && (
+              <button
+                onClick={() => setBlogView("create")}
+                className="btn-primary text-xs py-2 px-4 flex items-center gap-1.5"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                New Article
+              </button>
+            )}
             <Link
               href="/"
-              className="btn-primary text-xs py-2 px-4 shadow-3d-accent font-semibold flex items-center gap-1.5"
+              className="btn-secondary text-xs py-2 px-3 flex items-center gap-1.5"
             >
-              <span>Back to Studio Site</span>
+              <span className="hidden sm:inline">Back to Site</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
 
-        {statusMsg && (
-          <div className="p-3 bg-[#25D366]/20 border border-[#25D366] text-[#25D366] rounded-xs font-mono text-xs">
-            ✓ {statusMsg}
-          </div>
-        )}
-
-        {/* Top Summary Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 font-mono">
-          <div className="bg-[#1A1E26] p-4 rounded-xs border border-white/10">
-            <div className="text-[10px] text-[#8A8E96] uppercase">TOTAL CAPTURED LEADS</div>
-            <div className="text-2xl font-bold text-white mt-1">{leads.length} Leads</div>
-            <div className="text-[10px] text-[#25D366] mt-1">Tagged by AI/Web/SaaS</div>
-          </div>
-
-          <div className="bg-[#1A1E26] p-4 rounded-xs border border-white/10">
-            <div className="text-[10px] text-[#8A8E96] uppercase">30-DAY BLOG VIEWS</div>
-            <div className="text-2xl font-bold text-[#FF4B23] mt-1">
-              {blogs.reduce((a, b) => a + b.views30Days, 0).toLocaleString()} Views
-            </div>
-            <div className="text-[10px] text-[#8A8E96] mt-1">Across 3 Technical Articles</div>
-          </div>
-
-          <div className="bg-[#1A1E26] p-4 rounded-xs border border-white/10">
-            <div className="text-[10px] text-[#8A8E96] uppercase">PIPELINE CONVERSIONS</div>
-            <div className="text-2xl font-bold text-emerald-400 mt-1">
-              {blogs.reduce((a, b) => a + b.conversions, 0)} Blueprint Requests
-            </div>
-            <div className="text-[10px] text-emerald-400 mt-1">Originating from Blog</div>
-          </div>
-
-          <div className="bg-[#1A1E26] p-4 rounded-xs border border-white/10">
-            <div className="text-[10px] text-[#8A8E96] uppercase">MSGZONE AUTOMATION</div>
-            <div className="text-2xl font-bold text-[#25D366] mt-1">100% ACTIVE</div>
-            <div className="text-[10px] text-[#8A8E96] mt-1">Instant WhatsApp Dispatched</div>
-          </div>
-        </div>
-
-        {/* Tab Switcher */}
-        <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+        {/* Main tab switcher */}
+        <div className="max-w-[1180px] mx-auto flex items-center gap-2 mt-3">
           <button
-            onClick={() => setActiveTab("leads")}
-            className={`font-mono text-xs px-4 py-2.5 rounded-xs font-bold flex items-center gap-2 transition-all ${
-              activeTab === "leads"
+            onClick={() => setMainTab("leads")}
+            className={`font-mono text-xs px-4 py-2 rounded-xs font-bold flex items-center gap-2 transition-all ${
+              mainTab === "leads"
                 ? "bg-[#FF4B23] text-white"
-                : "bg-[#1A1E26] text-[#8A8E96] hover:text-white"
+                : "bg-[#F5F6F1] text-[#585D67] hover:text-[#12151B]"
             }`}
           >
-            <Users className="w-4 h-4" />
-            PHASE 4: INCOMING LEADS CRM ({leads.length})
+            <Users className="w-3.5 h-3.5" />
+            Leads CRM
+            {leads.length > 0 && (
+              <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px]">
+                {leads.length}
+              </span>
+            )}
           </button>
-
           <button
-            onClick={() => setActiveTab("cms")}
-            className={`font-mono text-xs px-4 py-2.5 rounded-xs font-bold flex items-center gap-2 transition-all ${
-              activeTab === "cms"
+            onClick={() => setMainTab("blog")}
+            className={`font-mono text-xs px-4 py-2 rounded-xs font-bold flex items-center gap-2 transition-all ${
+              mainTab === "blog"
                 ? "bg-[#1F3D8C] text-white"
-                : "bg-[#1A1E26] text-[#8A8E96] hover:text-white"
+                : "bg-[#F5F6F1] text-[#585D67] hover:text-[#12151B]"
             }`}
           >
-            <BookOpen className="w-4 h-4" />
-            PHASE 5: BLOG METRICS
-          </button>
-
-          <button
-            onClick={() => setActiveTab("publish")}
-            className={`font-mono text-xs px-4 py-2.5 rounded-xs font-bold flex items-center gap-2 transition-all ${
-              activeTab === "publish"
-                ? "bg-[#25D366] text-[#12151B]"
-                : "bg-[#1A1E26] text-[#8A8E96] hover:text-white"
-            }`}
-          >
-            <Sparkles className="w-4 h-4" />
-            PUBLISH NEW BLOG
+            <BookOpen className="w-3.5 h-3.5" />
+            Blog CMS
+            {posts.length > 0 && (
+              <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px]">
+                {posts.length}
+              </span>
+            )}
           </button>
         </div>
+      </header>
 
-        {/* --- TAB 1: LEADS CRM --- */}
-        {activeTab === "leads" && (
-          <div className="space-y-4">
-            {/* Filter Pills */}
-            <div className="flex items-center gap-2 font-mono text-xs overflow-x-auto pb-2">
-              <span className="text-[#8A8E96] font-bold uppercase">Filter Tag:</span>
-              {["all", "AI Agent", "Web Architecture", "Custom SaaS", "Mobile App Engine"].map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => setLeadFilter(tag)}
-                  className={`px-3 py-1 rounded-xs border transition-colors ${
-                    leadFilter === tag
-                      ? "bg-white text-[#12151B] font-bold border-white"
-                      : "bg-[#1A1E26] text-[#8A8E96] border-white/10 hover:border-white/30"
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
+      {/* Main content */}
+      <main className="max-w-[1180px] mx-auto px-5 sm:px-8 py-8">
+        {/* ─── LEADS CRM TAB ─────────────────────────────── */}
+        {mainTab === "leads" && (
+          <LeadsCRM initialLeads={leads} loading={leadsLoading} onRefresh={fetchLeads} />
+        )}
 
-            {/* Leads Table */}
-            <div className="bg-[#1A1E26] border border-white/10 rounded-xs overflow-hidden">
-              <div className="grid grid-cols-12 bg-[#0B0D10] p-4 text-[11px] font-mono text-[#8A8E96] uppercase border-b border-white/10">
-                <div className="col-span-2 font-bold">ID / Timestamp</div>
-                <div className="col-span-2 font-bold">Name & Contact</div>
-                <div className="col-span-4 font-bold">Business Specs / Requirement</div>
-                <div className="col-span-2 font-bold">Domain Tag</div>
-                <div className="col-span-2 font-bold text-right">Status Action</div>
-              </div>
-
-              <div className="divide-y divide-white/5">
-                {filteredLeads.map((lead) => (
-                  <div key={lead.id} className="grid grid-cols-12 p-4 text-xs items-center hover:bg-white/5 transition-colors">
-                    <div className="col-span-2 font-mono">
-                      <div className="font-bold text-[#FF4B23]">{lead.id}</div>
-                      <div className="text-[10px] text-[#8A8E96]">{lead.timestamp}</div>
-                      <div className="text-[9px] text-[#25D366] mt-0.5">{lead.source}</div>
-                    </div>
-
-                    <div className="col-span-2">
-                      <div className="font-bold text-white">{lead.name}</div>
-                      <div className="font-mono text-[11px] text-[#25D366] flex items-center gap-1">
-                        <PhoneCall className="w-3 h-3" />
-                        {lead.contact}
-                      </div>
-                      {lead.email && <div className="text-[10px] text-[#8A8E96] truncate">{lead.email}</div>}
-                    </div>
-
-                    <div className="col-span-4 text-[#8A8E96] pr-4">
-                      <div className="text-white font-medium mb-1">{lead.businessDescription}</div>
-                      <div className="font-mono text-[10px] text-[#1F3D8C] bg-[#EEF2FB]/10 px-2 py-0.5 rounded inline-block border border-white/10">
-                        Focus: {lead.auditFocus}
-                      </div>
-                    </div>
-
-                    <div className="col-span-2">
-                      <span className="font-mono text-[10px] px-2.5 py-1 rounded border font-bold bg-[#1F3D8C]/20 border-[#1F3D8C] text-[#25D366] flex items-center gap-1 w-max">
-                        <Tag className="w-3 h-3" />
-                        {lead.taggedDomain}
-                      </span>
-                    </div>
-
-                    <div className="col-span-2 flex items-center justify-end gap-2">
-                      <select
-                        value={lead.status}
-                        onChange={(e) => handleUpdateStatus(lead.id, e.target.value as LeadItem["status"])}
-                        className="bg-[#12151B] border border-white/20 text-xs font-mono p-1.5 rounded text-white focus:outline-none"
-                      >
-                        <option value="New">New</option>
-                        <option value="In Review">In Review</option>
-                        <option value="Blueprint Sent">Blueprint Sent</option>
-                        <option value="Closed">Closed</option>
-                      </select>
+        {/* ─── BLOG CMS TAB ──────────────────────────────── */}
+        {mainTab === "blog" && (
+          <>
+            {blogView === "list" && (
+              <div className="space-y-6">
+                {/* Stats bar */}
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                  <div className="bg-white border border-[#C7C9C0] rounded-xs p-4 xmark">
+                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase">Total</div>
+                    <div className="font-display text-2xl font-bold text-[#12151B] mt-1">
+                      {posts.length}
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* --- TAB 2: BLOG CMS METRICS --- */}
-        {activeTab === "cms" && (
-          <div className="space-y-6">
-            <div className="bg-[#1A1E26] border border-white/10 rounded-xs overflow-hidden">
-              <div className="grid grid-cols-12 bg-[#0B0D10] p-4 text-[11px] font-mono text-[#8A8E96] uppercase border-b border-white/10">
-                <div className="col-span-5 font-bold">Article Title & Category</div>
-                <div className="col-span-2 font-bold">Read Time</div>
-                <div className="col-span-2 font-bold text-center">30-Day Live Views</div>
-                <div className="col-span-3 font-bold text-right">Pipeline Conversions</div>
-              </div>
-
-              <div className="divide-y divide-white/5">
-                {blogs.map((blog) => (
-                  <div key={blog.id} className="grid grid-cols-12 p-4 text-xs items-center hover:bg-white/5 transition-colors">
-                    <div className="col-span-5 pr-4">
-                      <div className="font-mono text-[10px] text-[#25D366] font-bold">{blog.category}</div>
-                      <Link href={`/blog/${blog.slug}`} className="font-bold text-white hover:text-[#FF4B23] transition-colors text-sm">
-                        {blog.title}
-                      </Link>
+                  <div className="bg-white border border-[#C7C9C0] rounded-xs p-4 xmark">
+                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase">
+                      Published
                     </div>
-
-                    <div className="col-span-2 font-mono text-[#8A8E96]">
-                      {blog.readTime}
-                    </div>
-
-                    <div className="col-span-2 font-mono text-center font-bold text-[#FF4B23] text-base">
-                      {blog.views30Days.toLocaleString()}
-                    </div>
-
-                    <div className="col-span-3 text-right font-mono">
-                      <div className="font-extrabold text-emerald-400 text-base">
-                        {blog.conversions} Conversions
-                      </div>
-                      <div className="text-[10px] text-[#8A8E96]">
-                        {((blog.conversions / blog.views30Days) * 100).toFixed(1)}% Conversion Rate
-                      </div>
+                    <div className="font-display text-2xl font-bold text-emerald-600 mt-1">
+                      {posts.filter((p) => p.status === "published").length}
                     </div>
                   </div>
-                ))}
+                  <div className="bg-white border border-[#C7C9C0] rounded-xs p-4 xmark">
+                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase">Drafts</div>
+                    <div className="font-display text-2xl font-bold text-[#8A8E96] mt-1">
+                      {posts.filter((p) => p.status === "draft").length}
+                    </div>
+                  </div>
+                  <div className="bg-white border border-[#C7C9C0] rounded-xs p-4 xmark">
+                    <div className="font-mono text-[10px] text-[#8A8E96] uppercase">
+                      Total Words
+                    </div>
+                    <div className="font-display text-2xl font-bold text-[#1F3D8C] mt-1">
+                      {posts.reduce((sum, p) => sum + (p.wordCount || 0), 0).toLocaleString()}
+                    </div>
+                  </div>
+                </div>
+
+                {postsLoading ? (
+                  <div className="flex items-center justify-center py-12 text-[#8A8E96]">
+                    <RefreshCw className="w-5 h-5 animate-spin mr-2" />
+                    <span className="font-mono text-xs">Loading posts...</span>
+                  </div>
+                ) : (
+                  <PostList initialPosts={posts} onEdit={handleEditPost} onRefresh={fetchPosts} />
+                )}
               </div>
-            </div>
-          </div>
-        )}
+            )}
 
-        {/* --- TAB 3: PUBLISH NEW BLOG --- */}
-        {activeTab === "publish" && (
-          <div className="space-y-6">
-            <BlogManager />
-          </div>
-        )}
+            {blogView === "create" && (
+              <div className="bg-white border border-[#C7C9C0] rounded-xs p-6 sm:p-8 shadow-3d">
+                <BlogManager onSaved={handlePostSaved} />
+              </div>
+            )}
 
-      </div>
+            {blogView === "edit" && editSlug && editData && (
+              <div className="bg-white border border-[#C7C9C0] rounded-xs p-6 sm:p-8 shadow-3d">
+                <BlogManager
+                  editSlug={editSlug}
+                  initialData={editData as Record<string, unknown>}
+                  onSaved={handlePostSaved}
+                />
+              </div>
+            )}
+          </>
+        )}
+      </main>
     </div>
+  );
+}
+
+// ─── Page Export (wraps in ToastProvider) ────────────────────────
+
+export default function AdminDashboard() {
+  return (
+    <ToastProvider>
+      <AdminContent />
+    </ToastProvider>
   );
 }

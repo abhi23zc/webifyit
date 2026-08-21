@@ -55,8 +55,7 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
               <li><a href="#projects" className="hover:text-white transition-colors">Dineezy POS Engine</a></li>
               <li><a href="#projects" className="hover:text-white transition-colors">MsgZone WhatsApp SaaS</a></li>
               <li><a href="#projects" className="hover:text-white transition-colors">HelpKey Engine</a></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors font-semibold text-white">Engineering Blog</Link></li>
-              <li><Link href="/admin" className="hover:text-white transition-colors font-semibold text-[#FF4B23]">Internal Lead CRM</Link></li>
+
               <li><button onClick={() => onOpenAuditModal && onOpenAuditModal()} className="hover:text-white transition-colors text-left text-xs font-mono text-[#25D366]">Request Blueprint →</button></li>
             </ul>
           </div>

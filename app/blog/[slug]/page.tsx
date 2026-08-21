@@ -43,7 +43,7 @@ export async function generateMetadata({
       modifiedTime: post.updatedDate,
       authors: [post.author.name],
       tags: post.tags,
-      siteName: "WebifyIt Engineering Studio",
+      siteName: "WebifyIt",
     },
     twitter: {
       card: "summary_large_image",
@@ -88,7 +88,7 @@ export default async function BlogPostPage({
     },
     publisher: {
       "@type": "Organization",
-      name: "WebifyIt Engineering Studio",
+      name: "WebifyIt",
       url: "https://webifyit.in",
     },
     datePublished: post.publishedDate,
