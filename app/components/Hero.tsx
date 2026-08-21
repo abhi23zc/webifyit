@@ -6,8 +6,8 @@ import { ArrowRight, SquareArrowOutUpLeft } from "lucide-react";
 import dynamic from "next/dynamic";
 
 // Dynamic import for Three.js component (no SSR)
-const ProductMockup = dynamic(
-  () => import("./ProductMockup/ProductMockup"),
+const LaptopMockup = dynamic(
+  () => import("./ProductMockup/LaptopMockup"),
   {
     ssr: false,
     loading: () => (
@@ -192,7 +192,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
             className="lg:col-span-6 relative w-full flex items-center justify-center pt-8 lg:pt-0"
           >
             <div className="w-full h-[400px] sm:h-[480px] lg:h-[560px]">
-              <ProductMockup product="hisabai" />
+              <LaptopMockup product="dineezy" />
             </div>
           </motion.div>
 
