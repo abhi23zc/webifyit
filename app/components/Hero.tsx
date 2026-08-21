@@ -18,6 +18,18 @@ const LaptopMockup = dynamic(
   }
 );
 
+const MobileMockup = dynamic(
+  () => import("./ProductMockup/ProductMockup"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[350px] lg:min-h-[500px] flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-[#DCDDD6] border-t-[#FF4B23] rounded-full animate-spin" />
+      </div>
+    ),
+  }
+);
+
 interface HeroProps {
   onOpenAuditModal: () => void;
 }
@@ -50,7 +62,7 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
             <motion.div custom={0} variants={fadeInUp} className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-white/90 backdrop-blur-md border border-[#C7C9C0] rounded-xs shadow-2xs flex-wrap">
               <span className="w-2 h-2 rounded-full bg-[#FF4B23] animate-pulse"></span>
               <span className="font-mono text-xs font-bold tracking-wider text-[#12151B] uppercase">
-                BUILT FOR INDIAN BUSINESSES
+                BUILT FOR BUSINESSES
               </span>
               <span className="font-mono text-[10px] text-emerald-600 border-l border-[#DCDDD6] pl-2 font-semibold hidden sm:inline">
                 HIGH CONVERSION WEBSITES & APPS
@@ -191,8 +203,14 @@ export default function Hero({ onOpenAuditModal }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="lg:col-span-6 relative w-full flex items-center justify-center pt-8 lg:pt-0"
           >
-            <div className="w-full h-[400px] sm:h-[480px] lg:h-[560px]">
+            {/* Desktop Mockup (Hidden on mobile) */}
+            <div className="hidden lg:block w-full h-[400px] sm:h-[480px] lg:h-[560px]">
               <LaptopMockup product="dineezy" />
+            </div>
+            
+            {/* Mobile Mockup (Hidden on desktop) */}
+            <div className="block lg:hidden w-full h-[450px] sm:h-[500px]">
+              <MobileMockup product="hisabai" />
             </div>
           </motion.div>
 

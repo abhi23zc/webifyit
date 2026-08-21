@@ -10,138 +10,70 @@ export default function Services() {
 
   const servicesData = [
     {
-      id: "SPEC-01",
       title: "Custom Web Applications",
       description:
-        "Fast, scalable web applications built with the latest enterprise technology. We ensure your platform handles high traffic seamlessly and works perfectly on all devices.",
+        "Fast, scalable web applications built to handle your business needs. We ensure your platform handles high traffic seamlessly and works perfectly on all devices.",
       icon: <Code2 className="w-6 h-6 text-[#1F3D8C]" />,
-      techSpecs: ["Next.js 16 App Router", "React 19 & TypeScript", "PostgreSQL & Prisma", "Fast Global Hosting"],
-      deliverables: ["Super-Fast Website", "REST & GraphQL API", "Fast Global Hosting", "100/100 Google Speed Score"],
+      trustLogos: [
+        { name: "React", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+        { name: "Next.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+        { name: "Node.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" }
+      ],
+      techSpecs: ["React & Next.js", "Node.js Backend", "Secure Databases", "Fast Cloud Hosting"],
+      deliverables: ["Custom Web App", "Admin Dashboard", "Mobile Responsive", "SEO Optimized"],
       timeline: "2 – 4 Weeks",
       imageSrc: "/images/services/web-app-mockup.png",
-      widget: (
-        <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
-          <div className="flex justify-between items-center font-mono text-xs">
-            <span className="text-[#585D67]">Build & Test Pipeline</span>
-            <span className="font-bold text-[#1F3D8C]">99.8% AUTOMATED</span>
-          </div>
-          <div className="w-full bg-[#F5F6F1] h-2 rounded-full overflow-hidden border border-[#DCDDD6]">
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "99%" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="bg-[#1F3D8C] h-full"
-            />
-          </div>
-          <div className="flex gap-2 pt-1 flex-wrap">
-            <span className="tag-pill tag-pill-blue text-[10px]">Next.js 16</span>
-            <span className="tag-pill tag-pill-blue text-[10px]">React 19</span>
-            <span className="tag-pill tag-pill-blue text-[10px]">TypeScript</span>
-          </div>
-        </div>
-      ),
     },
     {
-      id: "SPEC-02",
-      title: "AI Chatbots & Voice Assistants",
+      title: "AI Chatbots & Voice",
       description:
-        "Custom AI chatbots and voice assistants that talk to your customers 24/7 in English and Hindi — on WhatsApp or your website.",
+        "Smart AI chatbots and voice assistants that talk to your customers 24/7 in English and Hindi — directly on WhatsApp or your website.",
       icon: <Bot className="w-6 h-6 text-[#FF4B23]" />,
-      techSpecs: ["OpenAI GPT-4o & Claude 3.5", "Voice AI & Speech Technology", "Smart AI Memory & Search", "WhatsApp API Integration"],
-      deliverables: ["24/7 AI Voice Assistant", "Document & Image AI", "Hindi + English Support", "Live CRM Updates"],
+      trustLogos: [
+        { name: "OpenAI", url: "https://cdn.worldvectorlogo.com/logos/openai-2.svg" },
+        { name: "n8n", url: "https://cdn.worldvectorlogo.com/logos/n8n.svg" },
+        { name: "Python", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" }
+      ],
+      techSpecs: ["OpenAI GPT-4", "n8n Automation", "Python AI Models", "WhatsApp API"],
+      deliverables: ["24/7 Customer Support", "WhatsApp Integration", "Hindi + English", "Automated Lead Capture"],
       timeline: "3 – 5 Weeks",
       imageSrc: "/images/services/ai-chat-mockup.png",
-      widget: (
-        <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
-          <div className="flex justify-between items-center font-mono text-xs">
-            <span className="text-[#585D67]">Voice AI Response Latency</span>
-            <span className="tag-pill tag-pill-accent text-[10px] font-bold">&lt; 220ms LATENCY</span>
-          </div>
-          <div className="flex items-center justify-between text-xs font-mono bg-[#EEF2FB] p-2 rounded-xs border border-[#1F3D8C]/20">
-            <span className="text-[#585D67]">Multi-lingual Bot</span>
-            <span className="font-bold text-[#FF4B23]">English + Hindi</span>
-          </div>
-          <div className="w-full bg-[#F5F6F1] h-2 rounded-full overflow-hidden border border-[#DCDDD6]">
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "95%" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="bg-[#FF4B23] h-full"
-            />
-          </div>
-        </div>
-      ),
     },
     {
-      id: "SPEC-03",
       title: "Cloud SaaS Platforms",
       description:
-        "Full-featured cloud software (SaaS) with user accounts, subscription payments, admin dashboards, and the ability to grow as your business scales.",
+        "Full-featured cloud software with user accounts, subscription payments, and admin dashboards. Built to scale as your business grows.",
       icon: <Cpu className="w-6 h-6 text-[#12151B]" />,
-      techSpecs: ["Multi-Tenant Architecture", "Razorpay / Stripe Payments", "Docker & Kubernetes Hosting", "AWS / Vercel Cloud"],
-      deliverables: ["Full Admin Dashboard", "Subscription & Billing System", "Usage Analytics", "User Role Management"],
+      trustLogos: [
+        { name: "AWS", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+        { name: "Docker", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+        { name: "Stripe", url: "https://cdn.worldvectorlogo.com/logos/stripe-4.svg" }
+      ],
+      techSpecs: ["AWS Cloud", "Docker Containers", "Stripe Payments", "Secure Authentication"],
+      deliverables: ["User Dashboards", "Subscription Billing", "Usage Analytics", "Role Management"],
       timeline: "4 – 8 Weeks",
       imageSrc: "/images/services/saas-dashboard-mockup.png",
-      widget: (
-        <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
-          <div className="flex justify-between items-center font-mono text-xs">
-            <span className="text-[#585D67]">Cloud SLA Uptime</span>
-            <span className="font-bold text-[#12151B]">99.99% GUARANTEE</span>
-          </div>
-          <div className="space-y-1.5">
-            <div className="flex justify-between text-[11px] font-mono text-[#8A8E96]">
-              <span>Auto-Scaling Clusters</span>
-              <span>Active</span>
-            </div>
-            <div className="w-full bg-[#F5F6F1] h-2 rounded-full overflow-hidden border border-[#DCDDD6]">
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className="bg-[#12151B] h-full"
-              />
-            </div>
-          </div>
-        </div>
-      ),
     },
     {
-      id: "SPEC-04",
-      title: "Mobile Apps for iOS & Android",
+      title: "Mobile Apps (iOS & Android)",
       description:
-        "Mobile apps that work on both iPhone and Android. Includes offline mode, push notifications, camera access, and listing on app stores.",
+        "High-performance mobile apps that work on both iPhone and Android. Give your users a native experience with push notifications and offline mode.",
       icon: <Smartphone className="w-6 h-6 text-[#1F3D8C]" />,
-      techSpecs: ["React Native & Expo", "TypeScript Core", "Offline Data Storage", "Push Notifications"],
-      deliverables: ["iOS & Android App", "Camera & Bluetooth APIs", "Offline Mode", "App Store & Play Store Launch"],
+      trustLogos: [
+        { name: "Apple", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apple/apple-original.svg" },
+        { name: "Android", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg" },
+        { name: "Kotlin", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" }
+      ],
+      techSpecs: ["iOS Native", "Android Native", "React Native", "Kotlin"],
+      deliverables: ["App Store Launch", "Play Store Launch", "Push Notifications", "Camera Integration"],
       timeline: "3 – 6 Weeks",
       imageSrc: "/images/services/hisab_ai_mockup.png",
-      widget: (
-        <div className="space-y-2 mt-4 pt-4 border-t border-[#DCDDD6] translate-z-20">
-          <div className="flex justify-between items-center font-mono text-xs">
-            <span className="text-[#585D67]">Cross-Platform Deployment</span>
-            <span className="font-bold text-emerald-600">iOS + ANDROID</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2 text-center">
-            <div className="bg-[#EEF2FB] p-2 rounded-xs border border-[#1F3D8C]/20">
-              <div className="font-mono text-[10px] text-[#8A8E96]">APP STORE</div>
-              <div className="font-display font-bold text-xs text-[#1F3D8C]">Ready</div>
-            </div>
-            <div className="bg-[#F5F6F1] p-2 rounded-xs border border-[#DCDDD6]">
-              <div className="font-mono text-[10px] text-[#8A8E96]">PLAY STORE</div>
-              <div className="font-display font-bold text-xs text-[#12151B]">Published</div>
-            </div>
-          </div>
-        </div>
-      ),
     },
   ];
 
   return (
     <section id="services" className="py-20 bg-[#F5F6F1] border-b border-[#DCDDD6]">
-      <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 xl:px-12">
 
         {/* Header */}
         <div className="max-w-2xl mb-12">
@@ -158,8 +90,8 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Visual Grid - Compact 4 Column Bento Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {/* Visual Grid - 4 Column Wide Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
           {servicesData.map((service, idx) => (
             <motion.div
               key={service.id}
@@ -173,8 +105,8 @@ export default function Services() {
               {/* Subtle gradient glow on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent to-[#EEF2FB] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-              {/* Service Mockup Image (Compact) */}
-              <div className="w-full h-32 sm:h-36 bg-[#F5F6F1] border-b border-[#DCDDD6] overflow-hidden relative">
+              {/* Service Mockup Image */}
+              <div className="w-full h-40 sm:h-44 bg-[#F5F6F1] border-b border-[#DCDDD6] overflow-hidden relative">
                 {service.imageSrc ? (
                   <img
                     src={service.imageSrc}
@@ -184,10 +116,6 @@ export default function Services() {
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-[#8A8E96] font-mono text-xs">Image Placeholder</div>
                 )}
-                {/* Floating ID badge */}
-                <div className="absolute top-3 right-3 font-mono text-[9px] font-bold text-[#1F3D8C] bg-white/90 backdrop-blur-sm border border-[#DCDDD6] px-2 py-0.5 rounded-full shadow-sm">
-                  {service.id}
-                </div>
               </div>
 
               <div className="relative z-10 p-5 flex flex-col flex-1">
@@ -208,6 +136,20 @@ export default function Services() {
                 <p className="font-body text-[13px] text-[#585D67] leading-relaxed mb-4 flex-1 line-clamp-3">
                   {service.description}
                 </p>
+
+                {/* Core Tech Stack Section */}
+                <div className="mb-4">
+                  <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-2.5">
+                    Core Tech Stack
+                  </div>
+                  <div className="flex items-center gap-4">
+                    {service.trustLogos.map(logo => (
+                      <div key={logo.name} className="h-6 flex items-center justify-center transition-transform duration-300 hover:scale-110 drop-shadow-sm" title={logo.name}>
+                        <img src={logo.url} alt={logo.name} className="h-full w-auto object-contain" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
                 {/* Minimal interaction hint */}
                 <div className="mt-auto flex items-center justify-between border-t border-[#DCDDD6]/60 pt-3">
@@ -249,9 +191,6 @@ export default function Services() {
                   {selectedService.icon}
                 </div>
                 <div>
-                  <span className="font-mono text-xs font-bold text-[#FF4B23]">
-                    {selectedService.id} SPECIFICATION
-                  </span>
                   <h3 className="font-display text-2xl font-bold text-[#12151B]">
                     {selectedService.title}
                   </h3>

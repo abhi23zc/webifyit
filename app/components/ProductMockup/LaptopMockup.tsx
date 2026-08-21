@@ -46,20 +46,6 @@ export default function LaptopMockup({ product = "dineezy" }: LaptopMockupProps)
         },
   };
 
-  const card1Variants = {
-    animate: shouldReduceMotion
-      ? {}
-      : {
-          y: [0, -6, 0],
-          transition: {
-            duration: 4.5,
-            repeat: Infinity,
-            ease: "easeInOut" as const,
-            delay: 0.5,
-          },
-        },
-  };
-
   return (
     <div className="relative w-full h-full flex items-center justify-center" aria-hidden="true" style={{ perspective: "1800px" }}>
       
@@ -86,73 +72,105 @@ export default function LaptopMockup({ product = "dineezy" }: LaptopMockupProps)
         />
 
         {/* Laptop Lid (Screen) */}
-        <div
+        <motion.div
           className="relative flex items-center justify-center"
+          initial={shouldReduceMotion ? { rotateX: -8 } : { rotateX: -90 }}
+          whileInView={{ rotateX: -8 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           style={{
             width: "520px",
             height: "340px",
-            background: "linear-gradient(to bottom right, #2a2a2f, #111116)",
-            borderRadius: "16px 16px 0 0",
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderBottom: "none",
-            boxShadow: `
-              inset 0 0 0 1px rgba(0,0,0,0.8),
-              inset 0 2px 4px rgba(255,255,255,0.2),
-              0 -10px 40px rgba(0,0,0,0.5)
-            `,
             transformOrigin: "bottom center",
-            transform: "rotateX(-8deg)", /* slightly open lid */
             transformStyle: "preserve-3d",
           }}
         >
-          {/* Outer edge highlight (metallic rim) */}
-          <div className="absolute inset-0 rounded-[16px_16px_0_0] pointer-events-none" style={{
-            boxShadow: "inset 0 1px 1px rgba(255,255,255,0.15), inset 0 0 0 3px #18181b"
-          }} />
-
-          {/* Seamless Glass Bezel */}
+          {/* ── FRONT: Screen Side ── */}
           <div
-            className="absolute inset-[4px] bottom-[14px] flex flex-col"
+            className="absolute inset-0 flex flex-col items-center justify-center"
             style={{
-              background: "#000",
-              borderRadius: "10px",
-              boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.05), 0 0 2px rgba(0,0,0,1)",
-              overflow: "hidden",
+              background: "linear-gradient(to bottom right, #2a2a2f, #111116)",
+              borderRadius: "16px 16px 0 0",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderBottom: "none",
+              boxShadow: `
+                inset 0 0 0 1px rgba(0,0,0,0.8),
+                inset 0 2px 4px rgba(255,255,255,0.2)
+              `,
+              transform: "translateZ(1px)",
+              backfaceVisibility: "hidden"
             }}
           >
-            {/* Screen Glare (Diagonal highlight) */}
-            <div 
-              className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
+            {/* Outer edge highlight (metallic rim) */}
+            <div className="absolute inset-0 rounded-[16px_16px_0_0] pointer-events-none" style={{
+              boxShadow: "inset 0 1px 1px rgba(255,255,255,0.15), inset 0 0 0 3px #18181b"
+            }} />
+
+            {/* Seamless Glass Bezel */}
+            <div
+              className="absolute inset-[4px] bottom-[14px] flex flex-col"
               style={{
-                background: "linear-gradient(105deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 30%, transparent 31%, transparent 100%)",
+                background: "#000",
+                borderRadius: "10px",
+                boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.05), 0 0 2px rgba(0,0,0,1)",
+                overflow: "hidden",
               }}
-            />
-
-            {/* Camera */}
-            <div className="flex justify-center items-center h-5 flex-shrink-0 bg-black z-20">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#111] border border-[#222]"></div>
-              <div className="w-1 h-1 rounded-full bg-emerald-500 ml-2 opacity-50 blur-[1px]"></div> {/* active light */}
-            </div>
-
-            {/* Screen Image */}
-            <div className="flex-1 relative overflow-hidden bg-[#1a1a26]">
-              <img
-                src={config.src}
-                alt={`${config.name} app screen`}
-                onLoad={() => setImgLoaded(true)}
-                className="absolute inset-0 w-full h-full object-cover object-top"
-                style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+            >
+              {/* Screen Glare (Diagonal highlight) */}
+              <div 
+                className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
+                style={{
+                  background: "linear-gradient(105deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 30%, transparent 31%, transparent 100%)",
+                }}
               />
-            </div>
-            
-            {/* Logo Area */}
-            <div className="h-5 flex items-center justify-center flex-shrink-0 bg-black z-20">
-              <div className="text-[7px] text-zinc-600 font-bold uppercase tracking-[0.25em]">
-                WebifyIt
+
+              {/* Camera */}
+              <div className="flex justify-center items-center h-5 flex-shrink-0 bg-black z-20">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#111] border border-[#222]"></div>
+                <div className="w-1 h-1 rounded-full bg-emerald-500 ml-2 opacity-50 blur-[1px]"></div> {/* active light */}
+              </div>
+
+              {/* Screen Image */}
+              <div className="flex-1 relative overflow-hidden bg-[#1a1a26]">
+                <img
+                  src={config.src}
+                  alt={`${config.name} app screen`}
+                  onLoad={() => setImgLoaded(true)}
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                  style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+                />
+              </div>
+              
+              {/* Logo Area */}
+              <div className="h-5 flex items-center justify-center flex-shrink-0 bg-black z-20">
+                <div className="text-[7px] text-zinc-600 font-bold uppercase tracking-[0.25em]">
+                  WebifyIt
+                </div>
               </div>
             </div>
           </div>
-        </div>
+
+          {/* ── BACK: Outer Cover Side ── */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: "linear-gradient(to bottom right, #cfd0d4, #a4a5ab)",
+              borderRadius: "16px 16px 0 0",
+              border: "1px solid #d4d4d8",
+              borderBottom: "none",
+              boxShadow: "inset 0 1px 2px rgba(255,255,255,0.8)",
+              transform: "translateZ(-1px) rotateY(180deg)",
+              backfaceVisibility: "hidden"
+            }}
+          >
+            {/* Faded embossed logo on the back */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 flex items-center gap-2">
+              <span className="font-display font-bold text-xl tracking-[0.2em] text-[#12151B]">
+                WEBIFYIT
+              </span>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Laptop Base (Keyboard Deck) */}
         <div
@@ -228,35 +246,6 @@ export default function LaptopMockup({ product = "dineezy" }: LaptopMockupProps)
           >
             {/* Trackpad notch */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-[#8b8c94] rounded-b-sm shadow-inner"></div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ── Floating card: top-right ─────────────── */}
-      <motion.div
-        animate="animate"
-        variants={card1Variants}
-        className="absolute pointer-events-none"
-        style={{ top: "5%", right: "5%", transform: "translateZ(50px)" }}
-        initial={{ opacity: 0, x: 10 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-      >
-        <div
-          className="bg-white border border-[#DCDDD6] rounded-xl px-4 py-3 shadow-lg"
-          style={{ minWidth: "164px", backdropFilter: "blur(8px)" }}
-        >
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-            <span className="font-mono text-[9px] font-bold text-emerald-600 uppercase tracking-wider">
-              Live Desktop App
-            </span>
-          </div>
-          <div className="font-display text-sm font-bold text-[#12151B] leading-tight">
-            {config.name}
-          </div>
-          <div className="font-mono text-[10px] text-[#8A8E96] mt-0.5 leading-tight">
-            {config.tagline}
           </div>
         </div>
       </motion.div>

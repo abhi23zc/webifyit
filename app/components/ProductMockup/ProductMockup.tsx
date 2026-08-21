@@ -49,34 +49,6 @@ export default function ProductMockup({ product = "hisabai" }: ProductMockupProp
         },
   };
 
-  const card1Variants = {
-    animate: shouldReduceMotion
-      ? {}
-      : {
-          y: [0, -6, 0],
-          transition: {
-            duration: 4.5,
-            repeat: Infinity,
-            ease: "easeInOut" as const,
-            delay: 0.5,
-          },
-        },
-  };
-
-  const card2Variants = {
-    animate: shouldReduceMotion
-      ? {}
-      : {
-          y: [0, -8, 0],
-          transition: {
-            duration: 5.5,
-            repeat: Infinity,
-            ease: "easeInOut" as const,
-            delay: 1.2,
-          },
-        },
-  };
-
   return (
     <div className="relative w-full h-full flex items-center justify-center" aria-hidden="true">
 
@@ -196,65 +168,6 @@ export default function ProductMockup({ product = "hisabai" }: ProductMockupProp
             filter: "blur(8px)",
           }}
         />
-      </motion.div>
-
-      {/* ── Floating card 1: top-right ─────────────── */}
-      <motion.div
-        animate="animate"
-        variants={card1Variants}
-        className="absolute pointer-events-none"
-        style={{ top: "10%", right: "2%" }}
-        initial={{ opacity: 0, x: 10 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-      >
-        <div
-          className="bg-white border border-[#DCDDD6] rounded-xl px-4 py-3 shadow-lg"
-          style={{ minWidth: "164px", backdropFilter: "blur(8px)" }}
-        >
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-            <span className="font-mono text-[9px] font-bold text-emerald-600 uppercase tracking-wider">
-              Live in Production
-            </span>
-          </div>
-          <div className="font-display text-sm font-bold text-[#12151B] leading-tight">
-            {config.name}
-          </div>
-          <div className="font-mono text-[10px] text-[#8A8E96] mt-0.5 leading-tight">
-            {config.tagline}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ── Floating card 2: bottom-left ───────────── */}
-      <motion.div
-        animate="animate"
-        variants={card2Variants}
-        className="absolute pointer-events-none"
-        style={{ bottom: "14%", left: "1%" }}
-        initial={{ opacity: 0, x: -10 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
-      >
-        <div
-          className="bg-white border border-[#DCDDD6] rounded-xl px-4 py-3 shadow-lg"
-          style={{ minWidth: "148px" }}
-        >
-          <div className="font-mono text-[9px] font-bold text-[#8A8E96] uppercase tracking-wider mb-2">
-            Tech Stack
-          </div>
-          <div className="flex flex-wrap gap-1">
-            {["Next.js", "Node.js", "Docker"].map((tech) => (
-              <span
-                key={tech}
-                className="font-mono text-[9px] px-2 py-0.5 rounded bg-[#F5F6F1] text-[#585D67] border border-[#DCDDD6] font-medium"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
       </motion.div>
 
     </div>
