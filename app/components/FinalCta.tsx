@@ -87,7 +87,7 @@ export default function FinalCta({ onOpenAuditModal }: FinalCtaProps) {
               </p>
             </div>
             <a
-              href="mailto:webifyit.in@gmail.com?subject=WebifyIt%20Inquiry"
+              href="mailto:support@webifyit.in?subject=WebifyIt%20Inquiry"
               className="w-full btn-secondary bg-transparent text-white border-white/30 hover:border-white hover:bg-white/10 justify-between text-xs py-3 px-4"
             >
               <span>Contact us</span>

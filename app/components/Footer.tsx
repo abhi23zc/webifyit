@@ -66,8 +66,8 @@ export default function Footer({ onOpenAuditModal }: FooterProps) {
               GET IN TOUCH
             </div>
             <div className="space-y-2 font-body text-sm text-[#8A8E96]">
-              <a href="mailto:webifyit.in@gmail.com" className="block hover:text-white transition-colors break-all">
-                webifyit.in@gmail.com
+              <a href="mailto:support@webifyit.in" className="block hover:text-white transition-colors break-all">
+                support@webifyit.in
               </a>
               <a href="tel:+919026665814" className="block hover:text-white transition-colors">
                 +91 90266 65814

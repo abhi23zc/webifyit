@@ -41,7 +41,7 @@ export default function AgencyLeadCta() {
                 </div>
                 <div className="space-y-1.5">
                   <label className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#585D67]">Work Email</label>
-                  <input type="email" required className="w-full bg-[#F5F6F1] border border-[#DCDDD6] rounded-md px-4 py-2.5 text-sm focus:outline-none focus:border-[#1F3D8C] focus:ring-1 focus:ring-[#1F3D8C]" placeholder="john@agency.com" />
+                  <input type="email" required className="w-full bg-[#F5F6F1] border border-[#DCDDD6] rounded-md px-4 py-2.5 text-sm focus:outline-none focus:border-[#1F3D8C] focus:ring-1 focus:ring-[#1F3D8C]" placeholder="support@webifyit.in" />
                 </div>
               </div>
               
