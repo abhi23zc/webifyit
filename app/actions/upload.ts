@@ -1,6 +1,7 @@
 "use server";
 
 import { supabase } from "../lib/supabase";
+import { requireAuth } from "../lib/auth";
 
 const STORAGE_BUCKET = "blog-images";
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -27,6 +28,8 @@ export async function uploadBlogImage(
   formData: FormData
 ): Promise<UploadResult> {
   try {
+    await requireAuth();
+
     const file = formData.get("file") as File | null;
 
     if (!file) {

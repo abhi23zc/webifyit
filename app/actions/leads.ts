@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { supabase } from "../lib/supabase";
+import { requireAuth } from "../lib/auth";
 
 // ─── Types ──────────────────────────────────────────────────────
 
@@ -73,6 +74,8 @@ export async function updateLeadStatus(
   status: LeadStatus
 ): Promise<ActionResult> {
   try {
+    await requireAuth();
+
     const { error } = await supabase
       .from("leads")
       .update({ status })
@@ -99,6 +102,8 @@ export async function updateLeadNotes(
   notes: string
 ): Promise<ActionResult> {
   try {
+    await requireAuth();
+
     const { error } = await supabase
       .from("leads")
       .update({ notes })
@@ -122,6 +127,8 @@ export async function updateLeadNotes(
 
 export async function deleteLead(id: number): Promise<ActionResult> {
   try {
+    await requireAuth();
+
     const { error } = await supabase.from("leads").delete().eq("id", id);
 
     if (error) {

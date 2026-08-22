@@ -117,12 +117,39 @@ export default function IndustriesWeServe({ onOpenAuditModal }: IndustriesWeServ
         {/* Industry Layout */}
         <div className="flex flex-col w-full relative pb-20">
           {industries.map((ind, idx) => {
+            const topMobileClass = [
+              "top-[5rem]",
+              "top-[6rem]",
+              "top-[7rem]",
+              "top-[8rem]"
+            ][idx];
+
+            const topDesktopClass = [
+              "md:top-[6rem]",
+              "md:top-[7.5rem]",
+              "md:top-[9rem]",
+              "md:top-[10.5rem]"
+            ][idx];
+            
+            const maxHMobileClass = [
+              "max-h-[calc(100vh-5.5rem)]",
+              "max-h-[calc(100vh-6.5rem)]",
+              "max-h-[calc(100vh-7.5rem)]",
+              "max-h-[calc(100vh-8.5rem)]"
+            ][idx];
+
+            const maxHDesktopClass = [
+              "md:max-h-[calc(100vh-6.5rem)]",
+              "md:max-h-[calc(100vh-8rem)]",
+              "md:max-h-[calc(100vh-9.5rem)]",
+              "md:max-h-[calc(100vh-11rem)]"
+            ][idx];
+
             return (
               <div
                 key={ind.id}
-                className="group sticky w-full bg-white rounded-2xl border border-[#DCDDD6] shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden mb-12 flex flex-col md:flex-row"
+                className={`group sticky w-full bg-white rounded-2xl border border-[#DCDDD6] shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden mb-12 flex flex-col md:flex-row overflow-y-auto scrollbar-hide ${topMobileClass} ${topDesktopClass} ${maxHMobileClass} ${maxHDesktopClass}`}
                 style={{
-                  top: `calc(6rem + ${idx * 24}px)`,
                   zIndex: 10 + idx,
                 }}
               >

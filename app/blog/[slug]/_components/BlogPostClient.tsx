@@ -14,7 +14,6 @@ import {
   Check,
   Hash,
 } from "lucide-react";
-import Card3D from "../../../components/Card3D";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import AuditModal from "../../../components/AuditModal";
@@ -272,7 +271,7 @@ export default function BlogPostClient({
               )}
 
               {/* Inline CTA */}
-              <Card3D intensity={6}>
+              <div className="mt-10 mb-10 transition-transform duration-300 hover:scale-[1.01]">
                 <div className="bg-[#12151B] text-white p-8 rounded-xs shadow-2xl border border-[#12151B] flex flex-col sm:flex-row items-center justify-between gap-6 xmark">
                   <div className="space-y-2 text-center sm:text-left">
                     <div className="font-mono text-xs font-bold text-[#FF4B23] uppercase tracking-wider">
@@ -295,7 +294,7 @@ export default function BlogPostClient({
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
-              </Card3D>
+              </div>
 
               {/* Related Articles */}
               {relatedPosts.length > 0 && (
@@ -305,7 +304,7 @@ export default function BlogPostClient({
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {relatedPosts.map((related) => (
-                      <Card3D key={related.slug} intensity={8}>
+                      <div key={related.slug} className="transition-transform duration-300 hover:scale-[1.02]">
                         <Link
                           href={`/blog/${related.slug}`}
                           className="block"
@@ -326,7 +325,7 @@ export default function BlogPostClient({
                             </span>
                           </div>
                         </Link>
-                      </Card3D>
+                      </div>
                     ))}
                   </div>
                 </section>

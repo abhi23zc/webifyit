@@ -10,11 +10,13 @@ import {
   ShieldCheck,
   BookOpen,
   Users,
+  LogOut,
 } from "lucide-react";
 import { ToastProvider } from "./_components/Toast";
 import BlogManager from "./_components/BlogManager";
 import PostList from "./_components/PostList";
 import LeadsCRM from "./_components/LeadsCRM";
+import { logout } from "../actions/auth";
 import type { BlogPost } from "../lib/blog-data";
 import type { Lead } from "../actions/leads";
 
@@ -188,6 +190,16 @@ function AdminContent() {
               <span className="hidden sm:inline">Back to Site</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
+            <form action={logout}>
+              <button
+                type="submit"
+                className="text-xs py-2 px-3 flex items-center gap-1.5 rounded-xs border border-[#C7C9C0] bg-white text-[#585D67] hover:border-red-300 hover:bg-red-50 hover:text-red-600 transition-colors"
+                title="Sign out"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Logout</span>
+              </button>
+            </form>
           </div>
         </div>
 

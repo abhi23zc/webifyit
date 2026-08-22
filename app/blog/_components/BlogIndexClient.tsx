@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock, ArrowRight, Search, X } from "lucide-react";
-import Card3D from "../../components/Card3D";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import AuditModal from "../../components/AuditModal";
@@ -117,7 +116,7 @@ export default function BlogIndexClient({
 
           {/* Featured Post (first article gets hero treatment) */}
           {featuredPost && activeCategory === "All" && !searchQuery.trim() && (
-            <Card3D intensity={5} className="mb-10">
+            <div className="mb-10 transition-transform duration-300 hover:scale-[1.01]">
               <Link href={`/blog/${featuredPost.slug}`} className="block">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -190,7 +189,7 @@ export default function BlogIndexClient({
                   </div>
                 </motion.div>
               </Link>
-            </Card3D>
+            </div>
           )}
 
           {/* Blog Grid */}
@@ -199,7 +198,7 @@ export default function BlogIndexClient({
               ? remainingPosts
               : filteredPosts
             ).map((post, idx) => (
-              <Card3D key={post.slug} intensity={8} className="h-full">
+              <div key={post.slug} className="h-full transition-transform duration-300 hover:scale-[1.02]">
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -279,7 +278,7 @@ export default function BlogIndexClient({
                     </div>
                   </article>
                 </motion.div>
-              </Card3D>
+              </div>
             ))}
           </div>
 
@@ -295,7 +294,7 @@ export default function BlogIndexClient({
           )}
 
           {/* CTA Banner */}
-          <Card3D intensity={5}>
+          <div className="mt-16 transition-transform duration-300 hover:scale-[1.01]">
             <div className="bg-[#12151B] text-white p-8 rounded-xs shadow-2xl border border-[#12151B] flex flex-col sm:flex-row items-center justify-between gap-6 xmark">
               <div className="space-y-2 text-center sm:text-left">
                 <div className="font-mono text-xs font-bold text-[#FF4B23] uppercase tracking-wider">
@@ -318,7 +317,7 @@ export default function BlogIndexClient({
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-          </Card3D>
+          </div>
         </div>
       </main>
 

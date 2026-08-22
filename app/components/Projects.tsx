@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Layers, Sparkles, X, Globe, SquareArrowOutUpLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { ExternalLink, Layers, Sparkles, X, Globe, SquareArrowOutUpLeft, ChevronLeft, ChevronRight, Apple, Play } from "lucide-react";
 import Card3D from "./Card3D";
 
 interface ProjectsProps {
@@ -23,6 +23,7 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       trustLogos: [
         { name: "Next.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
         { name: "TypeScript", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+        { name: "TailwindCSS", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
         { name: "PostgreSQL", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" }
       ],
       link: "https://dineezy.in",
@@ -33,6 +34,8 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
         type: "image",
         url: "/images/dineezy/1.png"
       },
+      appStoreUrl: undefined,
+      playStoreUrl: undefined
     },
     {
       id: "PRJ-02",
@@ -42,6 +45,7 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
         "Enterprise bulk messaging platform delivering automated attachment dispatch, campaign scheduling, and real-time read analytics.",
       trustLogos: [
         { name: "Node.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+        { name: "React", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
         { name: "Redis", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" },
         { name: "Docker", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" }
       ],
@@ -53,6 +57,8 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
         type: "image",
         url: "/images/msgzone/1.png"
       },
+      appStoreUrl: undefined,
+      playStoreUrl: undefined
     },
     {
       id: "PRJ-03",
@@ -63,7 +69,8 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       trustLogos: [
         { name: "React Native", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
         { name: "OpenAI", url: "https://cdn.worldvectorlogo.com/logos/openai-2.svg" },
-        { name: "TypeScript", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" }
+        { name: "TypeScript", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+        { name: "Node.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" }
       ],
       link: "https://hisabai.in",
       domain: "hisabai.in",
@@ -74,7 +81,8 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
         type: "image",
         url: "/images/hisab/1.png"
       },
-
+      appStoreUrl: "https://apps.apple.com/us/app/hisabai-split-bills-track/id6756543928",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=ai.synergon.hisab"
     },
     {
       id: "PRJ-04",
@@ -85,7 +93,8 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       trustLogos: [
         { name: "Next.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
         { name: "Python", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
-        { name: "OpenAI", url: "https://cdn.worldvectorlogo.com/logos/openai-2.svg" }
+        { name: "OpenAI", url: "https://cdn.worldvectorlogo.com/logos/openai-2.svg" },
+        { name: "Docker", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" }
       ],
       link: "https://synergon.ai",
       domain: "synergon.ai",
@@ -95,6 +104,8 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
         type: "image",
         url: "/images/synergon/1.png"
       },
+      appStoreUrl: undefined,
+      playStoreUrl: undefined
     },
     {
       id: "PRJ-05",
@@ -103,6 +114,7 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       description:
         "Full-scale hotel booking platform with instant room availability lookup, multi-tier dynamic pricing, and Razorpay payment gate.",
       trustLogos: [
+        { name: "Next.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
         { name: "PostgreSQL", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
         { name: "AWS", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
         { name: "TypeScript", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" }
@@ -112,6 +124,8 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       badge: "Web App + Android",
       highlight: "Instant Booking Engine",
       stats: "Sub-50ms Booking",
+      appStoreUrl: undefined,
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.zrf.helpkey"
     },
     {
       id: "PRJ-06",
@@ -122,7 +136,8 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       trustLogos: [
         { name: "React", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
         { name: "OpenAI", url: "https://cdn.worldvectorlogo.com/logos/openai-2.svg" },
-        { name: "Firebase", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" }
+        { name: "Firebase", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" },
+        { name: "Node.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" }
       ],
       link: "#",
       domain: "Enterprise Platform",
@@ -131,8 +146,10 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
       media: {
         type: "image",
         url: "/images/interview/1.png"
-      }
-    },
+      },
+      appStoreUrl: undefined,
+      playStoreUrl: undefined
+    }
   ];
 
   const filteredProjects =
@@ -262,13 +279,7 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
                     if (!isActive) setActiveIndex(idx);
                   }}
                 >
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      if (!isActive) e.preventDefault();
-                    }}
+                  <div
                     className={`group block bg-white border ${isActive ? 'border-[#1F3D8C] shadow-3d-blue' : 'border-[#C7C9C0] shadow-sm'} rounded-[1.5rem] p-3 flex flex-col h-full transition-all duration-300`}
                   >
                     {/* Media Mockup Header */}
@@ -301,15 +312,33 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
 
                         {/* Title & Domain */}
                         <div className="mb-3">
-                          <h3 className="font-display text-xl font-bold text-[#12151B] group-hover:text-[#1F3D8C] transition-colors flex items-center justify-between">
-                            {project.name}
-                            <ExternalLink className="w-4 h-4 text-[#8A8E96] opacity-0 group-hover:opacity-100 transition-opacity" />
-                          </h3>
+                          <a href={project.link} target="_blank" rel="noopener noreferrer" className="group/title flex items-center justify-between">
+                            <h3 className="font-display text-xl font-bold text-[#12151B] group-hover:text-[#1F3D8C] group-hover/title:underline transition-colors flex items-center gap-2">
+                              {project.name}
+                            </h3>
+                            <ExternalLink className="w-4 h-4 text-[#8A8E96] opacity-0 group-hover:opacity-100 group-hover/title:text-[#1F3D8C] transition-all" />
+                          </a>
                         </div>
 
                         <p className="font-body text-sm text-[#585D67] leading-relaxed mb-6 line-clamp-2">
                           {project.description}
                         </p>
+
+                        {/* App Store Links */}
+                        {(project.appStoreUrl || project.playStoreUrl) && (
+                          <div className="flex items-center gap-3 mb-5">
+                            {project.appStoreUrl && (
+                              <a href={project.appStoreUrl} target="_blank" rel="noopener noreferrer" className="block hover:scale-105 transition-transform duration-300 shadow-sm rounded-md">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" className="h-8 w-auto" />
+                              </a>
+                            )}
+                            {project.playStoreUrl && (
+                              <a href={project.playStoreUrl} target="_blank" rel="noopener noreferrer" className="block hover:scale-105 transition-transform duration-300 shadow-sm rounded-md">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" className="h-8 w-auto" />
+                              </a>
+                            )}
+                          </div>
+                        )}
                       </div>
 
                       {/* Core Tech Stack Section */}
@@ -320,14 +349,14 @@ export default function Projects({ onOpenAuditModal }: ProjectsProps) {
                         </div>
                         <div className="flex items-center gap-4">
                           {project.trustLogos.map(logo => (
-                            <div key={logo.name} className="h-5 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100 drop-shadow-sm" title={logo.name}>
+                            <div key={logo.name} className="h-5 flex items-center justify-center transition-all duration-300 drop-shadow-sm" title={logo.name}>
                               <img src={logo.url} alt={logo.name} className="h-full w-auto object-contain" />
                             </div>
                           ))}
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </motion.div>
               );
             })}

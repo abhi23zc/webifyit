@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { supabase } from "../lib/supabase";
+import { requireAuth } from "../lib/auth";
 import {
   countWords,
   calculateReadTime,
@@ -37,6 +38,8 @@ export type ActionResult = {
 
 export async function createPost(data: BlogInput): Promise<ActionResult> {
   try {
+    await requireAuth();
+
     const wordCount = countWords(data.content_markdown);
     const readTime = calculateReadTime(wordCount);
     const excerpt = generateExcerpt(data.content_markdown);
@@ -91,6 +94,8 @@ export async function updatePost(
   data: Partial<BlogInput>
 ): Promise<ActionResult> {
   try {
+    await requireAuth();
+
     const updates: Record<string, unknown> = {
       updated_date: new Date().toISOString(),
     };
@@ -166,6 +171,8 @@ export async function updatePost(
 
 export async function deletePost(slug: string): Promise<ActionResult> {
   try {
+    await requireAuth();
+
     const { error } = await supabase.from("blogs").delete().eq("slug", slug);
 
     if (error) {
@@ -190,11 +197,14 @@ export async function togglePostStatus(
   slug: string,
   newStatus: "draft" | "published"
 ): Promise<ActionResult> {
+  await requireAuth();
   return updatePost(slug, { status: newStatus });
 }
 
 export async function duplicatePost(slug: string): Promise<ActionResult> {
   try {
+    await requireAuth();
+
     const { data, error: fetchError } = await supabase
       .from("blogs")
       .select("*")
